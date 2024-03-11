@@ -7,6 +7,7 @@ interface IFinancialBalance {
 
 interface IOperation {
   title: string;
+  icon: string;
   link: string;
 }
 
