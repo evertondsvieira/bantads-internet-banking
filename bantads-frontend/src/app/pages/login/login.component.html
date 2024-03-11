@@ -1,1 +1,48 @@
-<p>login works!</p>
+<div class="container">
+  <div class="row-cols-12 hstack gap-2">
+      <div class="col-4 text-center">
+        <img src="#" alt="Logo" class="img-fluid w-60">
+      </div>
+      <div class="col-md-5 col-sm-2 mt-4">
+          <h4 class="text-danger text-center mt-4 mb-2">BANTADS - Internet Banking do TADS</h4>
+          <div class="card mb-2 mt-4">
+              <div class="card-header">
+                  <h4 class="text-center">Login</h4>
+              </div>
+              <div class="card-body">
+                  <form #formLogin="ngForm" (keyup.enter)="login()">
+                      <div class="mb-3 form-group">
+                          <label for="username" class="form-label">Usuário: </label>
+                          <input type="text" class="form-control" id="email" name="usuario"
+                                 [(ngModel)]="auth.email" #email="ngModel" required>
+                          <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
+                            <div [hidden]="!email.errors['required']">Digite seu e-mail de acesso!</div>
+                          </div>
+                      </div>
+                      <div class="mb-3 form-group">
+                          <label for="password" class="form-label">Senha: </label>
+                          <input [type]="passwordVisible? 'text' : 'password'" class="form-control" id="password" name="password" 
+                                 [(ngModel)]="auth.password" #password="ngModel" required>
+                          <div class="input-group-append">
+                              <span class="container" id="showPasswordBtn" (click)="togglePassword()">
+                                  <i id="eye" [className]="passwordVisible ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                              </span>
+                          </div>
+                          <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
+                            <div [hidden]="!password.errors['required']">Digite a senha</div>
+                          </div>
+                      </div>
+                      <button type="button" class="btn btn-primary w-100"
+                              (click)="login()"  [disabled]="!formLogin.form.valid">
+                              Entrar
+                      </button>
+                      <p id="mensagemErro" class="text-danger mt-3">{{ message }}</p>
+                  </form>
+              </div>
+          </div>
+          <div class="row justify-content-center text-center mt-1">
+              <p class="text-secondary" style="font-size: 14px;">Formula Clean &copy; 2023</p>
+          </div>
+      </div>
+  </div>
+</div>
