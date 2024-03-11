@@ -62,7 +62,7 @@ export const routes: Routes = [
   ]},
 ]
 
-NgModule({
+@NgModule({
   imports: [
     RouterModule.forRoot(routes, {
       scrollOffset: [0, 0],
