@@ -1,1 +1,66 @@
-<p>client-deposit works!</p>
+<body class="bg-light">
+  <div class="container">
+      <div class="hstack justify-content-center">
+          <div class="col-md-10 col-sm-2 mt-4">
+              <h4 class="text-danger text-center mt-4 mb-2">BANTADS - Internet Banking do TADS</h4>
+              <div class="card mb-2 mt-4">
+                  <div class="card-header">
+                      <h4 class="text-center">Depositar</h4>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="row g-2">
+                        <div class="col-lg-4 mb-3">
+                            <label for="numero-conta" class="form-label">Número da Conta Destino:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="numero-conta" placeholder="0000000123" required/>
+                                <button class="btn btn-outline-secondary" type="button">Procurar</button>
+                            </div>
+                        </div>
+                      </div>
+                    
+                      <!-- Dados do Beneficiário -->
+                      <div class="row g-2">
+                          <div class="col-lg-4 mb-3">
+                              <label for="nome-beneficiario" class="form-label">Nome do Beneficiário:</label>
+                              <input type="text" class="form-control" id="nome-beneficiario" placeholder="Fulano Cadastrado" readonly="true"/>
+                          </div>
+                  
+                          <div class="col-lg-4 mb-3">
+                              <label for="cpf-beneficiario" class="form-label">CPF do Beneficiário:</label>
+                              <input type="text" class="form-control" id="cpf-beneficiario" placeholder="123.456.789-00" readonly="true"/>
+                          </div>
+                  
+                          <div class="col-lg-4 mb-3">
+                            <label for="email-beneficiario" class="form-label">E-mail do Beneficiário:</label>
+                            <input type="email" class="form-control" id="email-beneficiario" placeholder="fulano@email.com" readonly="true"/>
+                          </div>
+
+                          <div class="col-lg-4 mb-3">
+                            <label for="telefone-beneficiario" class="form-label">Telefone do Beneficiário:</label>
+                            <input type="text" class="form-control" id="telefone-beneficiario" placeholder="(41)99999-1234" readonly="true"/>
+                          </div>
+                      </div>
+                  
+                      <!-- Dados do Depósito -->
+                      <div class="row g-3">
+                          <div class="col-lg-6 mb-3">
+                              <label for="valor-deposito" class="form-label">Valor do Depósito:</label>
+                              <input type="number" class="form-control" id="valor-deposito" required/>
+                          </div>
+                      </div>
+
+                      <div class="w-auto mb-3 text-center">
+                          <button type="button" class="btn btn-outline-danger">Confirmar Depósito</button>
+                      </div>
+                  </form>
+                  
+                  </div>
+              </div>
+              <div class="row justify-content-center text-center mt-1">
+                  <p class="text-secondary" style="font-size: 14px;">Bantads &copy; 2024</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</body>
