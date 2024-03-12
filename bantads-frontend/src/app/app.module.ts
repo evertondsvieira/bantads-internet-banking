@@ -8,9 +8,9 @@ import { SharedModule } from './modules/shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { BrowserModule, platformBrowser } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
-  declarations: [],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -19,8 +19,9 @@ import { AppComponent } from './app.component';
     AccountModule,
     SharedModule,
     AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
