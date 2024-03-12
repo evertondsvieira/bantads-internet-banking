@@ -1,1 +1,54 @@
-<p>client-home works!</p>
+<div class="container-fluid my-4 mx-2">
+  <h4>Bem-vindo, Nome do Cliente</h4>
+</div>
+
+<div class="container-fluid">
+  <div class="d-flex">
+    <div class="container-fluid d-flex flex-column">
+      <h6>Conta Digital</h6>
+      <div class="row">
+        <div class="col-lg-3" *ngFor="let operation of operations">
+          <a [routerLink]="operation.link">
+            <button type="button" class="btn btn-light w-100">
+              <mat-icon>{{ operation.icon }}</mat-icon>
+              <p>{{ operation.title }}</p>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5 d-flex flex-column gap-4">
+      <div>
+        <h6>Resumo Financeiro</h6>
+        <div *ngFor="let balance of balances"
+          class="container-sm card text-bg-light d-flex flex-row align-items-start justify-content-between p-3 my-2">
+          <strong>{{ balance.title }}:</strong>
+          <span [ngClass]="getBalanceColor(balance.value)">{{ balance.value | currency: 'BRL' }}</span>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column gap-2">
+        <div class="d-flex align-items-center justify-content-between">
+          <h6>Transações Recentes</h6>
+          <div class="d-flex gap-4">
+            <button type="button" class="btn btn-light" (click)="filterRecipes('Todos')">Todos</button>
+            <button type="button" class="btn btn-light" (click)="filterRecipes('Receitas')">Receitas</button>
+            <button type="button" class="btn btn-light" (click)="filterRecipes('Despesas')">Despesas</button>                       
+          </div>
+        </div>
+        
+        <div *ngFor="let transaction of filteredTransactions"
+          class="card text-bg-light p-2 d-flex flex-row align-items-start justify-content-between">
+          <div>
+            <p>{{ transaction.title }}</p>
+            <h6>{{ transaction.type }}</h6>
+          </div>
+          <div>
+            <span [ngClass]="getTransactionColor(transaction.value, transaction.type)">{{ transaction.value | currency: 'BRL' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
