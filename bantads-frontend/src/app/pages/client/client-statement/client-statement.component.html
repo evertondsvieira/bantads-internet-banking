@@ -1,1 +1,49 @@
-<p>client-statement works!</p>
+<div class="container-fluid my-4 mx-2">
+  <div class="d-flex flex-column gap-4">
+    <div class="d-flex align-items-start justify-content-between">
+      <div>
+        <h6>Consultar extrato</h6>
+        <form class="d-flex align-items-center gap-4">
+          <label for="start">Data de Início:</label>
+          <input type="date" id="start" name="start" [(ngModel)]="start">
+
+          <label for="end">Data de Fim:</label>
+          <input type="date" id="end" name="end" [(ngModel)]="end">
+        </form>
+      </div>
+
+      <div class="d-flex flex-column align-items-start justify-content-center">
+        <h6>Saldo Consolidado</h6>
+        <p>Data: {{ currentDate | date: 'dd/MM/yyyy' }}</p>
+        <p>Saldo: <span [ngClass]="{'text-danger': getBalance() < 0, 'text-primary': getBalance() >= 0}">{{ getBalance() | currency }}</span></p>
+      </div>
+    </div>
+
+    <table class="table table-striped">
+      <thead class="container">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Data/Hora</th>
+          <th scope="col">Operação</th>
+          <th scope="col">Origem</th>
+          <th scope="col">Destino</th>
+          <th scope="col">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let statement of filterStatements(start, end)">
+          <th scope="row">{{ statement.id }}</th>
+          <td>{{ statement.timestamp | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>{{ statement.operation }}</td>
+          <td>{{ statement.origin }}</td>
+          <td>{{ statement.destiny !== '' ? statement.destiny : statement.origin }}</td>
+          <td [ngClass]="{'text-danger': statement.value < 0, 'text-primary': statement.value >= 0}">{{ statement.value | currency }}</td>
+        </tr>        
+      </tbody>
+    </table>
+
+    <div *ngIf="filterStatements(start, end).length === 0" class="d-flex align-items-center justify-content-center">
+      <p>Nenhum registro encontrado</p>
+    </div>
+  </div>
+</div>
