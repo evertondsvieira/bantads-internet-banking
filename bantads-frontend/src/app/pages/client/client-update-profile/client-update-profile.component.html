@@ -3,7 +3,24 @@
         <div class="hstack justify-content-center">
             <div class="col-md-10 col-sm-2 mt-4">
                 <h4 class="text-danger text-center mt-4 mb-2">BANTADS - Internet Banking do TADS</h4>
-                <div class="card mb-2 mt-4">
+                <div class="row g-2">
+                    <div class="col-lg-3 mb-3">
+                        <label for="nomeGerente" class="form-label">Gerente:</label>
+                        <input type="text" class="form-control" id="nomeGerente" value="John Doe" readonly disabled/>
+                    </div>
+
+                    <div class="col-lg-6 mb-3">
+                    </div>
+                
+                    <div class="col-lg-3 mb-3">
+                        <label for="saldo" class="form-label">Saldo:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="saldo" value="10000" readonly disabled>
+                            <button class="btn btn-secondary" type="button" [routerLink]="['/current/balance']">Ver Saldo</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-2 mt-2">
                     <div class="card-header">
                         <h4 class="text-center">Editar Perfil</h4>
                     </div>
@@ -13,7 +30,7 @@
                             <div class="row g-2">
                                 <div class="col-lg-2 mb-3">
                                     <label for="cpf" class="form-label">CPF:</label>
-                                    <input type="text" class="form-control bg-light" id="cpf" value="123.456.789-00" readonly disabled/>
+                                    <input type="text" class="form-control" id="cpf" value="123.456.789-00" readonly disabled/>
                                 </div>
 
                                 <div class="col-lg-5 mb-3">
