@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { SharedModule } from '../shared/shared.module';
 
 import { ClientHomeComponent } from '../../pages/client/client-home/client-home.component';
 import { ClientCurrentBalanceComponent } from '../../pages/client/client-current-balance/client-current-balance.component';
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     CommonModule,
     RouterModule,
-    FormsModule, 
+    FormsModule,
+    SharedModule
   ],
   exports: [],
 })
