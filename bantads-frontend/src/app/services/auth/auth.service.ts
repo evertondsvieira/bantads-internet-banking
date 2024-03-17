@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, filter, map, of } from 'rxjs';
-import { Auth } from '../models/auth.model';
-import { User } from '../models/user.model';
-import { UserService } from './user.service';
-import { DOCUMENT } from '@angular/common';
-import { Inject } from '@angular/core';
+import { Observable, filter, map, of} from 'rxjs';
+import { Auth } from '../../models/auth.model';
+import { User } from '../../models/user.model';
+import { UserService } from '../user/user.service';
 
 const LS_CHAVE: string = "loggedUser";
 
@@ -14,10 +12,9 @@ const LS_CHAVE: string = "loggedUser";
 
 export class AuthService {
   private user?: User;
-  constructor(private userService: UserService, 
-              @Inject(DOCUMENT) private document: Document) {
-    const sessionStorage = document.defaultView?.sessionStorage;
+  constructor(private userService: UserService) {
   }
+  
   public get loggedUser() : User {
     let user = sessionStorage[LS_CHAVE];
     return (user ? JSON.parse(user) : null);

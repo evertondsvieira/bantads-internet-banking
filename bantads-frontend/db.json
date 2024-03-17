@@ -1,0 +1,25 @@
+{
+  "user":[
+    {
+      "id": 1,
+      "email": "gerente@email",
+      "nome": "Gerenterson",
+      "cpf": "11111111111",
+      "profile": "MANAGER"
+    },
+    {
+      "id": 2,
+      "email": "admin@email",
+      "nome": "Adminerson",
+      "cpf": "11111111111",
+      "profile": "ADMIN"
+    },
+    {
+      "id": 3,
+      "email": "cliente@email",
+      "nome": "Clienterson",
+      "cpf": "11111111111",
+      "profile": "CLIENT"
+    }
+  ]
+}
