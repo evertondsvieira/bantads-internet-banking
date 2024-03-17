@@ -6,6 +6,8 @@ Para rodar o servidor Json fake utilizar o comando `npx json-server db.json` no 
 
 Para logar basta inserir um email válido que esteja no db.json como "user" e uma senha qualquer.
 
+[ATENCAO] Como não temos nav-bar com botão de logout, para deslogar: F12 -> armazenamento -> Limpar armazenamento de sessão do localhost
+
 ## Guard Service
 
 O serviço de guarda foi adicionado. Para autorizar um perfil a um módulo basta adicionar o perfil em "data.role"
