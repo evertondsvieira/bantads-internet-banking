@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void{
-    console.log(JSON.stringify(this.auth));
     
     this.loading = true;
     if(this.formLogin.form.valid){
@@ -41,6 +40,9 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.auth).subscribe(authUser => {
         let user: User | null = authUser ? authUser : null;
         
+        // Remover quando não ter o json-server
+        user = Array.isArray(user) ? user[0] : user;
+
         if(user != null){
           this.authService.loggedUser = user;   
           this.loading = false;
@@ -56,7 +58,7 @@ export class LoginComponent implements OnInit {
           }
         }
         else{
-          this.message = "Usuário/Senha Inválidos";
+          this.message = "Email/Senha Inválidos";
         }
       })
     }
