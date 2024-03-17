@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './client-current-balance.component.css'
 })
 export class ClientCurrentBalanceComponent {
+  public valueVisible: boolean = false;
+
+  toggleValue(): void{
+    this.valueVisible = !this.valueVisible;
+  }
 
 }

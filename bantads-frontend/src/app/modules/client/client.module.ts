@@ -11,6 +11,7 @@ import { ClientWithdrawlComponent } from '../../pages/client/client-withdrawl/cl
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     CommonModule,
     RouterModule,
+    FormsModule, 
   ],
   exports: [],
 })
