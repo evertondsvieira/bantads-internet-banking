@@ -25,3 +25,22 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## JSON-SERVER
+
+Para rodar o servidor Json fake utilizar o comando `npx json-server db.json`.
+
+Para logar basta inserir um email válido que esteja no db.json como "user" e uma senha qualquer.
+
+## Guard Service
+
+O serviço de guarda foi adicionado. Para autorizar um perfil a um módulo basta adicionar o perfil em "data.role"
+separando cada perfil por vírgula. Por exemplo:
+
+```
+## Autoriza role de cliente a acessar rota
+data:{"role": "CLIENT"}
+
+## Autoriza role de cliente e gerente a acessar rota
+data:{"role": "CLIENT,MANAGER"}
+```

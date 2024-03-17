@@ -21,33 +21,34 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ClientWithdrawlComponent } from './pages/client/client-withdrawl/client-withdrawl.component';
 import { NgModule } from '@angular/core';
+import { authGuard } from './modules/auth';
 
 export const clientRoutes: Routes = [
-  { path: "home", component: ClientHomeComponent },
-  { path: "current/balance", component: ClientCurrentBalanceComponent },
-  { path: "deposit", component: ClientDepositComponent },
-  { path: "statement", component: ClientStatementComponent },
-  { path: "transfer", component: ClientTransferComponent },
-  { path: "update/profile", component: ClientUpdateProfileComponent },
-  { path: "withdrawl", component: ClientWithdrawlComponent },
+  { path: "home", component: ClientHomeComponent, canActivate: [authGuard], data:{"role": "CLIENT"}},
+  { path: "current/balance", component: ClientCurrentBalanceComponent, canActivate: [authGuard], data:{"role": "CLIENT"}},
+  { path: "deposit", component: ClientDepositComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
+  { path: "statement", component: ClientStatementComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
+  { path: "transfer", component: ClientTransferComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
+  { path: "update/profile", component: ClientUpdateProfileComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
+  { path: "withdrawl", component: ClientWithdrawlComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
 ]
 
 export const managerRoutes: Routes = [
-  { path: "manager/home", component: ManagerHomeComponent },
-  { path: "manager/consult/all", component: ManagerConsultAllCustomersComponent },
-  { path: "manager/consult/customers", component: ManagerConsultCustomersComponent },
-  { path: "manager/consult/top", component: ManagerConsultTopComponent },
-  { path: "manager/approve", component: ManagerApproveComponent },
-  { path: "manager/reject", component: ManagerRejectComponent }, 
+  { path: "manager/home", component: ManagerHomeComponent, canActivate: [authGuard], data:{"role": "MANAGER"} },
+  { path: "manager/consult/all", component: ManagerConsultAllCustomersComponent, canActivate: [authGuard], data:{"role": "MANAGER"} },
+  { path: "manager/consult/customers", component: ManagerConsultCustomersComponent, canActivate: [authGuard], data:{"role": "MANAGER"} },
+  { path: "manager/consult/top", component: ManagerConsultTopComponent, canActivate: [authGuard], data:{"role": "MANAGER"} },
+  { path: "manager/approve", component: ManagerApproveComponent, canActivate: [authGuard], data:{"role": "MANAGER"} },
+  { path: "manager/reject", component: ManagerRejectComponent, canActivate: [authGuard], data:{"role": "MANAGER"} }, 
 ]
 
 export const adminRoutes: Routes = [
-  { path: "admin/home", component: AdminHomeComponent },
-  { path: "admin/customer/report", component: AdminCustomerReportComponent },
-  { path: "admin/add/manager", component: AdminAddManagerComponent },
-  { path: "admin/remove/manager", component: AdminRemoveManagerComponent },
-  { path: "admin/list/manager", component: AdminListManagerComponent },
-  { path: "admin/update/manager", component: AdminUpdateManagerComponent },
+  { path: "admin/home", component: AdminHomeComponent, canActivate: [authGuard], data:{"role": "ADMIN"} },
+  { path: "admin/customer/report", component: AdminCustomerReportComponent, canActivate: [authGuard], data:{"role": "ADMIN"} },
+  { path: "admin/add/manager", component: AdminAddManagerComponent, canActivate: [authGuard], data:{"role": "ADMIN"} },
+  { path: "admin/remove/manager", component: AdminRemoveManagerComponent, canActivate: [authGuard], data:{"role": "ADMIN"} },
+  { path: "admin/list/manager", component: AdminListManagerComponent, canActivate: [authGuard], data:{"role": "ADMIN"} },
+  { path: "admin/update/manager", component: AdminUpdateManagerComponent, canActivate: [authGuard], data:{"role": "ADMIN"} },
 ]
 
 export const routes: Routes = [
