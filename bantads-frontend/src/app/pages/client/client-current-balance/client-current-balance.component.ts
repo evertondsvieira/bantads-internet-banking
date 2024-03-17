@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrl: './client-current-balance.component.css'
 })
 export class ClientCurrentBalanceComponent {
+  public saldo: number = 10000;
   public valueVisible: boolean = false;
 
   toggleValue(): void{

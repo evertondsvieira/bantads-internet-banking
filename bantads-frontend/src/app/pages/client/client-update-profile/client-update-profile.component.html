@@ -1,115 +1,116 @@
-<body class="bg-light">
-    <div class="container">
-        <div class="hstack justify-content-center">
-            <div class="col-md-10 col-sm-2 mt-4">
-                <h4 class="text-danger text-center mt-4 mb-2">BANTADS - Internet Banking do TADS</h4>
-                <div class="row g-2">
-                    <div class="col-lg-3 mb-3">
-                        <label for="nomeGerente" class="form-label">Gerente:</label>
-                        <input type="text" class="form-control" id="nomeGerente" value="John Doe" readonly disabled/>
-                    </div>
+<div class="container">
+    <div class="hstack justify-content-center">
+        <div class="col-md-10 col-sm-2 mt-4">
+            <h4 class="text-danger text-center mt-4 mb-2">BANTADS - Internet Banking do TADS</h4>
+            <div class="row g-2">
+                <div class="col-lg-3 mb-3">
+                    <label for="nomeGerente" class="form-label">Gerente:</label>
+                    <input type="text" class="form-control" id="nomeGerente" value="John Doe" readonly disabled/>
+                </div>
 
-                    <div class="col-lg-6 mb-3">
+                <div class="col-lg-6 mb-3">
+                </div>
+            
+                <div class="col-lg-3 mb-3">
+                    <label for="saldo" class="form-label">Saldo:</label>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-secondary me-5" (click)="toggleValue()">
+                            <i [className]="valueVisible ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                        </button>
+                        <span *ngIf="valueVisible">{{ saldo | realPipe }}</span>
+                        <span *ngIf="!valueVisible">*******</span>                       
                     </div>
-                
-                    <div class="col-lg-3 mb-3">
-                        <label for="saldo" class="form-label">Saldo:</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control" id="saldo" value="10000" readonly disabled>
-                            <button class="btn btn-secondary" type="button" [routerLink]="['/current/balance']">Ver Saldo</button>
+                </div>
+            </div>
+            <div class="card mb-2 mt-2">
+                <div class="card-header">
+                    <h4 class="text-center">Editar Perfil</h4>
+                </div>
+                <div class="card-body">
+                    <form>
+                            <!-- Dados do Cliente -->
+                        <div class="row g-2">
+                            <div class="col-lg-2 mb-3">
+                                <label for="cpf" class="form-label">CPF:</label>
+                                <input type="text" class="form-control" #cpf="ngModel" [(ngModel)]="user.cpf" name="cpf" [showMaskTyped]="true" [shownMaskExpression]="'___.___.___-__'" mask="000.000.000-00" readonly disabled>
+                            </div>
+
+                            <div class="col-lg-5 mb-3">
+                                <label for="nome" class="form-label">Nome:</label>
+                                <input type="text" class="form-control" #name="ngModel" [(ngModel)]="user.name" name="name"/>
+                            </div>
+
+                            <div class="col-lg-5 mb-3">
+                                <label for="email" class="form-label">E-mail:</label>
+                                <input type="email" class="form-control" #email="ngModel" [(ngModel)]="user.email" name="email"/>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card mb-2 mt-2">
-                    <div class="card-header">
-                        <h4 class="text-center">Editar Perfil</h4>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                             <!-- Dados do Cliente -->
-                            <div class="row g-2">
-                                <div class="col-lg-2 mb-3">
-                                    <label for="cpf" class="form-label">CPF:</label>
-                                    <input type="text" class="form-control" id="cpf" value="123.456.789-00" readonly disabled/>
-                                </div>
-
-                                <div class="col-lg-5 mb-3">
-                                    <label for="nome" class="form-label">Nome:</label>
-                                    <input type="text" class="form-control" id="nome"/>
-                                </div>
-
-                                <div class="col-lg-5 mb-3">
-                                    <label for="email" class="form-label">E-mail:</label>
-                                    <input type="email" class="form-control" id="email"/>
-                                </div>
+                    
+                        <div class="row g-3">             
+                        
+                            <div class="col-lg-6 mb-3">
+                                <label for="telefone" class="form-label">Telefone:</label>
+                                <input type="tel" class="form-control" id="telefone" />
                             </div>
                         
-                            <div class="row g-3">             
-                           
-                                <div class="col-lg-6 mb-3">
-                                    <label for="telefone" class="form-label">Telefone:</label>
-                                    <input type="tel" class="form-control" id="telefone" />
-                                </div>
-                            
-                                <div class="col-lg-6 mb-3">
-                                    <label for="salario" class="form-label">Salário:</label>
-                                    <input type="number" class="form-control" id="salario" />
-                                </div>
+                            <div class="col-lg-6 mb-3">
+                                <label for="salario" class="form-label">Salário:</label>
+                                <input type="number" class="form-control" id="salario" />
+                            </div>
 
+                        </div>
+                    
+                        <!-- Dados do Endereço -->
+                        <div class="row g-3">
+                            <div class="col-lg-2 mb-3">
+                                <label for="tipoEndereco" class="form-label">Tipo de Endereço:</label>
+                                <select class="form-select" id="tipoEndereco">
+                                <option value="rua">Rua</option>
+                                <option value="avenida">Avenida</option>
+                                </select>
                             </div>
                         
-                            <!-- Dados do Endereço -->
-                            <div class="row g-3">
-                                <div class="col-lg-2 mb-3">
-                                    <label for="tipoEndereco" class="form-label">Tipo de Endereço:</label>
-                                    <select class="form-select" id="tipoEndereco">
-                                    <option value="rua">Rua</option>
-                                    <option value="avenida">Avenida</option>
-                                    </select>
-                                </div>
-                            
-                                <div class="col-lg-8 mb-3">
-                                    <label for="logradouro" class="form-label">Logradouro:</label>
-                                    <input type="text" class="form-control" id="logradouro" />
-                                </div>
-                            
-                                <div class="col-lg-2 mb-3">
-                                    <label for="numero" class="form-label">Número:</label>
-                                    <input type="text" class="form-control" id="numero" />
-                                </div>
+                            <div class="col-lg-8 mb-3">
+                                <label for="logradouro" class="form-label">Logradouro:</label>
+                                <input type="text" class="form-control" id="logradouro" />
                             </div>
-                            
-                            <div class="row g-3">                        
-                                <div class="col-lg-3 mb-3">
-                                    <label for="complemento" class="form-label">Complemento:</label>
-                                    <input type="text" class="form-control" id="complemento" />
-                                </div>
-                            
-                                <div class="col-lg-3 mb-3">
-                                    <label for="cep" class="form-label">CEP:</label>
-                                    <input type="text" class="form-control" id="cep" />
-                                </div>
-                            
-                                <div class="col-lg-3 mb-3">
-                                    <label for="cidade" class="form-label">Cidade:</label>
-                                    <input type="text" class="form-control" id="cidade" />
-                                </div>
-                            
-                                <div class="col-lg-3 mb-3">
-                                    <label for="estado" class="form-label">Estado:</label>
-                                    <input type="text" class="form-control" id="estado" />
-                                </div>
+                        
+                            <div class="col-lg-2 mb-3">
+                                <label for="numero" class="form-label">Número:</label>
+                                <input type="text" class="form-control" id="numero" />
                             </div>
-                            <div class="w-auto mb-3 text-center">
-                                <button type="button" class="btn btn-outline-danger">Atualizar Dados</button>
+                        </div>
+                        
+                        <div class="row g-3">                        
+                            <div class="col-lg-3 mb-3">
+                                <label for="complemento" class="form-label">Complemento:</label>
+                                <input type="text" class="form-control" id="complemento" />
                             </div>
-                        </form>
-                    </div>
+                        
+                            <div class="col-lg-3 mb-3">
+                                <label for="cep" class="form-label">CEP:</label>
+                                <input type="text" class="form-control" id="cep" />
+                            </div>
+                        
+                            <div class="col-lg-3 mb-3">
+                                <label for="cidade" class="form-label">Cidade:</label>
+                                <input type="text" class="form-control" id="cidade" />
+                            </div>
+                        
+                            <div class="col-lg-3 mb-3">
+                                <label for="estado" class="form-label">Estado:</label>
+                                <input type="text" class="form-control" id="estado" />
+                            </div>
+                        </div>
+                        <div class="w-auto mb-3 text-center">
+                            <button type="button" class="btn btn-outline-danger">Atualizar Dados</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="row justify-content-center text-center mt-1">
-                    <p class="text-secondary" style="font-size: 14px;">Bantads &copy; 2024</p>
-                </div>
+            </div>
+            <div class="justify-content-center text-center mt-1">
+                <p class="text-secondary" style="font-size: 14px;">Bantads &copy; 2024</p>
             </div>
         </div>
     </div>
-</body>
+</div>
