@@ -9,7 +9,7 @@ import { User } from '../../models/user.model';
 })
 
 export class UserService {
-  private BASE_URL: string = "http://localhost:3000";
+  private BASE_URL: string = "http://localhost:3000/user";
   private httpOptions = {
     headers: new HttpHeaders({
       'content-type': 'application/json'
@@ -18,7 +18,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public(): Observable<User[]>{
+  public getUsers(): Observable<User[]>{
     return this.http.get<User[]>(this.BASE_URL,
                                           this.httpOptions);
   }
@@ -55,6 +55,6 @@ export class UserService {
   // remover
   // Função login fake
   public login(auth: Auth): Observable<User>{
-    return this.http.get<User>(`${this.BASE_URL}/user?email=${auth.email}`);
+    return this.http.get<User>(`${this.BASE_URL}?email=${auth.email}`);
   }
 }

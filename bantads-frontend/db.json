@@ -3,23 +3,107 @@
     {
       "id": 1,
       "email": "gerente@email",
-      "nome": "Gerenterson",
+      "name": "Gerenterson",
       "cpf": "11111111111",
       "profile": "MANAGER"
     },
     {
       "id": 2,
       "email": "admin@email",
-      "nome": "Adminerson",
+      "name": "Adminerson",
       "cpf": "11111111111",
       "profile": "ADMIN"
     },
     {
       "id": 3,
       "email": "cliente@email",
-      "nome": "Clienterson",
+      "name": "Clienterson",
       "cpf": "11111111111",
       "profile": "CLIENT"
     }
-  ]
+  ],
+
+  "client": [
+    {
+        "id": 2,
+        "name": "Tyrion Lannister",
+        "cpf": "22222222222",
+        "accountId": "8888",
+        "salary": 3200.75,
+        "situation": "REJECTED"
+    },
+    {
+        "id": 3,
+        "name": "Daenerys Targaryen",
+        "cpf": "33333333333",
+        "accountId": "7777",
+        "salary": 2800.00,
+        "situation": "APPROVED"
+    },
+    {
+        "id": 4,
+        "name": "Jon Snow",
+        "cpf": "44444444444",
+        "accountId": "6666",
+        "salary": 4000.25,
+        "situation": "OPEN"
+    },
+    {
+        "id": 5,
+        "name": "Arya Stark",
+        "cpf": "55555555555",
+        "accountId": "5555",
+        "salary": 3500.00,
+        "situation": "OPEN"
+    },
+    {
+        "id": 6,
+        "name": "Cersei Lannister",
+        "cpf": "66666666666",
+        "accountId": "4444",
+        "salary": 2700.50,
+        "situation": "APPROVED"
+    },
+    {
+        "id": 7,
+        "name": "Sansa Stark",
+        "cpf": "77777777777",
+        "accountId": "3333",
+        "salary": 2900.75,
+        "situation": "REJECTED"
+    },
+    {
+        "id": 8,
+        "name": "Jaime Lannister",
+        "cpf": "88888888888",
+        "accountId": "2222",
+        "salary": 3800.25,
+        "situation": "OPEN"
+    },
+    {
+        "id": 9,
+        "name": "Brienne of Tarth",
+        "cpf": "99999999999",
+        "accountId": "1111",
+        "salary": 3100.00,
+        "situation": "APPROVED"
+    },
+    {
+        "id": 10,
+        "name": "Eddard Stark",
+        "cpf": "10101010101",
+        "accountId": "0000",
+        "salary": 2600.50,
+        "situation": "OPEN"
+    },
+    {
+        "id": 11,
+        "name": "Petyr Baelish",
+        "cpf": "12121212121",
+        "accountId": "1234",
+        "salary": 2900.75,
+        "situation": "REJECTED"
+    }
+]
+
 }
