@@ -1,1 +1,50 @@
-<p>manager-consult-all-customers works!</p>
+<!-- Section: Design Block -->
+<section class="">
+  <!-- Jumbotron -->
+  <div class="container-fluid my-4 mx-2">
+    <h4>Bem-vindo, {{user.name}}</h4>
+  </div>
+
+  <div class="container-fluid my-4 mx-2">
+    <h6>Consultar Todos os CLientes</h6>
+  </div>
+  <div class="px-4 py-5 px-md-5 text-center text-lg-start h-100 d-flex align-items-start" style="background-color: hsl(0, 0%, 96%)">
+    <div class="container">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Pesquisar por CPF ou Nome" [(ngModel)]="searchQuery" (input)="searchClients()">
+      </div>
+      <table [hidden]="clients ? false : true" class="table table-striped">
+        <thead>
+          <tr>
+            <th>CPF</th>
+            <th colspan="2">Nome</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>Saldo</th>
+            <th>Detalhes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clients">
+            <td>{{client.cpf}}</td>
+            <td colspan="2">{{client.name}}</td>
+            <td>{{client.cidade}}</td>
+            <td>{{client.estado}}</td>
+            <td>{{client.saldo}}</td>
+            <td>
+              <!-- <a [routerLink]="['/client-details', client.id]">Detalhes</a> -->
+              <!-- implementar a página de detalhes do cliente-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!clients" class="container-fluid">
+        <div class="d-flex px-4 py-5 px-md-5 text-center w-90 bg-info text-white">
+          Nenhuma conta registrada!
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
