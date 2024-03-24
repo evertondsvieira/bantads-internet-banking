@@ -11,9 +11,13 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ManagerModule } from './modules/manager/manager.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { MaskComponent } from './components/mask/mask.component';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, NavBarComponent, MaskComponent],
   imports: [
+    MatIconModule,
     BrowserModule,
     CommonModule,
     ClientModule,

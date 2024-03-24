@@ -1,0 +1,13 @@
+<div class="d-flex bd-highlight">
+  <div class="p-2 flex-grow-1 bd-highlight">
+    <div class="d-flex gap-1 fw-bold">
+      <p class="ls-tight mb-0">Bank</p>
+      <span class="text-danger">Tads</span>
+    </div>
+  </div>
+  <ul *ngFor="let item of getFilteredNavItems()" class="p-2 bd-highlight">
+    <a [routerLink]="item.link" class="d-flex list-group-item cursor-pointer">
+      <li class="material-icons cursor-pointer">{{ item.icon }}</li>
+    </a>
+  </ul>
+</div>
