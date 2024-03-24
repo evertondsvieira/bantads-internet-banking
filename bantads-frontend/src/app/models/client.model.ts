@@ -1,13 +1,17 @@
-import { Situation } from "./enum/situation.enum";
+import { Situation } from './enum/situation.enum';
 
-export class Client{
+export class Client {
   constructor(
     private _id: string,
     private _name: string,
     private _cpf: string,
     private _accountId: string,
     private _salary: number,
-    private _situation: Situation 
+    private _rua: string,
+    private _cidade: string,
+    private _estado: string,
+    private _saldo: number,
+    private _situation: Situation
   ) {}
 
   public get situation(): Situation {
@@ -45,5 +49,25 @@ export class Client{
   }
   public set id(value: string) {
     this._id = value;
+  }
+  public get cidade(): string {
+    return this._cidade;
+  }
+  public set cidade(value: string) {
+    this._cidade = value;
+  }
+
+  public get estado(): string {
+    return this._estado;
+  }
+  public set estado(value: string) {
+    this._estado = value;
+  }
+  //colocar em conta depois - testando consultAll
+  public get saldo(): number {
+    return this._saldo;
+  }
+  public set saldo(value: number) {
+    this._saldo = value;
   }
 }

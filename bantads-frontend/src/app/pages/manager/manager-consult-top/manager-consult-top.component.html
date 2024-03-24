@@ -1,1 +1,27 @@
-<p>manager-consult-top works!</p>
+<div class="container-fluid my-4 mx-2">
+  <div class="d-flex flex-column gap-4">
+    <h6>Três melhores clientes</h6>
+    <table class="table table-striped">
+      <thead class="container">
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Saldo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of sortedClients">
+          <td>{{ item.name }}</td>
+          <td>{{ item.city }}</td>
+          <td>{{ item.state }}</td>
+          <td>{{ item.balance }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="!sortedClients || sortedClients.length === 0" class="d-flex align-items-center justify-content-center">
+      <p>Nenhum registro encontrado</p>
+    </div>
+  </div>
+</div>
