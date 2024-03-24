@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Client } from '../../../models/client.model';
 import { ClientService } from '../../../services/client/client.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth/auth.service';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-manager-consult-all-customers',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
   templateUrl: './manager-consult-all-customers.component.html',
   styleUrl: './manager-consult-all-customers.component.css',
 })

@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ManagerHomeComponent } from '../../pages/manager/manager-home/manager-home.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared';
+import { CommonModule } from '@angular/common';
+
+import { ManagerHomeComponent } from '../../pages/manager/manager-home/manager-home.component';
 import { ManagerApproveComponent } from '../../pages/manager/manager-approve/manager-approve.component';
 import { ManagerRejectComponent } from '../../pages/manager/manager-reject/manager-reject.component';
+import { ManagerConsultAllCustomersComponent } from '../../pages/manager/manager-consult-all-customers/manager-consult-all-customers.component';
+import { ManagerConsultCustomersComponent } from '../../pages/manager/manager-consult-customers/manager-consult-customers.component';
+import { ManagerConsultTopComponent } from '../../pages/manager/manager-consult-top/manager-consult-top.component';
 
 
 
@@ -12,7 +16,10 @@ import { ManagerRejectComponent } from '../../pages/manager/manager-reject/manag
   declarations: [
     ManagerHomeComponent,
     ManagerApproveComponent,
-    ManagerRejectComponent
+    ManagerRejectComponent,
+    ManagerConsultCustomersComponent,
+    ManagerConsultAllCustomersComponent,
+    ManagerConsultTopComponent,
   ],
   imports: [
     CommonModule,
