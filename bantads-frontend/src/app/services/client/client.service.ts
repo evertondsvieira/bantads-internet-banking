@@ -29,10 +29,6 @@ export class ClientService {
   }
 
   public searchClients(query: string): Observable<Client[]> {
-    let params = new HttpParams();
-    if (query) {
-      params = params.append('search', query);
-    }
-    return this.http.get<Client[]>(this.BASE_URL, { params: params });
-  }
+    return this.http.get<Client[]>(`${this.BASE_URL}?q=${query}`);
+}
 }
