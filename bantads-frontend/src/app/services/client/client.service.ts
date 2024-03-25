@@ -31,7 +31,7 @@ export class ClientService {
 
   public searchClients(query: string): Observable<Client[]> {
     return this.http.get<Client[]>(`${this.BASE_URL}?q=${query}`, this.httpOptions);
-}
+  }
 
   public getClientByCPF(cpf: string): Observable<Client> {
     return this.http.get<Client>(
@@ -39,12 +39,22 @@ export class ClientService {
       this.httpOptions
     );
   }
+  
+  public searchById(query: string): Observable<Client> {
+    return this.http.get<Client>(
+      this.BASE_URL + `/${query}`,
+      this.httpOptions);
+  }
 
+  public searchByCpf(query: string): Observable<Client[]> {
+    return this.http.get<Client[]>(
+      this.BASE_URL + `?cpf=${query}`,
+      this.httpOptions);
+  }
+  
   public getAccountByCPF(cpf: string): Observable<Account> {
     return this.http.get<Account>(
       `http://localhost:3000/account?cpf=${cpf}`,
       this.httpOptions
     );
-
-}
 }
