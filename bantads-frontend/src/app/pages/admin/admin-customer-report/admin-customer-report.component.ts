@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-customer-report',
-  standalone: true,
   templateUrl: './admin-customer-report.component.html',
   styleUrl: './admin-customer-report.component.css',
   imports: [CommonModule]

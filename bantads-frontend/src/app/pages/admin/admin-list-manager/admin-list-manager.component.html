@@ -1,1 +1,54 @@
-<p>admin-list-manager works!</p>
+<!-- Section: Design Block -->
+<section class="">
+  <!-- Jumbotron -->
+  <div class="container-fluid my-4 mx-2">
+    <h4>Bem-vindo, {{user.name}}</h4>
+  </div>
+
+  <div class="container-fluid my-4 mx-2">
+    <h6>Listar todos os gerentes</h6>
+  </div>
+  <div class="px-4 py-5 px-md-5 text-center text-lg-start h-100 d-flex align-items-start" style="background-color: hsl(0, 0%, 96%)">
+    <div class="container">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Pesquisar por CPF ou Nome">
+      </div>
+      <table [hidden]="managers ? false : true" class="table table-striped">
+        <thead>
+          <tr>
+            <th>CPF</th>
+            <th colspan="2">Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th class="text-center">Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let manager of managers">
+            <td>{{manager.cpf}}</td>
+            <td colspan="2">{{manager.name}}</td>
+            <td>{{manager.email}}</td>
+            <td>{{manager.phone}}</td>
+            <td>
+              <div class="d-flex justify-content-around">
+                <button *ngFor="let acao of acoes"
+                        [ngClass]="['btn', acao.buttonStyle]" 
+                        type="button"
+                        (click)="acao.manageModal(modalService)">
+                  <i [ngClass]="['bi', acao.icon]"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!managers" class="container-fluid">
+        <div class="d-flex px-4 py-5 px-md-5 text-center w-90 bg-info text-white">
+          Nenhuma conta registrada!
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->
