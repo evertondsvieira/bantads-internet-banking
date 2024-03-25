@@ -24,10 +24,10 @@ export class ManagerConsultAllCustomersComponent implements OnInit {
   public get lista(): Client[] {
     return this._lista;
   }
+
   public set lista(value: Client[]) {
     this._lista = value;
   }
-
   public getClientsOrderedByName() {
     this.clientService.getClientsOrderedByName().subscribe(
       lista => {
