@@ -23,7 +23,7 @@ export class ClientService {
   }
   public getClientsOrderedByName(): Observable<Client[]> {
     return this.http.get<Client[]>(
-      this.BASE_URL + '?sort=nome',
+      this.BASE_URL + '?_sort=name',
       this.httpOptions
     );
   }

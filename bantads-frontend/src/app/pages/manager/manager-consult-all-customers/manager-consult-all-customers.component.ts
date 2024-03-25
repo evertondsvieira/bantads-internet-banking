@@ -31,7 +31,7 @@ export class ManagerConsultAllCustomersComponent implements OnInit {
     this._clients = value;
   }
 
-  public getUser(): User {
+  public get user(): User {
     return this._user;
   }
   public set user(user: User) {
