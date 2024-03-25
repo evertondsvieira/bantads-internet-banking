@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Client } from '../../models/client.model';
+import { Account } from '../../models/account.model';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,21 @@ export class ClientService {
   }
 
   public searchClients(query: string): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.BASE_URL}?q=${query}`);
+    return this.http.get<Client[]>(`${this.BASE_URL}?q=${query}`, this.httpOptions);
+}
+
+  public getClientByCPF(cpf: string): Observable<Client> {
+    return this.http.get<Client>(
+      `${this.BASE_URL}?cpf=${cpf}`,
+      this.httpOptions
+    );
+  }
+
+  public getAccountByCPF(cpf: string): Observable<Account> {
+    return this.http.get<Account>(
+      `http://localhost:3000/account?cpf=${cpf}`,
+      this.httpOptions
+    );
+
 }
 }
