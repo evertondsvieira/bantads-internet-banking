@@ -25,6 +25,15 @@
 
   "client": [
     {
+        "id": 1,
+        "name": "Clienterson",
+        "cpf": "11111111111",
+        "accountId": "8888",
+        "salary": 3200.75,
+        "saldo": 8000.00,
+        "situation": "REJECTED"
+    },
+    {
         "id": 2,
         "name": "Tyrion Lannister",
         "cpf": "22222222222",

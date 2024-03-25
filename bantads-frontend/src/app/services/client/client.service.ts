@@ -35,4 +35,16 @@ export class ClientService {
     }
     return this.http.get<Client[]>(this.BASE_URL, { params: params });
   }
+
+  searchById(query: string): Observable<Client> {
+    return this.http.get<Client>(
+      this.BASE_URL + `/${query}`,
+      this.httpOptions);
+  }
+
+  searchByCpf(query: string): Observable<Client[]> {
+    return this.http.get<Client[]>(
+      this.BASE_URL + `?cpf=${query}`,
+      this.httpOptions);
+  }
 }
