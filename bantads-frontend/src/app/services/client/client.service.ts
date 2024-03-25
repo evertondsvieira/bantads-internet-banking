@@ -23,16 +23,12 @@ export class ClientService {
   }
   public getClientsOrderedByName(): Observable<Client[]> {
     return this.http.get<Client[]>(
-      this.BASE_URL + '?sort=nome',
+      this.BASE_URL + '?_sort=name',
       this.httpOptions
     );
   }
 
   public searchClients(query: string): Observable<Client[]> {
-    let params = new HttpParams();
-    if (query) {
-      params = params.append('search', query);
-    }
-    return this.http.get<Client[]>(this.BASE_URL, { params: params });
-  }
+    return this.http.get<Client[]>(`${this.BASE_URL}?q=${query}`);
+}
 }
