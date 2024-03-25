@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -5,7 +6,7 @@ interface INavItems {
   name: string
   icon: string
   link: string
-  role: 'CLIENT' | 'MANAGER' | 'ADMIN'
+  role: 'CLIENT' | 'MANAGER' | 'ADMIN' | 'ALL'
 }
 
 @Component({
@@ -14,7 +15,7 @@ interface INavItems {
   styleUrl: './nav-bar.component.css'
 })
 export class NavBarComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   navItems: INavItems[] = [
     { name: 'Início', icon: 'home', link: 'home', role: 'CLIENT' },
@@ -35,7 +36,8 @@ export class NavBarComponent {
     { name: 'Adicionar Gerente', icon: 'person_add', link: 'admin/add/manager', role: 'ADMIN' },
     { name: 'Remover Gerente', icon: 'person_remove', link: 'admin/remove/manager', role: 'ADMIN' },
     { name: 'Listar Gerentes', icon: 'list_alt', link: 'admin/list/manager', role: 'ADMIN' },
-    { name: 'Atualizar Gerente', icon: 'settings', link: 'admin/update/manager', role: 'ADMIN' }
+    { name: 'Atualizar Gerente', icon: 'settings', link: 'admin/update/manager', role: 'ADMIN' },
+    { name: 'Deslogar', icon: 'logout', link: '/login', role: 'ALL' },
   ]
   
   getFilteredNavItems(): INavItems[] {
@@ -43,6 +45,15 @@ export class NavBarComponent {
 
     if (!userRole) return []
 
-    return this.navItems.filter(item => item.role === userRole)
+    if (userRole === 'ADMIN' || userRole === 'MANAGER' || userRole === 'CLIENT') {
+      return this.navItems.filter(item => item.role === userRole || item.role === 'ALL');
+    }
+
+    return []
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('loggedUser')
+    this.router.navigate(['/login'])
   }
 }
