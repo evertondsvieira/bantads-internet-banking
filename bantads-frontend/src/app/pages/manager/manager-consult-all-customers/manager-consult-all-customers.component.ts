@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Client } from '../../../models/client.model';
 import { ClientService } from '../../../services/client/client.service';
 import { User } from '../../../models/user.model';
@@ -14,7 +15,8 @@ export class ManagerConsultAllCustomersComponent implements OnInit {
   public searchQuery: string = '';
 
   constructor(
-    private clientService: ClientService
+    private clientService: ClientService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -46,5 +48,9 @@ export class ManagerConsultAllCustomersComponent implements OnInit {
     } else {
       this.getClientsOrderedByName();
     }
+  }
+
+  public viewMoreDetails(clientCPF: string) {
+    this.router.navigate(['manager/consult/customers', clientCPF]);
   }
 }

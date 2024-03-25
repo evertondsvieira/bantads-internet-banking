@@ -34,9 +34,12 @@
             <td>{{client.estado}}</td>
             <td>{{client.saldo}}</td>
             <td>
-              <!-- <a [routerLink]="['/client-details', client.id]">Detalhes</a> -->
-              <!-- implementar a página de detalhes do cliente-->
+              <!--<a [routerLink]="['manager/consult/customers', client.cpf]">Ver Mais</a>-->
             </td>
+            <td>
+              <button class="btn btn-primary" (click)="viewMoreDetails(client.id)">Ver mais</button>
+            </td>
+
           </tr>
         </tbody>
       </table>

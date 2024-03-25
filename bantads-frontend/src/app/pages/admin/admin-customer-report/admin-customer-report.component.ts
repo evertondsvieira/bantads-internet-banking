@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-admin-customer-report',
   templateUrl: './admin-customer-report.component.html',
   styleUrl: './admin-customer-report.component.css',
-  imports: [CommonModule]
+  imports: [CommonModule],
 })
 export class AdminCustomerReportComponent implements OnInit {
   private _user: User = this.authService.loggedUser;
