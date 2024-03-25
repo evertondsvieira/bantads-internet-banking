@@ -1,1 +1,27 @@
-<p>admin-customer-report works!</p>
+<div class="container">
+    <div class="hstack justify-content-center">
+        <div class="col-md-10 col-sm-2 mt-4">
+            <h3 class="text-danger text-center mt-4 mb-2">Relatório de Clientes</h3>
+            <div class="container mt-5">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="bg-danger text-white" scope="col">Cliente</th>
+                            <th class="bg-danger text-white" scope="col">CPF</th>
+                            <th class="bg-danger text-white" scope="col">Limite</th>
+                            <th class="bg-danger text-white" scope="col">Gerente</th>
+                            <th class="bg-danger text-white" scope="col">Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let client of clients">
+                            <td>{{ client.name }}</td>
+                            <td>{{ client.cpf }}</td>
+                            <td>{{ client.saldo }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

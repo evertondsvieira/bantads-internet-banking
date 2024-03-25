@@ -113,6 +113,44 @@
         "salary": 2900.75,
         "situation": "REJECTED"
     }
-]
+],
+
+"manager": [
+    {
+      "id": 1,
+      "name": "Petyr Baelish",
+      "cpf": "12121212121",
+      "email": "petyr@email.com",
+      "phone": "465465167"
+    },
+    {
+      "id": 2,
+      "name": "Cersei Lannister",
+      "cpf": "23232323232",
+      "email": "cersei@email.com",
+      "phone": "789456123"
+    },
+    {
+      "id": 3,
+      "name": "Jon Snow",
+      "cpf": "34343434343",
+      "email": "jon@email.com",
+      "phone": "321654987"
+    },
+    {
+      "id": 4,
+      "name": "Daenerys Targaryen",
+      "cpf": "45454545454",
+      "email": "daenerys@email.com",
+      "phone": "654987321"
+    },
+    {
+      "id": 5,
+      "name": "Tyrion Lannister",
+      "cpf": "56565656565",
+      "email": "tyrion@email.com",
+      "phone": "987654321"
+    }
+  ]
 
 }

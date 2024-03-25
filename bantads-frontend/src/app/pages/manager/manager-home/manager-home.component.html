@@ -28,7 +28,8 @@
               <div class="d-flex justify-content-around">
                 <button *ngFor="let acao of acoes"
                         [ngClass]="['btn', acao.buttonStyle]" 
-                        type="button">
+                        type="button"
+                        (click)="acao.manageModal(modalService)">
                   <i [ngClass]="['bi', acao.icon]"></i>
                   <span class="ms-1">{{acao.title | titlecase}}</span>
                 </button>

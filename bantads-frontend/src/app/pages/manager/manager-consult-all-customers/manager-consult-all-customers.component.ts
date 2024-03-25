@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Client } from '../../../models/client.model';
 import { ClientService } from '../../../services/client/client.service';
 import { User } from '../../../models/user.model';
@@ -10,37 +11,29 @@ import { AuthService } from '../../../services/auth/auth.service';
   styleUrl: './manager-consult-all-customers.component.css',
 })
 export class ManagerConsultAllCustomersComponent implements OnInit {
-  private _user: User = this.authService.loggedUser;
-  private _clients!: Client[];
+  private _lista!: Client[];
   public searchQuery: string = '';
 
   constructor(
-    private authService: AuthService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this._user = this.authService.loggedUser;
     this.getClientsOrderedByName();
   }
 
-  public get clients(): Client[] {
-    return this._clients;
-  }
-  public set clients(value: Client[]) {
-    this._clients = value;
+  public get lista(): Client[] {
+    return this._lista;
   }
 
-  public getUser(): User {
-    return this._user;
+  public set lista(value: Client[]) {
+    this._lista = value;
   }
-  public set user(user: User) {
-    this._user = user;
-  }
-
   public getClientsOrderedByName() {
-    this.clientService.getClientsOrderedByName().subscribe((clients) => {
-      this._clients = clients;
+    this.clientService.getClientsOrderedByName().subscribe(
+      lista => {
+      this._lista = lista;
     });
   }
 
@@ -48,11 +41,16 @@ export class ManagerConsultAllCustomersComponent implements OnInit {
     if (this.searchQuery.trim() !== '') {
       this.clientService
         .searchClients(this.searchQuery)
-        .subscribe((clients) => {
-          this._clients = clients;
+        .subscribe(
+          lista => {
+          this._lista = lista;
         });
     } else {
       this.getClientsOrderedByName();
     }
+  }
+
+  public viewMoreDetails(clientCPF: string) {
+    this.router.navigate(['manager/consult/customers', clientCPF]);
   }
 }

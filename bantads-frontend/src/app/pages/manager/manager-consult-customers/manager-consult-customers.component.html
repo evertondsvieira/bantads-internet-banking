@@ -1,1 +1,43 @@
-<p>manager-consult-customers works!</p>
+<!-- Section: Design Block -->
+<section class="">
+  <!-- Jumbotron -->
+
+  <div class="container-fluid my-4 mx-2">
+    <h3>Consultar Cliente</h3>
+  </div>
+  <div class="px-4 py-5 px-md-5 text-center text-lg-start h-100 d-flex align-items-start" style="background-color: hsl(0, 0%, 96%)">
+    <div class="container">
+      <div class="row mb-3 d-flex">
+        <div class="col-8">
+          <div class="form-group">
+            <label for="cpf">Informe o CPF do Cliente:</label>
+            <input type="text" class="form-control" id="cpf" [(ngModel)]="cpf">
+          </div>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary" (click)="consultClient(cpf)">Consultar</button>
+        </div>
+      </div>
+      <div *ngIf="client">
+        <h3>Dados do Cliente</h3>
+        <h6><strong>{{ client.name }} </strong></h6>
+        <p><strong>CPF:</strong> {{ client.cpf }}</p>
+        <!--<p><strong>E-mail:</strong> {{ client.email }}</p> 
+        <p><strong>Endereço:</strong> {{ client.adress }}</p>
+        <p><strong>Telefone:</strong> {{ client.telephone }}</p> -->
+        <p><strong>Salário:</strong> {{ client.salary }}</p>
+        <!-- Adicionar os outros dados do cliente aqui -->
+        <h3>Dados da Conta</h3>
+        <p><strong>Número da Conta:</strong> {{ account.accountId }}</p>
+        <p><strong>Data de Criação:</strong> {{ account.creationDate | date }}</p>
+        <p><strong>Número da Conta:</strong> {{ account.limite }}</p>
+        <!-- Adicionar os outros dados da conta aqui -->
+      </div>
+      <div *ngIf="mensagemErro" class="alert alert-danger">
+        {{ mensagemErro }}
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->

@@ -22,6 +22,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ClientWithdrawlComponent } from './pages/client/client-withdrawl/client-withdrawl.component';
 import { NgModule } from '@angular/core';
 import { authGuard } from './modules/auth';
+import { MaskComponent } from './components/mask/mask.component';
 
 export const clientRoutes: Routes = [
   { path: "home", component: ClientHomeComponent, canActivate: [authGuard], data:{"role": "CLIENT"}},
@@ -55,7 +56,9 @@ export const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "", children: [
+  { path: "", 
+    component: MaskComponent,
+    children: [
     ...clientRoutes,
     ...managerRoutes,
     ...adminRoutes,
