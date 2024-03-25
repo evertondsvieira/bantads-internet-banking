@@ -57,4 +57,5 @@ export class ClientService {
       `http://localhost:3000/account?cpf=${cpf}`,
       this.httpOptions
     );
+  }
 }
