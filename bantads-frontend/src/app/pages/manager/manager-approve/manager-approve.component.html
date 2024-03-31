@@ -1,9 +1,13 @@
 <div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
+  <h4 class="modal-title">Aprovação de Cliente</h4>
   <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 </div>
 <div class="modal-body">
+  <p>
+    Aprovar cliente {{client.name | titlecase}}, portador do CPF {{client.cpf}}?    
+  </p> 
 </div>
 <div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="approveClient(client)">Aprovar</button>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

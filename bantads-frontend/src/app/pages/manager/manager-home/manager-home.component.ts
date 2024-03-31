@@ -10,8 +10,8 @@ import { ManagerRejectComponent } from '../manager-reject/manager-reject.compone
 interface IAcao {
   title: string;
   icon: string;
-  buttonStyle: string,
-  manageModal: (modalService: NgbModal) => Boolean
+  buttonStyle: string;
+  component: Object;
 }
 
 @Component({
@@ -22,7 +22,7 @@ interface IAcao {
 
 export class ManagerHomeComponent implements OnInit{
   private _user: User = this.authService.loggedUser;
-  private _clients!: Client[];
+  private _clients: Client[] = [];
 
   constructor(
     private authService: AuthService,
@@ -37,8 +37,8 @@ export class ManagerHomeComponent implements OnInit{
   }
 
   public acoes: IAcao[] = [
-    { title: "aprovar", icon: "bi-check-lg", buttonStyle: "btn-success", manageModal: this.openModalManagerApprove },
-    { title: "rejeitar", icon: "bi-x", buttonStyle: "btn-danger", manageModal: this.openModalManagerReject }
+    { title: "aprovar", icon: "bi-check-lg", buttonStyle: "btn-success", component: ManagerApproveComponent},
+    { title: "rejeitar", icon: "bi-x", buttonStyle: "btn-danger", component: ManagerRejectComponent}
   ];
 
   public get user(): User {
@@ -70,13 +70,21 @@ export class ManagerHomeComponent implements OnInit{
     );
   }
 
-  public openModalManagerApprove(modalService: NgbModal): Boolean {
-    const modalRef = modalService.open(ManagerApproveComponent)
+  public openModal(modalService: NgbModal, client: Client, component: Component): Boolean {
+    const modalRef = modalService.open(component);
+    modalRef.componentInstance.client = client;
+    modalRef.dismissed.subscribe(result =>{
+      if(result){
+        this.clients = this.clients.filter((cli) => {
+          return cli.id != client.id;
+        });
+      }
+    })
     return true;
   }
 
-  public openModalManagerReject(modalService: NgbModal): Boolean {
-    const modalRef = modalService.open(ManagerRejectComponent)
+  public openModalManagerReject(modalService: NgbModal, client: Client): Boolean {
+    const modalRef = modalService.open(ManagerRejectComponent);
     return true;
   }
 }
