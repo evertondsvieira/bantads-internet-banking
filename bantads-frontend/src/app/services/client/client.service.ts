@@ -39,6 +39,14 @@ export class ClientService {
       this.httpOptions
     );
   }
+
+  public updateClient(client: Client): Observable<Client> {
+    return this.http.put<Client>(
+      this.BASE_URL + `/${client.id}`,
+      JSON.stringify(client),
+      this.httpOptions
+    );
+  }
   
   public searchById(query: string): Observable<Client> {
     return this.http.get<Client>(

@@ -1,9 +1,15 @@
 <div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
+  <h4 class="modal-title">Rejeição de Cliente</h4>
   <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 </div>
 <div class="modal-body">
+  <p>
+    reprovar cliente {{client.name | titlecase}}, portador do CPF {{client.cpf}}?
+    <label for="reason">Motivo: </label><br>
+    <textarea name="reason" id="" cols="30" rows="3"></textarea>    
+  </p> 
 </div>
 <div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="rejectClient(client)">Rejeitar</button>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>
