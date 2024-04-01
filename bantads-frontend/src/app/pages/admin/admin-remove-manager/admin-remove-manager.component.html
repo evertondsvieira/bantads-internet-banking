@@ -1,1 +1,13 @@
-<p>admin-remove-manager works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">Remover do Gerente</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <p>
+    Remover gerente {{manager.name | titlecase}}, portador do CPF {{manager.cpf}}? 
+  </p> 
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="deleteManager(manager)">Remover</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fechar</button>
+</div>

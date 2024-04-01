@@ -1,1 +1,33 @@
-<p>admin-update-manager works!</p>
+<div class="container">
+  <div class="card w-100 mt-5 mb-5 mx-auto">
+    <div class="card-body">
+      <h3 class="card-title text-center">Atualização de Gerente</h3>
+      <form #formManager="ngForm">
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label for="cpf" class="form-label">CPF</label>
+            <input [(ngModel)]="manager.cpf" name="cpf" type="text" class="form-control" id="cpf" [showMaskTyped]="true" [shownMaskExpression]="'___.___.___-__'" mask="000.000.000-00">
+          </div>
+          <div class="col-md-9">
+            <label for="name" class="form-label">Nome</label>
+            <input [(ngModel)]="manager.name" name="name" type="text" class="form-control" id="name" placeholder="Insira o nome">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-9">
+            <label for="email" class="form-label">Email</label>
+            <input [(ngModel)]="manager.email" name="email" type="email" class="form-control" id="email" placeholder="Insira o email/login">
+          </div>
+          <div class="col-md-3">
+            <label for="phone" class="form-label">Telefone</label>
+            <input [(ngModel)]="manager.phone" name="phone" type="tel" id="phone" class="form-control" placeholder="Insira o telefone">
+          </div>
+        </div>
+        <div class="row d-flex align-items-end justify-content-end">
+          <button type="submit" (click)="updateManager(manager)"  class="btn btn-danger col-md-2 me-3">Atualizar</button>
+          <button type="button" class="btn btn-outline-dark col-md-1" (click)="activeModal.close('Close click')">Fechar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

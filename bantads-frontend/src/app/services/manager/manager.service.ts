@@ -23,4 +23,27 @@ export class ManagerService {
       this.httpOptions
     );
   }
+
+  public addManager(manager: Manager): Observable<Manager>{
+    return this.http.post<Manager>(
+      this.BASE_URL,
+      JSON.stringify(manager),
+      this.httpOptions
+    )
+  }
+
+  public updateManager(manager: Manager): Observable<Manager>{
+    return this.http.put<Manager>(
+      this.BASE_URL + `/${manager.id}`,
+      JSON.stringify(manager),
+      this.httpOptions
+    )
+  }
+
+  public deleteManager(manager: Manager): Observable<Manager>{
+    return this.http.delete<Manager>(
+      this.BASE_URL + `/${manager.id}`,
+      this.httpOptions
+    )
+  }
 }
