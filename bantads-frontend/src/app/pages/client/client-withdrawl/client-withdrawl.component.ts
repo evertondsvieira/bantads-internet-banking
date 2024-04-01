@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Client } from '../../../models/client.model';
+import { Account } from '../../../models/account.model';
 import { Transaction } from '../../../models/transaction.model';
-import { ClientService } from '../../../services/client/client.service';
+import { AccountService } from '../../../services/account/account.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth/auth.service';
 
@@ -11,13 +11,12 @@ import { AuthService } from '../../../services/auth/auth.service';
   styleUrl: './client-withdrawl.component.css'
 })
 export class ClientWithdrawlComponent {
-  accountNumber!: string;
-  clientData!: Client;
+  accountData!: Account;
   transaction!: Transaction;
   user!: User
   
   constructor (
-    private clientService: ClientService,
+    private accountService: AccountService,
     private authService: AuthService
   ){}
 
@@ -27,9 +26,9 @@ export class ClientWithdrawlComponent {
   }
 
   getAccount() {
-    this.clientService.searchByCpf(/*this.user.cpf*/'11111111111').subscribe(
-      (clientsData: Client[]) => {
-        this.clientData = clientsData[0];
+    this.accountService.getAccountByCPF(/*this.user.cpf*/'11111111111').subscribe(
+      (accountsData: Account[]) => {
+        this.accountData = accountsData[0];
       }
     )
   }
