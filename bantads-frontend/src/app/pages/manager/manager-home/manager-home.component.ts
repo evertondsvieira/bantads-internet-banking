@@ -82,9 +82,4 @@ export class ManagerHomeComponent implements OnInit{
     })
     return true;
   }
-
-  public openModalManagerReject(modalService: NgbModal, client: Client): Boolean {
-    const modalRef = modalService.open(ManagerRejectComponent);
-    return true;
-  }
 }

@@ -11,9 +11,13 @@ interface IAcao {
   title: string;
   icon: string;
   buttonStyle: string,
-  manageModal: (modalService: NgbModal) => Boolean
+  component: Object
 }
-
+interface IModalResponse{
+  updatedManager: Manager,
+  changed: boolean,
+  deleted: boolean
+}
 @Component({
   selector: 'app-admin-list-manager',
   templateUrl: './admin-list-manager.component.html',
@@ -25,6 +29,7 @@ export class AdminListManagerComponent implements OnInit{
   private _user: User = this.authService.loggedUser;
   private _managers!: Manager[];
   public searchQuery: string = '';
+  public notFilteredManagers: Manager[] = [];
 
   constructor(
     private authService: AuthService,
@@ -35,11 +40,12 @@ export class AdminListManagerComponent implements OnInit{
   ngOnInit(): void {
     this._user = this.authService.loggedUser;
     this.getManagersOrderedByName();
+    
   }
 
   public acoes: IAcao[] = [
-    { title: "editar", icon: "bi-pencil-square", buttonStyle: "btn-primary", manageModal: this.openModalManagerUpdate },
-    { title: "remover", icon: "bi-trash-fill", buttonStyle: "btn-danger", manageModal: this.openModalManagerRemove }
+    { title: "editar", icon: "bi-pencil-square", buttonStyle: "btn-primary", component: AdminUpdateManagerComponent},
+    { title: "remover", icon: "bi-trash-fill", buttonStyle: "btn-danger", component: AdminRemoveManagerComponent}
   ];
 
   public get managers(): Manager[] {
@@ -65,17 +71,38 @@ export class AdminListManagerComponent implements OnInit{
 
   public getManagersOrderedByName() {
     this.managerService.getManagersOrderedByName().subscribe((managers) => {
-      this._managers = managers;
+      this.managers = managers;
+      this.notFilteredManagers = managers;
     });
   }
 
-  public openModalManagerUpdate(modalService: NgbModal): Boolean {
-    const modalRef = modalService.open(AdminUpdateManagerComponent)
+  public openModal(modalService: NgbModal, manager: Manager, component: Component): Boolean {
+    const modalRef = modalService.open(component, {size: 'xl'});
+    modalRef.componentInstance.manager = {...manager};
+    modalRef.dismissed.subscribe((res) => {
+      let modalRes: IModalResponse = <IModalResponse> res;
+      console.log(modalRes);
+      console.log(modalRes.updatedManager);
+      
+      if(modalRes.changed){
+        let updateIndex = this.managers.findIndex(manager => manager.id == modalRes.updatedManager.id)
+        this.managers[updateIndex] = modalRes.updatedManager;
+      } 
+      else if (modalRes.deleted){
+        let deletedManagerId = manager.id; 
+        let deletedManagerIndex: number = this.managers.findIndex(manager => manager.id == deletedManagerId)
+        this.managers.splice(deletedManagerIndex, 1);
+      }
+    });
     return true;
   }
 
-  public openModalManagerRemove(modalService: NgbModal): Boolean {
-    const modalRef = modalService.open(AdminRemoveManagerComponent)
-    return true;
+  public filterManager(filterValue: string): void {
+    if(filterValue.length > 0) {
+      this.managers = this.managers.filter((manager) => manager.cpf?.replace(/(\.)(\-)/, '').match(filterValue) || 
+                                                        manager.name?.toLowerCase().match(filterValue.toLowerCase()));
+    } else {
+      this.managers = this.notFilteredManagers;
+    }
   }
 }

@@ -11,7 +11,7 @@
   <div class="px-4 py-5 px-md-5 text-center text-lg-start h-100 d-flex align-items-start" style="background-color: hsl(0, 0%, 96%)">
     <div class="container">
       <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Pesquisar por CPF ou Nome">
+        <input #filter type="text" class="form-control" placeholder="Pesquisar por CPF ou Nome" (change)="filterManager(filter.value)">
       </div>
       <table [hidden]="managers ? false : true" class="table table-striped">
         <thead>
@@ -34,7 +34,7 @@
                 <button *ngFor="let acao of acoes"
                         [ngClass]="['btn', acao.buttonStyle]" 
                         type="button"
-                        (click)="acao.manageModal(modalService)">
+                        (click)="openModal(modalService, manager, acao.component)">
                   <i [ngClass]="['bi', acao.icon]"></i>
                 </button>
               </div>
