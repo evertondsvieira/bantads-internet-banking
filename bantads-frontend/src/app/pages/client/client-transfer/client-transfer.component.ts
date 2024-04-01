@@ -9,30 +9,28 @@ import { ClientService } from '../../../services/client/client.service';
   styleUrl: './client-transfer.component.css'
 })
 export class ClientTransferComponent {
-  accountNumber!: string;
+  accountCPF!: string;
   clientData!: Client;
-  validAccountNumber!: boolean;
+  clientsData!: Client[];
   transaction!: Transaction;
+  searchDone!: boolean;
   
   constructor (
     private clientService: ClientService
   ){}
 
   ngOnInit(): void {
-    this.validAccountNumber = false;
+    this.searchDone = false;
   }
 
   searchAccount() {
-    if (this.clientService.searchById(this.accountNumber).subscribe(
-      (clientData: Client) => {
-        this.clientData = clientData;
+    this.searchDone = true;
+    this.clientService.getClientByCPF(this.accountCPF).subscribe(
+      (clientsData: Client[]) => {
+        this.clientData = clientsData[0];
+        this.clientsData = clientsData;
       }
-    )) {
-      this.validAccountNumber = true;
-    }
-    else {
-      this.validAccountNumber = false;
-    }
+    )
   }
 
   confirmTransfer(transaction: Transaction){

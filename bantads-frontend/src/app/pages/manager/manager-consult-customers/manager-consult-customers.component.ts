@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Client } from '../../../models/client.model';
-import {Account } from '../../../models/account.model';
+import { Account } from '../../../models/account.model';
 import { ClientService } from '../../../services/client/client.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth/auth.service';
+import { AccountService } from '../../../services/account/account.service';
 
 @Component({
   selector: 'app-manager-consult-customers',
@@ -13,12 +14,15 @@ import { AuthService } from '../../../services/auth/auth.service';
 })
 export class ManagerConsultCustomersComponent {
   cpf: string = '';
+  public clients!: Client[];
   private _client!: Client;
+  public accounts!: Account[];
   private _account!: Account;
   mensagemErro: string | undefined;
 
 
   constructor(
+    private accountService: AccountService,
     private clientService: ClientService,
     private router: Router
   ) {}
@@ -39,14 +43,14 @@ export class ManagerConsultCustomersComponent {
 //retomar
   public consultClient(cpf: string) {
     this.clientService.getClientByCPF(cpf).subscribe(
-      client => {
-        if (client) {
-          this.client = client;
+      clients => {
+        if (clients) {
+          this.client = clients[0];
           this.mensagemErro = undefined;
           // Se o cliente foi encontrado, busca a conta associada
-          this.clientService.getAccountByCPF(client.cpf).subscribe(
+          this.accountService.getAccountByCPF(this.client.cpf).subscribe(
             account => {
-              this.account = account;
+              this.account = this.accounts[0];
             },
             error => {
               console.error('Erro ao consultar conta:', error);
