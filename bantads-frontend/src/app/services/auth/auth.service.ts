@@ -32,5 +32,10 @@ export class AuthService {
     let observableUser = this.userService.login(auth);
     return observableUser;
   }
-  
+
+  /*
+  public register(value: any) {
+    return this.userService.register(value);
+ }
+  */
 }
