@@ -4,6 +4,7 @@ import { Client } from '../../../models/client.model';
 import { ClientService } from '../../../services/client/client.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth/auth.service';
+import { Adress } from '../../../models/adress.model';
 
 @Component({
   selector: 'app-manager-consult-all-customers',
