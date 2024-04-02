@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modalLabel"> Confirmação </h4>
+  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar" (click)="activeModal.dismiss()">
+  </button>
+</div>
+
+<div class="modal-body text-center">
+  <div>
+    <h5 *ngIf="transaction.type == 'Deposit'">Tem certeza que deseja depositar R$#{{transaction.amount}} em sua conta?</h5>
+    <h5 *ngIf="transaction.type == 'Withdrawl'">Tem certeza que deseja sacar R$#{{transaction.amount}} da sua conta?</h5>
+    <h5 *ngIf="transaction.type == 'Transfer'">Tem certeza que deseja tranferir #{{transaction.amount}} da sua conta para a conta #{{transaction.destinationAccount}}?</h5>
+  </div>
+</div>
+
+<div class="modal-foot text-center p-2">
+  <div>
+    <button type="button" style="margin-right: 100px;" class="btn btn-outline-danger btn-block btn-lg" (click)="activeModal.close()"> Não </button>
+    <button type="button" class="btn btn-outline-success btn-block btn-lg"  (click)="createTransaction(transaction)"> Sim </button>
+  </div>
+</div>

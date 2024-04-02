@@ -38,6 +38,7 @@
       "cpf": "22222222222",
       "accountId": "8888",
       "salary": 3200.75,
+      "balance": 12000,
       "situation": "REJECTED"
     },
     {

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Client } from '../../../models/client.model';
 import { Transaction } from '../../../models/transaction.model';
 import { ClientService } from '../../../services/client/client.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalTransactionComponent } from '../../../components/modal/modal-transaction/modal-transaction.component';
 
 @Component({
   selector: 'app-client-transfer',
@@ -16,7 +18,8 @@ export class ClientTransferComponent {
   searchDone!: boolean;
   
   constructor (
-    private clientService: ClientService
+    private clientService: ClientService,
+    private modalService: NgbModal
   ){}
 
   ngOnInit(): void {
@@ -33,7 +36,8 @@ export class ClientTransferComponent {
     )
   }
 
-  confirmTransfer(transaction: Transaction){
-
+  openModal(transaction: Transaction){
+    const modalRef = this.modalService.open(ModalTransactionComponent);
+    modalRef.componentInstance.transaction = this.transaction;
   }
 }

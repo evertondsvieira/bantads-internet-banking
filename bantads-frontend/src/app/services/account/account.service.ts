@@ -26,6 +26,7 @@ export class AccountService {
       this.BASE_URL + `?cpf=${query}`,
       this.httpOptions);
   }
+  
   public updateAccount(account: Account): Observable<Account> {
     return this.http.put<Account>(
       this.BASE_URL + `/${account.id}`,
