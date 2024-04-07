@@ -1,0 +1,11 @@
+services:
+  - name: 'account'
+    url: http://localhost:3001
+  - name: 'client'
+    url: http://localhost:3002
+  - name: 'manager'
+    url: http://localhost:3003
+  - name: 'auth'
+    url: http://localhost:3004
+  - name: 'sagas'
+    url: http://localhost:3005
