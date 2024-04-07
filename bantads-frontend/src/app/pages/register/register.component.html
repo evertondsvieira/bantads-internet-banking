@@ -31,7 +31,10 @@
             <h4 class="text-center">Abra agora sua Conta!</h4>
           </div>
           <div class="card-body">
-            <form #formRegistration="ngForm" method="post">
+            <!-- Lucas Cazionato | 07/04/2024-05:40 | Projeto nao estava compilando entao deixei como comentario apenas para rodar
+              <form #formRegistration="ngForm" method="post">
+            -->
+            <form #formRegistration="" method="post">
               <div class="row">
                 <h4>Informações Pessoais</h4>
               </div>
@@ -39,7 +42,10 @@
               <div class="row g-2">
                 <div class="col-lg-2 mb-3">
                   <label for="cpf" class="form-label">CPF:</label>
-                  <input type="text" class="form-control bg-light" id="cpf" placeholder="000.000.000-00" [(ngModel)]="cpf" mask="000.000.000-00" inputmode="numeric" name="cpf" required cpf />
+                  <!-- Lucas Cazionato | 07/04/2024-05:42 | Projeto nao estava compilando entao deixei como comentario apenas para rodar
+                    <input type="text" class="form-control bg-light" id="cpf" placeholder="000.000.000-00" [(ngModel)]="cpf" mask="000.000.000-00" inputmode="numeric" name="cpf" required cpf />
+                  -->
+                  <input type="text" class="form-control bg-light" id="cpf" placeholder="000.000.000-00" mask="000.000.000-00" inputmode="numeric" name="cpf" required cpf />
                 </div>
 
                 <div class="col-lg-5 mb-3">

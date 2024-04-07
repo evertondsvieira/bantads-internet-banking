@@ -30,8 +30,10 @@
           <tr *ngFor="let client of lista">
             <td>{{client.cpf}}</td>
             <td colspan="2">{{client.name}}</td>
+            <!-- Lucas Cazionato | 07/04/2024-04:47 | Projeto nao estava compilando entao comentei essas linhas para verificacao
             <td>{{client.cidade}}</td>
             <td>{{client.estado}}</td>
+            -->
             <td>{{client.saldo}}</td>
             <td>
               <!--<a [routerLink]="['manager/consult/customers', client.cpf]">Ver Mais</a>-->
