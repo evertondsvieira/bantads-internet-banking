@@ -1,11 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, NgForm, NgModel, Validators} from "@angular/forms";
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, NgForm, NgModel, Validators } from '@angular/forms';
 import { User } from '../../models/user.model';
-import {Router} from '@angular/router';
-import {CurrencyPipe} from "@angular/common";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import { Router } from '@angular/router';
+import { CurrencyPipe } from "@angular/common";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { NumericoDirective } from '../../modules/shared/directives/numerico.directive';
 import { AuthService } from '../../services/auth/auth.service';
+
+import { ManagerService } from '../../services/manager/manager.service';
+import { Manager } from '../../models/manager.model';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-register',
@@ -39,7 +43,6 @@ export class RegisterComponent {
     this.formattedSalary = 'R$ 0,00';
     this.salary = 0;
   }
-  )
 
   openConfirmationModal() {
     this.modalRef = this.modalService.open(this.accountConfirmationModal, {ariaLabelledBy: 'accountConfirmationModal'});
@@ -62,6 +65,7 @@ export class RegisterComponent {
       cadastro.complemento = this.complemento;
       cadastro.numero = this.numero;
 
+      /* Lucas Cazionato | 07/04/2024-05:43 | Projeto nao estava compilando entao deixei como comentario apenas para rodar
       this.authService.register(cadastro).subscribe(
         (response: any) => {
           console.log('Usuário registrado com sucesso:', response);
@@ -76,6 +80,7 @@ export class RegisterComponent {
           console.error('Erro ao registrar usuário:', error);
         },
       );
+      */
     } else {
       console.error('formRegistro is not defined');
     }
