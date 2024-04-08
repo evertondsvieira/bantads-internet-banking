@@ -42,10 +42,12 @@ export class ManagerConsultCustomersComponent {
   }
 //retomar
   public consultClient(cpf: string) {
-    this.clientService.getClientByCPF(cpf).subscribe(
+    this.clientService.getClientByCPF(cpf).subscribe(      
       clients => {
         if (clients) {
           this.client = clients[0];
+          console.log(this.client.address);
+          
           this.mensagemErro = undefined;
           // Se o cliente foi encontrado, busca a conta associada
           this.accountService.getAccountByCPF(this.client.cpf).subscribe(
