@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-MsAccountApplication<ms-account>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "bantads.msaccount.MsAccountApplication",
+      "projectName": "ms-account",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
