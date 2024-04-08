@@ -1,21 +1,18 @@
-import { Adress } from './adress.model';
+import { Address } from './address.model';
 import { Situation } from './enum/situation.enum';
 
 export class Client {
   constructor(
     private _id: string,
     private _name: string,
-    private _email:string,
+    private _email: string,
     private _cpf: string,
-    private _adress: Adress,
+    private _address: Address,
     private _phone: number,
     private _salary: number,
     private _accountId: string,
     private _saldo: number,
     private _situation: Situation,
-    private _rua: string,         //retirar - endereço
-    private _cidade: string,
-    private _estado: string,
   ) {}
 
   public get situation(): Situation {
@@ -25,11 +22,11 @@ export class Client {
     this._situation = value;
   }
 
-  public get adress(): Adress {
-    return this._adress;
+  public get address(): Address {
+    return this._address;
   }
-  public set adress(value: Adress) {
-    this._adress = value;
+  public set address(value: Address) {
+    this._address = value;
   }
 
   public get phone(): number {
@@ -76,5 +73,11 @@ export class Client {
   }
   public set saldo(value: number) {
     this._saldo = value;
+  }
+  public get email(): string {
+    return this._email;
+  }
+  public set email(value: string) {
+    this._email = value;
   }
 }

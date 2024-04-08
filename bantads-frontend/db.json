@@ -22,7 +22,7 @@
       "profile": "CLIENT"
     }
   ],
-  "client": [
+  "client":[
     {
       "id": "1",
       "name": "Clienterson",
@@ -30,7 +30,16 @@
       "accountId": "8888",
       "salary": 3200.75,
       "balance": 8000,
-      "situation": "REJECTED"
+      "situation": "REJECTED",
+      "address": {
+        "type": "Residential",
+        "street": "Main Street",
+        "number": 123,
+        "complement": "Apt 1",
+        "cep": 12345678,
+        "city": "Some City",
+        "state": "Some State"
+      }
     },
     {
       "id": "2",
@@ -39,7 +48,16 @@
       "accountId": "8888",
       "salary": 3200.75,
       "balance": 12000,
-      "situation": "REJECTED"
+      "situation": "REJECTED",
+      "address": {
+        "type": "Residential",
+        "street": "Second Street",
+        "number": 456,
+        "complement": "Apt 2",
+        "cep": 87654321,
+        "city": "Another City",
+        "state": "Another State"
+      }
     },
     {
       "id": "3",
@@ -47,7 +65,16 @@
       "cpf": "33333333333",
       "accountId": "7777",
       "salary": 2800,
-      "situation": "APPROVED"
+      "situation": "APPROVED",
+      "address": {
+        "type": "Commercial",
+        "street": "Dragonstone Street",
+        "number": 789,
+        "complement": "Tower",
+        "cep": 99999999,
+        "city": "King's Landing",
+        "state": "Westeros"
+      }
     },
     {
       "id": "4",
@@ -55,7 +82,16 @@
       "cpf": "44444444444",
       "accountId": "6666",
       "salary": 4000.25,
-      "situation": "OPEN"
+      "situation": "OPEN",
+      "address": {
+        "type": "Residential",
+        "street": "Winterfell Avenue",
+        "number": 10,
+        "complement": "",
+        "cep": 11111111,
+        "city": "Winterfell",
+        "state": "The North"
+      }
     },
     {
       "id": "5",
@@ -63,7 +99,16 @@
       "cpf": "55555555555",
       "accountId": "5555",
       "salary": 3500,
-      "situation": "OPEN"
+      "situation": "OPEN",
+      "address": {
+        "type": "Residential",
+        "street": "Faceless Street",
+        "number": 5,
+        "complement": "",
+        "cep": 55555555,
+        "city": "Braavos",
+        "state": "Essos"
+      }
     },
     {
       "id": "6",
@@ -71,7 +116,16 @@
       "cpf": "66666666666",
       "accountId": "4444",
       "salary": 2700.5,
-      "situation": "APPROVED"
+      "situation": "APPROVED",
+      "address": {
+        "type": "Residential",
+        "street": "Red Keep Road",
+        "number": 100,
+        "complement": "",
+        "cep": 66666666,
+        "city": "King's Landing",
+        "state": "Westeros"
+      }
     },
     {
       "id": "7",
@@ -79,7 +133,16 @@
       "cpf": "77777777777",
       "accountId": "3333",
       "salary": 2900.75,
-      "situation": "REJECTED"
+      "situation": "REJECTED",
+      "address": {
+        "type": "Residential",
+        "street": "Winterfell Avenue",
+        "number": 20,
+        "complement": "Apt 3",
+        "cep": 77777777,
+        "city": "Winterfell",
+        "state": "The North"
+      }
     },
     {
       "id": "8",
@@ -87,7 +150,16 @@
       "cpf": "88888888888",
       "accountId": "2222",
       "salary": 3800.25,
-      "situation": "OPEN"
+      "situation": "OPEN",
+      "address": {
+        "type": "Residential",
+        "street": "Lannister Lane",
+        "number": 8,
+        "complement": "",
+        "cep": 88888888,
+        "city": "Casterly Rock",
+        "state": "Westeros"
+      }
     },
     {
       "id": "9",
@@ -95,7 +167,16 @@
       "cpf": "99999999999",
       "accountId": "1111",
       "salary": 3100,
-      "situation": "APPROVED"
+      "situation": "APPROVED",
+      "address": {
+        "type": "Residential",
+        "street": "Tarth Terrace",
+        "number": 15,
+        "complement": "",
+        "cep": 99999999,
+        "city": "Evenfall Hall",
+        "state": "Westeros"
+      }
     },
     {
       "id": "10",
@@ -103,7 +184,16 @@
       "cpf": "10101010101",
       "accountId": "0000",
       "salary": 2600.5,
-      "situation": "OPEN"
+      "situation": "OPEN",
+      "address": {
+        "type": "Residential",
+        "street": "Winterfell Avenue",
+        "number": 30,
+        "complement": "",
+        "cep": 10101010,
+        "city": "Winterfell",
+        "state": "The North"
+      }
     },
     {
       "id": "11",
@@ -111,9 +201,19 @@
       "cpf": "12121212121",
       "accountId": "1234",
       "salary": 2900.75,
-      "situation": "REJECTED"
+      "situation": "REJECTED",
+      "address": {
+        "type": "Residential",
+        "street": "Baelish Boulevard",
+        "number": 1234,
+        "complement": "",
+        "cep": 12121212,
+        "city": "Harrenhal",
+        "state": "Westeros"
+      }
     }
-  ],
+  ]
+  ,
   "manager": [
     {
       "id": "1",
@@ -143,5 +243,7 @@
       "email": "tyrion@email.com",
       "phone": "222222222"
     }
+  ],
+  "account":[
   ]
 }
