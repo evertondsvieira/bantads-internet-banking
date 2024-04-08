@@ -53,12 +53,16 @@
                     </span>        
                   </div>
                   <label class="control-label" for="password">Senha</label>
+                  <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                  </div>
                 </div>
 
                 <!-- Submit button -->
                 <button type="submit" (click)="login()" class="btn btn-danger btn-block mb-4">
                   Login
                 </button>
+                
 
                 <!-- Register buttons -->
                 <div class="text-center">

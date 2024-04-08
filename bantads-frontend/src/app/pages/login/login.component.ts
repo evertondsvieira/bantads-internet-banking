@@ -1,85 +1,64 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Auth } from '../../models/auth.model';
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../models/user.model';
-import { CommonModule } from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('formLogin') formLogin! : NgForm;
+  @ViewChild('formLogin') formLogin!: NgForm;
   public auth: Auth = new Auth();
   public loading: boolean = false;
-  public message!: string;
+  public errorMessage: string = ''; // Nova propriedade para armazenar a mensagem de erro
   public passwordVisible: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
-  ) {  
-    this.verifyAuth();
-  } 
+  ) { }
 
   ngOnInit(): void {
-    this.verifyAuth();
-    this.route.queryParams.subscribe(param => this.message = param["error"])
+    this.route.queryParams.subscribe(param => this.errorMessage = param["error"]);
   }
 
-  login(): void{
-    
+  login(): void {
     this.loading = true;
-    if(this.formLogin.form.valid){
-      
+    
+    if (this.formLogin.form.valid) {
       this.authService.login(this.auth).subscribe(authUser => {
         let user: User | null = authUser ? authUser : null;
         
-        // Remover quando não ter o json-server
+        // Remover quando não tiver o json-server
         user = Array.isArray(user) ? user[0] : user;
 
-        if(user != null){
+        if (user != null) {
           this.authService.loggedUser = user;   
           this.loading = false;
 
-          if(user.profile == 'CLIENT'){
+          if (user.profile == 'CLIENT') {
             this.router.navigate(["/home"]);
-          }
-          else if (user.profile == 'MANAGER'){
+          } else if (user.profile == 'MANAGER') {
             this.router.navigate(['/manager/home']);
-          }
-          else if(user.profile == 'ADMIN'){
+          } else if (user.profile == 'ADMIN') {
             this.router.navigate(['/admin/home']);
           }
+        } else {
+          this.errorMessage = "Email/Senha Inválidos"; // Define a mensagem de erro
+          this.loading = false;
         }
-        else{
-          this.message = "Email/Senha Inválidos";
-        }
-      })
+      });
+    } else {
+      this.loading = false;
     }
-    this.loading = false;
   }
 
-  private verifyAuth(){
-    let loggedUser = this.authService.loggedUser;
-    if(loggedUser){
-      if(loggedUser.profile == 'CLIENT'){
-        this.router.navigate(["/home"]);
-      }
-      else if(loggedUser.profile == 'MANAGER'){
-        this.router.navigate(['/manager/home']);
-      }
-      else if(loggedUser.profile == 'ADMIN'){
-        this.router.navigate(['/admin/home']);
-      }
-    }
-  }
-  togglePassword(): void{
+  togglePassword(): void {
     this.passwordVisible = !this.passwordVisible;
   }
 }
