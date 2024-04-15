@@ -9,6 +9,16 @@
       "projectName": "ms-account",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-MsClientApplication<ms-client>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "bantads.msclient.MsClientApplication",
+      "projectName": "ms-client",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
