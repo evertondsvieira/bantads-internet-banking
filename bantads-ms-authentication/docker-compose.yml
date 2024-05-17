@@ -1,21 +1,34 @@
 version: '3.8'
-
 services:
-  postgres:
-    image: postgres:latest
-    restart: always
+  mongo-db:
+    image: mongo:latest
+    container_name: mongo-db
     env_file:
       - .env
+    ports:
+      - "27017:27017"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mongo-data:/data/db
+    networks:
+      - bantads-network
 
-  ms_account:
-    build: .
+  ms-authentication:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-authentication
     env_file:
       - .env
+    ports:
+      - "3004:3004"
     depends_on:
-      - postgres
+      - mongo-db
+    networks:
+      - bantads-network
+
+networks:
+  bantads-network:
+    driver: bridge
 
 volumes:
-  postgres_data:
-    name: postgres_data
+  mongo-data:
