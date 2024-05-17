@@ -1,50 +1,30 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:latest
-    restart: always
-    env_file:
-      - .env
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-  ms_account:
+  ms-account:
     build:
       context: ./bantads-ms-account
       dockerfile: ./Dockerfile
     env_file:
       - ./bantads-ms-account/.env
-    depends_on:
-      - postgres
 
-  ms_authentication:
+  ms-authentication:
     build:
       context: ./bantads-ms-authentication
       dockerfile: ./Dockerfile
     env_file:
       - ./bantads-ms-authentication/.env
-    depends_on:
-      - postgres
 
-  ms_client:
+  ms-client:
     build:
       context: ./bantads-ms-client
       dockerfile: ./Dockerfile
     env_file:
       - ./bantads-ms-client/.env
-    depends_on:
-      - postgres
 
-  ms_manager:
+  ms-manager:
     build:
       context: ./bantads-ms-manager
       dockerfile: ./Dockerfile
     env_file:
       - ./bantads-ms-manager/.env
-    depends_on:
-      - postgres
-
-volumes:
-  postgres_data:
-    name: postgres_data
