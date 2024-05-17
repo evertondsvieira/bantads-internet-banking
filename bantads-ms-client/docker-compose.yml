@@ -1,50 +1,29 @@
 version: '3.8'
-
 services:
-  postgres:
+  postgres-db:
     image: postgres:latest
-    restart: always
+    container_name: postgres-db
     env_file:
       - .env
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - bantads-network
 
-  ms_account:
+  ms-client:
     build:
-      context: ./bantads-ms-account
-      dockerfile: ./Dockerfile
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-client
     env_file:
-      - ./bantads-ms-account/.env
+      - .env
+    ports:
+      - "3002:3002"
     depends_on:
-      - postgres
+      - postgres-db
+    networks:
+      - bantads-network
 
-  ms_authentication:
-    build:
-      context: ./bantads-ms-authentication
-      dockerfile: ./Dockerfile
-    env_file:
-      - ./bantads-ms-authentication/.env
-    depends_on:
-      - postgres
-
-  ms_client:
-    build:
-      context: ./bantads-ms-client
-      dockerfile: ./Dockerfile
-    env_file:
-      - ./bantads-ms-client/.env
-    depends_on:
-      - postgres
-
-  ms_manager:
-    build:
-      context: ./bantads-ms-manager
-      dockerfile: ./Dockerfile
-    env_file:
-      - ./bantads-ms-manager/.env
-    depends_on:
-      - postgres
-
-volumes:
-  postgres_data:
-    name: postgres_data
+networks:
+  bantads-network:
+    driver: bridge
