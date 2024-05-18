@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  mongo-db:
+    image: mongo:latest
+    container_name: mongo-db
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - bantads-network
+
+  ms-authentication:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-authentication
+    env_file:
+      - .env
+    ports:
+      - "3004:3004"
+    depends_on:
+      - mongo-db
+    networks:
+      - bantads-network
+
+networks:
+  bantads-network:
+    driver: bridge
+
+volumes:
+  mongo-data:

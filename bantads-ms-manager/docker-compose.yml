@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    networks:
+      - bantads-network
+
+  ms-manager:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-manager
+    env_file:
+      - .env
+    ports:
+      - "3003:3003"
+    depends_on:
+      - postgres-db
+    networks:
+      - bantads-network
+
+networks:
+  bantads-network:
+    driver: bridge

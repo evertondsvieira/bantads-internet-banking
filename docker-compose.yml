@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  ms-account:
+    build:
+      context: ./bantads-ms-account
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./bantads-ms-account/.env
+
+  ms-authentication:
+    build:
+      context: ./bantads-ms-authentication
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./bantads-ms-authentication/.env
+
+  ms-client:
+    build:
+      context: ./bantads-ms-client
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./bantads-ms-client/.env
+
+  ms-manager:
+    build:
+      context: ./bantads-ms-manager
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./bantads-ms-manager/.env
