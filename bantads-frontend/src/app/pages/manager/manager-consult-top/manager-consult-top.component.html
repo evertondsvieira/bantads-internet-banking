@@ -1,6 +1,7 @@
-<div class="container-fluid my-4 mx-2">
-  <div class="d-flex flex-column gap-4">
-    <h6>Três melhores clientes</h6>
+<div class="card">
+  <div class="card-header">
+    <h4 class="text-center">Três melhores clientes</h4>
+  </div>
     <table class="table table-striped">
       <thead class="container">
         <tr>
@@ -23,5 +24,4 @@
     <div *ngIf="!sortedClients || sortedClients.length === 0" class="d-flex align-items-center justify-content-center">
       <p>Nenhum registro encontrado</p>
     </div>
-  </div>
 </div>

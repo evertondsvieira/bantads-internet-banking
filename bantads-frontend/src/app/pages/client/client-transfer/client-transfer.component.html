@@ -1,72 +1,115 @@
-<body class="bg-light">
-  <div class="container">
-      <div class="hstack justify-content-center">
-          <div class="col-md-10 col-sm-2 mt-4">
-              <h4 class="text-danger text-center mt-4 mb-2">BANTADS - Internet Banking do TADS</h4>
-              <div class="card mb-2 mt-4">
-                  <div class="card-header">
-                      <h4 class="text-center">Transferir</h4>
-                  </div>
-                  <div class="card-body">
-                    <form>
-                      <div class="row g-2">
-                        <div class="col-lg-4 mb-3">
-                            <label for="numero-conta" class="form-label">Número do CPF do beneficiário</label>
-                            <div class="input-group">
-                              <input enter="true" type="text" class="form-control" id="accountCPF" name="accountCPF" [(ngModel)]="accountCPF" placeholder="000.000.000-00" required numerico>
-                              <button (click)="searchAccount()" class="btn btn-outline-secondary" type="submit">Procurar</button>
-                          </div>
-                        </div>
-                      </div>
-                    
-                      <!-- Dados do Beneficiário -->
-                      <div *ngIf="searchDone && (!clientsData || clientsData.length === 0)" class="d-flex align-items-center justify-content-center">
-                        <p>Nenhum registro encontrado.</p>
-                      </div>
-                      <div class="row g-2" *ngFor="let clientData of clientsData">
-                        <div class="col-lg-4 mb-3">
-                            <label for="nome-beneficiario" class="form-label">Nome do Beneficiário:</label>
-                            <output type="text" class="form-control" id="nome-beneficiario">{{clientData.name}}</output>
-                        </div>
-                
-                        <div class="col-lg-4 mb-3">
-                            <label for="cpf-beneficiario" class="form-label">CPF do Beneficiário:</label>
-                            <output type="text" class="form-control" id="cpf-beneficiario">{{clientData.cpf}}</output>
-                        </div>
-                
-                        <div class="col-lg-4 mb-3">
-                          <label for="email-beneficiario" class="form-label">E-mail do Beneficiário:</label>
-                          <output type="email" class="form-control" id="email-beneficiario">{{clientData.name}}</output>
-                        </div>
-
-                        <div class="col-lg-4 mb-3">
-                          <label for="telefone-beneficiario" class="form-label">Telefone do Beneficiário:</label>
-                          <output type="text" class="form-control" id="telefone-beneficiario">{{clientData.accountId}}</output>
-                        </div>
-                    </div>
-                  
-                      <!-- Dados da Tranferência -->
-                      <div class="row g-3">
-                          <div class="col-lg-6 mb-3">
-                              <label for="valor-tranferencia" class="form-label">Valor da transferência:</label>
-                              <input type="number" class="form-control" id="valor-tranferencia" required/>
-                          </div>
-                      </div>
-                      <div class="d-flex justify-content-center">
-                          <div class="mx-4 text-center">
-                              <button (click)="openModal(transaction)" type="button" class="btn btn-outline-danger">Confirmar Transferência</button>
-                          </div>
-                          <div class="mx-4 text-center">
-                              <button routerLink="/home" type="button" class="btn btn-outline-secondary">Cancelar</button>
-                          </div>
-                      </div>
-                  </form>
-                  </div>
-              </div>
-              <div class="row justify-content-center text-center mt-1">
-                  <p class="text-secondary" style="font-size: 14px;">Bantads &copy; 2024</p>
-              </div>
-          </div>
-      </div>
+<div class="card m-2">
+  <div class="card-header">
+    <h4 class="text-center">Transferir</h4>
   </div>
-</body>
+
+  <div class="card-body">
+    <form>
+      <div class="row">
+        <div class="col-lg-4 mb-3">
+          <label for="numero-conta" class="form-label"
+            >Número do CPF do beneficiário</label
+          >
+          <div class="input-group">
+            <input
+              enter="true"
+              type="text"
+              class="form-control"
+              id="accountCPF"
+              name="accountCPF"
+              [(ngModel)]="accountCPF"
+              placeholder="000.000.000-00"
+              required
+              numerico
+            />
+            <button
+              (click)="searchAccount()"
+              class="btn btn-outline-secondary"
+              type="submit"
+            >
+              Procurar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="searchDone && (!clientsData || clientsData.length === 0)"
+        class="d-flex align-items-center justify-content-center"
+      >
+        <p>Nenhum registro encontrado.</p>
+      </div>
+      <div class="row g-2" *ngFor="let clientData of clientsData">
+        <div class="col-lg-4 mb-3">
+          <label for="nome-beneficiario" class="form-label"
+            >Nome do Beneficiário:</label
+          >
+          <output type="text" class="form-control" id="nome-beneficiario">{{
+            clientData.name
+          }}</output>
+        </div>
+
+        <div class="col-lg-4 mb-3">
+          <label for="cpf-beneficiario" class="form-label"
+            >CPF do Beneficiário:</label
+          >
+          <output type="text" class="form-control" id="cpf-beneficiario">{{
+            clientData.cpf
+          }}</output>
+        </div>
+
+        <div class="col-lg-4 mb-3">
+          <label for="email-beneficiario" class="form-label"
+            >E-mail do Beneficiário:</label
+          >
+          <output type="email" class="form-control" id="email-beneficiario">{{
+            clientData.name
+          }}</output>
+        </div>
+
+        <div class="col-lg-4 mb-3">
+          <label for="telefone-beneficiario" class="form-label"
+            >Telefone do Beneficiário:</label
+          >
+          <output type="text" class="form-control" id="telefone-beneficiario">{{
+            clientData.accountId
+          }}</output>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-lg-4 mb-3">
+          <label for="valor-tranferencia" class="form-label"
+            >Valor da transferência:</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="valor-tranferencia"
+            required
+          />
+        </div>
+      </div>
+      <div class="d-flex justify-content-center">
+        <div class="mx-4 text-center">
+          <button
+            (click)="openModal(transaction)"
+            type="button"
+            class="btn btn-outline-danger"
+          >
+            Confirmar Transferência
+          </button>
+        </div>
+        <div class="mx-4 text-center">
+          <button
+            routerLink="/home"
+            type="button"
+            class="btn btn-outline-secondary"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

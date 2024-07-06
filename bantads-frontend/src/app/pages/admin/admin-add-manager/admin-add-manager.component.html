@@ -1,37 +1,75 @@
-<div class="container">
-  <div class="card w-75 mt-5 mx-auto">
-    <div class="card-body">
-      <h3 class="card-title text-center">Cadastro de gerente</h3>
-      <form *ngIf="statusMessage && !statusMessage.status" #managerForm="ngForm">
-        <div class="row mb-3">
-          <div class="col-md-3">
-            <label for="cpf" class="form-label">CPF</label>
-            <input [(ngModel)]="manager.cpf" name="cpf" type="text" class="form-control" id="cpf" [showMaskTyped]="true" [shownMaskExpression]="'___.___.___-__'" mask="000.000.000-00">
-          </div>
-          <div class="col-md-9">
-            <label for="name" class="form-label">Nome</label>
-            <input [(ngModel)]="manager.name" name="name" type="text" class="form-control" id="name" placeholder="Insira o nome">
-          </div>
+<div class="card m-2">
+  <div class="card-header">
+    <h4 class="text-center">Cadastro de gerente</h4>
+  </div>
+  <div class="card-body">
+    <form *ngIf="statusMessage && !statusMessage.status" #managerForm="ngForm">
+      <div class="row mb-3">
+        <div class="col-md-3">
+          <label for="cpf" class="form-label">CPF</label>
+          <input
+            [(ngModel)]="manager.cpf"
+            name="cpf"
+            type="text"
+            class="form-control"
+            id="cpf"
+            [showMaskTyped]="true"
+            [shownMaskExpression]="'___.___.___-__'"
+            mask="000.000.000-00"
+          />
         </div>
-        <div class="row mb-3">
-          <div class="col-md-9">
-            <label for="email" class="form-label">Email</label>
-            <input [(ngModel)]="manager.email" name="email" type="email" class="form-control" id="email" placeholder="Insira o email/login">
-          </div>
-          <div class="col-md-3">
-            <label for="phone" class="form-label">Telefone</label>
-            <input [(ngModel)]="manager.phone" name="phone" type="tel" id="phone" class="form-control" placeholder="Insira o telefone">
-          </div>
+        <div class="col-md-9">
+          <label for="name" class="form-label">Nome</label>
+          <input
+            [(ngModel)]="manager.name"
+            name="name"
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Insira o nome"
+          />
         </div>
-        <button type="submit" (click)="addManager(manager)" class="btn btn-danger">Cadastrar</button>
-      </form>
-      <div *ngIf="statusMessage && statusMessage.status" class="row-mb-3">
-        <div [ngClass]="statusMessage.style">
-          <span><i [ngClass]="statusMessage.icon"></i></span>
-          {{statusMessage.message}}
-        </div>
-        <button class="btn btn-danger" type="button" (click)="newRegister()">Novo Cadastro</button>
       </div>
+      <div class="row mb-3">
+        <div class="col-md-9">
+          <label for="email" class="form-label">Email</label>
+          <input
+            [(ngModel)]="manager.email"
+            name="email"
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Insira o email/login"
+          />
+        </div>
+        <div class="col-md-3">
+          <label for="phone" class="form-label">Telefone</label>
+          <input
+            [(ngModel)]="manager.phone"
+            name="phone"
+            type="tel"
+            id="phone"
+            class="form-control"
+            placeholder="Insira o telefone"
+          />
+        </div>
+      </div>
+      <button
+        type="submit"
+        (click)="addManager(manager)"
+        class="btn btn-danger"
+      >
+        Cadastrar
+      </button>
+    </form>
+    <div *ngIf="statusMessage && statusMessage.status" class="row-mb-3">
+      <div [ngClass]="statusMessage.style">
+        <span><i [ngClass]="statusMessage.icon"></i></span>
+        {{ statusMessage.message }}
+      </div>
+      <button class="btn btn-danger" type="button" (click)="newRegister()">
+        Novo Cadastro
+      </button>
     </div>
   </div>
 </div>

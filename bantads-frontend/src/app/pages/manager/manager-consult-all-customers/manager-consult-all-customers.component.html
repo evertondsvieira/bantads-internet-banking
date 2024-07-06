@@ -1,57 +1,58 @@
-<!-- Section: Design Block -->
-<section class="">
-  <!-- Jumbotron -->
-
-  <div class="container-fluid my-4 mx-2">
-    <h6>Consultar Todos os Clientes</h6>
+<div class="card m-2">
+  <div class="card-header">
+    <h4 class="text-center">Consultar Todos os Clientes</h4>
   </div>
-  <div class="px-4 py-5 px-md-5 text-center text-lg-start h-100 d-flex align-items-start" style="background-color: hsl(0, 0%, 96%)">
-    <div class="container">
-      <div class="row mb-3 d-flex">
-        <div class="col-4">
-          <input type="text" class="form-control" placeholder="Pesquisar por CPF ou Nome" [(ngModel)]="searchQuery">
-        </div>
-        <div class="col-2">
-          <button class="btn btn-primary" (click)="searchClients()">Pesquisar</button>
-        </div>
-      </div>
-      <table [hidden]="lista ? false : true" class="table table-striped">
-        <thead>
-          <tr>
-            <th>CPF</th>
-            <th colspan="2">Nome</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-            <th>Saldo</th>
-            <th>Detalhes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let client of lista">
-            <td>{{client.cpf}}</td>
-            <td colspan="2">{{client.name}}</td>
-            <!-- Lucas Cazionato | 07/04/2024-04:47 | Projeto nao estava compilando entao comentei essas linhas para verificacao
+
+  <div class="row my-2 mx-1">
+    <div class="col-10">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Pesquisar por CPF ou Nome"
+        [(ngModel)]="searchQuery"
+      />
+    </div>
+    <div class="col-2">
+      <button class="btn btn-primary" (click)="searchClients()">
+        Pesquisar
+      </button>
+    </div>
+  </div>
+  
+  <table [hidden]="lista ? false : true" class="table table-striped">
+    <thead>
+      <tr>
+        <th>CPF</th>
+        <th>Nome</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+        <th>Saldo</th>
+        <th>Detalhes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of lista">
+        <td>{{ client.cpf }}</td>
+        <td colspan="2">{{ client.name }}</td>
+        <!-- Lucas Cazionato | 07/04/2024-04:47 | Projeto nao estava compilando entao comentei essas linhas para verificacao
             <td>{{client.cidade}}</td>
             <td>{{client.estado}}</td>
             -->
-            <td>{{client.saldo}}</td>
-            <td>
-              <!--<a [routerLink]="['manager/consult/customers', client.cpf]">Ver Mais</a>-->
-            </td>
-            <td>
-              <button class="btn btn-primary" (click)="viewMoreDetails(client.id)">Ver mais</button>
-            </td>
-
-          </tr>
-        </tbody>
-      </table>
-      <div *ngIf="!lista" class="container-fluid">
-        <div class="d-flex px-4 py-5 px-md-5 text-center w-90 bg-danger text-white">
-          Nenhuma conta registrada!
-        </div>
-      </div>
+        <td>{{ client.saldo }}</td>
+        <td>
+          <!--<a [routerLink]="['manager/consult/customers', client.cpf]">Ver Mais</a>-->
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="viewMoreDetails(client.id)">
+            Ver mais
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!lista" class="container-fluid">
+    <div class="d-flex px-4 py-5 px-md-5 text-center w-90 bg-danger text-white">
+      Nenhuma conta registrada!
     </div>
   </div>
-  <!-- Jumbotron -->
-</section>
-<!-- Section: Design Block -->
+</div>

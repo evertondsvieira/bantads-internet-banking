@@ -1,59 +1,43 @@
-<body class="bg-light">
-  <div class="container">
-      <div class="hstack justify-content-center">
-          <div class="col-md-10 col-sm-2 mt-4">
-              <h4 class="text-danger text-center mt-4 mb-2">BANTADS - Internet Banking do TADS</h4>
-              <div class="card mb-2 mt-4">
-                  <div class="card-header">
-                      <h4 class="text-center">Depositar</h4>
-                  </div>
-                  <div class="card-body">
-                    <form>
-                      <!-- Dados do Cliente -->
-                      <div class="row g-2">
-                        <div class="col-lg-4 mb-3">
-                            <label for="numero-conta" class="form-label">Número da Conta:</label>
-                            <output type="text" class="form-control" id="numero-conta">{{accountData.accountId}}</output>
-                        </div>
-                
-                        <div class="col-lg-4 mb-3">
-                            <label for="nome-cliente" class="form-label">Nome:</label>
-                            <output type="text" class="form-control" id="nome-cliente">{{accountData.client_name}}</output>
-                        </div>
-                
-                        <div class="col-lg-4 mb-3">
-                            <label for="cpf-cliente" class="form-label">CPF:</label>
-                            <output type="text" class="form-control" id="cpf-beneficiario">{{accountData.client_cpf}}</output>
-                        </div>
-                
-                        <div class="col-lg-4 mb-3">
-                            <label for="saldo-conta" class="form-label">Saldo da Conta:</label>
-                            <output type="number" class="form-control" id="saldo-conta">{{accountData.balance}}</output>
-                        </div>
-                    </div>
-                  
-                      <!-- Dados do Depósito -->
-                      <div class="row g-3">
-                          <div class="col-lg-6 mb-3">
-                              <label for="valor-deposito" class="form-label">Valor do Depósito:</label>
-                              <input type="number" class="form-control" id="valor-deposito" required/>
-                          </div>
-                      </div>
-                      <div class="d-flex justify-content-center">
-                          <div class="mx-4 text-center">
-                              <button (click)="openModal(transaction)" type="button" class="btn btn-outline-danger">Confirmar Depósito</button>
-                          </div>
-                          <div class="mx-4 text-center">
-                              <button routerLink="/home" type="button" class="btn btn-outline-secondary">Cancelar</button>
-                          </div>
-                      </div>
-                  </form>
-                  </div>
-              </div>
-              <div class="row justify-content-center text-center mt-1">
-                  <p class="text-secondary" style="font-size: 14px;">Bantads &copy; 2024</p>
-              </div>
-          </div>
-      </div>
+<div class="card m-2">
+  <div class="card-header text-center">
+    <h4>Depositar</h4>
   </div>
-</body>
+  <div class="card-body">
+    <form>
+      <div class="row">
+        <div class="col-lg-4 my-4">
+          <label for="numero-conta" class="form-label">Número da Conta:</label>
+          <output type="text" class="form-control h-100" id="numero-conta">{{ accountData.accountId }}</output>
+        </div>
+        <div class="col-lg-4 my-4">
+          <label for="nome-cliente" class="form-label">Nome:</label>
+          <output type="text" class="form-control h-100" id="nome-cliente">{{ accountData.client_name }}</output>
+        </div>
+        <div class="col-lg-4 my-4">
+          <label for="cpf-cliente" class="form-label">CPF:</label>
+          <output type="text" class="form-control h-100" id="cpf-beneficiario">{{ accountData.client_cpf }}</output>
+        </div>
+        <div class="col-lg-4 my-4">
+          <label for="saldo-conta" class="form-label">Saldo da Conta:</label>
+          <output type="number" class="form-control h-100" id="saldo-conta">{{ accountData.balance }}</output>
+        </div>
+				<div class="col-lg-4 my-4">
+          <label for="valor-deposito" class="form-label">Valor do Depósito:</label>
+          <input type="number" class="form-control h-100" id="valor-deposito" required />
+        </div>
+      </div>
+    </form>
+  </div>
+	<div class="d-flex justify-content-center my-4">
+		<div class="mx-2">
+			<button (click)="openModal(transaction)" type="button" class="btn btn-outline-danger">
+				Confirmar Depósito
+			</button>
+		</div>
+		<div class="mx-2">
+			<button routerLink="/home" type="button" class="btn btn-outline-secondary">
+				Cancelar
+			</button>
+		</div>
+	</div>
+</div>
