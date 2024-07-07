@@ -22,7 +22,7 @@
       "profile": "CLIENT"
     }
   ],
-  "client":[
+  "client": [
     {
       "id": "1",
       "name": "Clienterson",
@@ -212,8 +212,7 @@
         "state": "Westeros"
       }
     }
-  ]
-  ,
+  ],
   "manager": [
     {
       "id": "1",
@@ -227,14 +226,7 @@
       "name": "Jon Snow",
       "cpf": "34343434343",
       "email": "jon@email.com",
-      "phone": "321654987"
-    },
-    {
-      "id": "4",
-      "name": "Daenerys Targaryen",
-      "cpf": "45454545454",
-      "email": "daenerys@email.com.br",
-      "phone": "654987321"
+      "phone": "321654988"
     },
     {
       "id": "5",
@@ -242,8 +234,14 @@
       "cpf": "56565656565",
       "email": "tyrion@email.com",
       "phone": "222222222"
+    },
+    {
+      "id": "1720364003052",
+      "name": "Lucas Henrique",
+      "cpf": "12345678920",
+      "email": "lucas@email.com",
+      "phone": "41 123457891"
     }
   ],
-  "account":[
-  ]
+  "account": []
 }

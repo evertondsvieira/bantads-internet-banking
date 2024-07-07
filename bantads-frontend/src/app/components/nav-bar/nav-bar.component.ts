@@ -29,14 +29,10 @@ export class NavBarComponent {
     { name: 'Consultar Todos os Clientes', icon: 'people', link: 'manager/consult/all', role: 'MANAGER' },
     { name: 'Consultar Clientes', icon: 'person', link: 'manager/consult/customers', role: 'MANAGER' },
     { name: 'Consultar Top', icon: 'trending_up', link: 'manager/consult/top', role: 'MANAGER' },
-    { name: 'Aprovar', icon: 'thumb_up', link: 'manager/approve', role: 'MANAGER' },
-    { name: 'Rejeitar', icon: 'thumb_down', link: 'manager/reject', role: 'MANAGER' },
     { name: 'Início do Administrador', icon: 'admin_panel_settings', link: 'admin/home', role: 'ADMIN' },
     { name: 'Relatório de Clientes', icon: 'assessment', link: 'admin/customer/report', role: 'ADMIN' },
     { name: 'Adicionar Gerente', icon: 'person_add', link: 'admin/add/manager', role: 'ADMIN' },
-    { name: 'Remover Gerente', icon: 'person_remove', link: 'admin/remove/manager', role: 'ADMIN' },
     { name: 'Listar Gerentes', icon: 'list_alt', link: 'admin/list/manager', role: 'ADMIN' },
-    { name: 'Atualizar Gerente', icon: 'settings', link: 'admin/update/manager', role: 'ADMIN' },
     { name: 'Deslogar', icon: 'logout', link: '/login', role: 'ALL' },
   ]
   
