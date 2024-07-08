@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AccountService {
-  private BASE_URL: string = 'http://localhost:3000/';
+  private BASE_URL: string = 'http://localhost:3000/account';
   private httpOptions = {
     headers: new HttpHeaders({
       'content-type': 'application/json',
@@ -23,7 +23,7 @@ export class AccountService {
   }
   public getAccountByCPF(query: string): Observable<Account[]> {
     return this.http.get<Account[]>(
-      this.BASE_URL + `?cpf=${query}`,
+      this.BASE_URL + `?client_cpf=${query}`,
       this.httpOptions);
   }
   

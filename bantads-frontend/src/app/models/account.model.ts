@@ -4,8 +4,8 @@ export class Account {
   constructor(
     private _id: number,
     private _client: Client,
-    private _client_name: String,
-    private _client_cpf: String,
+    private _client_name: string,
+    private _client_cpf: string,
     private _accountId: string,
     private _creationDate: Date,
     private _limite: number,
@@ -24,16 +24,16 @@ export class Account {
   public set client(value: Client) {
     this._client = value;
   }
-  public get client_name(): String {
+  public get client_name(): string {
     return this._client_name;
   }
-  public set client_name(value: String) {
+  public set client_name(value: string) {
     this._client_name = value;
   }
-  public get client_cpf(): String {
+  public get client_cpf(): string {
     return this._client_cpf;
   }
-  public set client_cpf(value: String) {
+  public set client_cpf(value: string) {
     this._client_cpf = value;
   }
   public get accountId(): string {

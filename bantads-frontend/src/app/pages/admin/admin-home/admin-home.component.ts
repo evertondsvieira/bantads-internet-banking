@@ -7,8 +7,8 @@ import { ManagerService } from '../../../services/manager/manager.service';
 interface managerData {
   name: string;
   quantity: string;
-  positiveBalance: string;
-  negativeBalance: string;
+  positiveBalance: number;
+  negativeBalance: number;
 }
 
 @Component({
@@ -23,26 +23,26 @@ export class AdminHomeComponent {
     {
       name: "Petyr Baelish",
       quantity: "10",
-      positiveBalance: "1000",
-      negativeBalance: "500"
+      positiveBalance: 1000,
+      negativeBalance: 500
     },
     {
       name: "Jon Snow",
       quantity: "5",
-      positiveBalance: "800",
-      negativeBalance: "200"
+      positiveBalance: 800,
+      negativeBalance: 200
     },
     {
       name: "Daenerys Targaryen",
       quantity: "7",
-      positiveBalance: "1200",
-      negativeBalance: "300"
+      positiveBalance: 1200,
+      negativeBalance: 300
     },
     {
       name: "Tyrion Lannister",
       quantity: "3",
-      positiveBalance: "600",
-      negativeBalance: "100"
+      positiveBalance: 600,
+      negativeBalance: 100
     }
   ];
 

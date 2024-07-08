@@ -22,7 +22,7 @@
         <div class="col-lg-6 my-4">
           <label for="cpf-cliente" class="form-label">CPF:</label>
           <output type="text" class="form-control h-100" id="cpf-beneficiario">{{
-            accountData.client_cpf
+            accountData.client_cpf | cpf
           }}</output>
         </div>
 
@@ -37,7 +37,7 @@
       <div class="row">
         <div class="col-lg-6 my-4">
           <label for="valor-saque" class="form-label">Valor do Saque:</label>
-          <input type="number" class="form-control" id="valor-saque" required />
+          <input [(ngModel)]="transaction.amount" name="amount" type="number" class="form-control" id="valor-saque" required />
         </div>
       </div>
 			

@@ -38,8 +38,9 @@
                     id="email"
                     class="form-control"
                     required
+                    placeholder="E-mail"
                   />
-                  <label class="form-label" for="email">Email</label>
+                  <label class="form-label" for="email"></label>
                 </div>
 
                 <div
@@ -63,6 +64,7 @@
                       id="password"
                       class="form-control border-end-1"
                       required
+                      placeholder="Senha"
                     />
                     <span class="input-group-addon bg-white">
                       <span class="input-group-text bg-transparent">
@@ -76,19 +78,23 @@
                       </span>
                     </span>
                   </div>
-                  <label class="control-label" for="password">Senha</label>
+                  <label class="control-label" for="password"></label>
                   <div *ngIf="errorMessage" class="alert alert-danger">
                     {{ errorMessage }}
                   </div>
                 </div>
-
-                <button
-                  type="submit"
-                  (click)="login()"
-                  class="btn btn-danger btn-block mb-4"
-                >
-                  Login
-                </button>
+                 <div class="d-flex justify-content-between align-items-center">
+                  <button
+                    type="submit"
+                    (click)="login()"
+                    class="btn btn-danger mb-4 button-block ps-5 pe-5"
+                  >
+                    Login
+                  </button>
+                  <div>
+                    Não possui conta? <a [routerLink]="['/register']" class="text-danger">Registre-se</a>
+                  </div>
+                </div>
 
                 <div class="text-center"></div>
               </form>

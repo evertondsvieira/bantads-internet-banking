@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { Client } from '../../../models/client.model';
 import { ClientService } from '../../../services/client/client.service';
 import { CommonModule } from '@angular/common';
+import { RealPipePipe } from '../../../modules/shared/pipes';
 
 @Component({
   selector: 'app-admin-customer-report',

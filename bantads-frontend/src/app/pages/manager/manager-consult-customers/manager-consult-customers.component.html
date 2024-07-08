@@ -18,12 +18,12 @@
   <div *ngIf="client">
     <h3>Dados do Cliente</h3>
     <h6>
-      <strong>{{ client.name }} </strong>
+      <strong>{{ client.name | titlecase}} </strong>
     </h6>
-    <p><strong>CPF:</strong> {{ client.cpf }}</p>
+    <p><strong>CPF:</strong> {{ client.cpf | cpf}}</p>
     <p><strong>E-mail:</strong> {{ client.email }}</p>
-    <p><strong>Telefone:</strong> {{ client.phone }}</p>
-    <p><strong>Salário:</strong> {{ client.salary }}</p>
+    <p><strong>Telefone:</strong> {{ client.phone | phone}}</p>
+    <p><strong>Salário:</strong> {{ client.salary | realPipe}}</p>
     <p>
       <strong>Endereço Completo:</strong>
       {{

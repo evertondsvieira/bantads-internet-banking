@@ -15,6 +15,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MaskComponent } from './components/mask/mask.component';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminModule } from './modules/admin/admin.module';
+import { ModalModule } from './components/modal/modal.module';
+
 @NgModule({
   declarations: [AppComponent, NavBarComponent, MaskComponent],
   imports: [
@@ -29,7 +31,8 @@ import { AdminModule } from './modules/admin/admin.module';
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ModalModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

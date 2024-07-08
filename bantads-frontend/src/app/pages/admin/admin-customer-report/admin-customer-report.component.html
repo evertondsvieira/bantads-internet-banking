@@ -15,9 +15,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let client of clients">
-        <td>{{ client.name }}</td>
-        <td>{{ client.cpf }}</td>
-        <td>{{ client.saldo }}</td>
+        <td>{{ client.name | titlecase}}</td>
+        <td>{{ client.cpf | cpf}}</td>
+        <td>{{ client.balance? (client.balance | realPipe) : "" }}</td>
         <td></td>
         <td></td>
       </tr>

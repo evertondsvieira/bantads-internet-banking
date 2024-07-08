@@ -14,7 +14,7 @@ import { ModalTransactionComponent } from '../../../components/modal/modal-trans
 })
 export class ClientWithdrawlComponent {
   accountData!: Account;
-  transaction!: Transaction;
+  transaction: Transaction = new Transaction(new Date(), "Withdrawl");
   user!: User
   
   constructor (
@@ -32,6 +32,7 @@ export class ClientWithdrawlComponent {
     this.accountService.getAccountByCPF(/*this.user.cpf*/'11111111111').subscribe(
       (accountsData: Account[]) => {
         this.accountData = accountsData[0];
+        this.transaction.originAccount = accountsData[0].accountId;
       }
     )
   }

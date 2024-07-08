@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Client } from '../../models/client.model';
 import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,7 +29,10 @@ export class ClientService {
     );
   }
   public searchClients(query: string): Observable<Client[]> {
-    return this.http.get<Client[]>(`${this.BASE_URL}?q=${query}`, this.httpOptions);
+    if(isNaN(Number(query))){
+      return this.http.get<Client[]>(`${this.BASE_URL}?name=${query}`, this.httpOptions);
+    } 
+    return this.http.get<Client[]>(`${this.BASE_URL}?cpf=${query}`, this.httpOptions);
   }
   public getClientByCPF(query: string): Observable<Client[]> {
     return this.http.get<Client[]>(

@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-client-statement',
   templateUrl: './client-statement.component.html',
   styleUrl: './client-statement.component.css'
 })
-export class ClientStatementComponent {
+export class ClientStatementComponent implements OnInit {
+  ngOnInit(): void {
+    this.start = '2024-01-01';   
+    this.end = '2024-12-31' 
+  }
+
   currentDate: Date = new Date()
   initialValue = 0
   start: string = ''

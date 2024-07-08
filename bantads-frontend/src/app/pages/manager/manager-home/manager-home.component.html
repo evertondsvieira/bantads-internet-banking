@@ -17,7 +17,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let client of clients">
-        <td>{{ client.cpf }}</td>
+        <td>{{ client.cpf | cpf}}</td>
         <td colspan="2">{{ client.name }}</td>
         <td>{{ client.salary | realPipe }}</td>
         <td>
