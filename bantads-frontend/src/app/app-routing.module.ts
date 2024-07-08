@@ -41,6 +41,8 @@ export const managerRoutes: Routes = [
   { path: "manager/consult/top", component: ManagerConsultTopComponent, canActivate: [authGuard], data:{"role": "MANAGER"} },
   { path: "manager/approve", component: ManagerApproveComponent, canActivate: [authGuard], data:{"role": "MANAGER"} },
   { path: "manager/reject", component: ManagerRejectComponent, canActivate: [authGuard], data:{"role": "MANAGER"} }, 
+  { path: "manager/consult/customers/:cpf", component: ManagerConsultCustomersComponent, canActivate: [authGuard], data:{"role": "MANAGER"} },
+
 ]
 
 export const adminRoutes: Routes = [

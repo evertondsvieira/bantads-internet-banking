@@ -6,6 +6,8 @@ import { AlfabeticoDirective } from './directives/alfabetico.directive';
 import { EmailDirective } from './directives/email.directive';
 import { NumericoDirective } from './directives/numerico.directive';
 import { AlfanumericoDirective } from './directives/alfanumerico.directive';
+import { CpfPipe } from './pipes';
+import { PhonePipe } from './pipes/phone.pipe';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { AlfanumericoDirective } from './directives/alfanumerico.directive';
     AlfabeticoDirective,
     EmailDirective,
     NumericoDirective,
-    AlfanumericoDirective
+    AlfanumericoDirective,
+    CpfPipe,
+    PhonePipe
   ],
   imports: [
     CommonModule,
@@ -25,6 +29,8 @@ import { AlfanumericoDirective } from './directives/alfanumerico.directive';
     NgxMaskDirective,
     NgxMaskPipe,
     RealPipePipe,
+    CpfPipe,
+    PhonePipe,
     AlfabeticoDirective,
     EmailDirective,
     NumericoDirective,

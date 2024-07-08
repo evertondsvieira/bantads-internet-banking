@@ -82,7 +82,7 @@
       "cpf": "44444444444",
       "accountId": "6666",
       "salary": 4000.25,
-      "situation": "OPEN",
+      "situation": "APPROVED",
       "address": {
         "type": "Residential",
         "street": "Winterfell Avenue",
@@ -184,7 +184,7 @@
       "cpf": "10101010101",
       "accountId": "0000",
       "salary": 2600.5,
-      "situation": "OPEN",
+      "situation": "REJECTED",
       "address": {
         "type": "Residential",
         "street": "Winterfell Avenue",
@@ -241,7 +241,171 @@
       "cpf": "12345678920",
       "email": "lucas@email.com",
       "phone": "41 123457891"
+    },
+    {
+      "id": "1720412965711",
+      "name": "GERENTE MESTRE ",
+      "cpf": "32165498765",
+      "email": "gerentemestre@email.com",
+      "phone": "321654987"
     }
   ],
-  "account": []
+  "account": [
+    {
+      "id": 1,
+      "client": {
+        "id": "1",
+        "name": "Clienterson",
+        "cpf": "11111111111",
+        "accountId": "8888",
+        "salary": 3200.75,
+        "balance": 8000,
+        "situation": "REJECTED",
+        "address": {
+          "type": "Residential",
+          "street": "Main Street",
+          "number": 123,
+          "complement": "Apt 1",
+          "cep": 12345678,
+          "city": "Some City",
+          "state": "Some State"
+        }
+      },
+      "client_name": "Clienterson",
+      "client_cpf": "11111111111",
+      "accountId": "8888",
+      "creationDate": "2024-07-07T00:00:00.000Z",
+      "limite": 5000,
+      "balance": 8000
+    },
+    {
+      "id": 2,
+      "client": {
+        "id": "2",
+        "name": "Tyrion Lannister",
+        "cpf": "22222222222",
+        "accountId": "8888",
+        "salary": 3200.75,
+        "balance": 12000,
+        "situation": "REJECTED",
+        "address": {
+          "type": "Residential",
+          "street": "Second Street",
+          "number": 456,
+          "complement": "Apt 2",
+          "cep": 87654321,
+          "city": "Another City",
+          "state": "Another State"
+        }
+      },
+      "client_name": "Tyrion Lannister",
+      "client_cpf": "22222222222",
+      "accountId": "8888",
+      "creationDate": "2024-07-07T00:00:00.000Z",
+      "limite": 7000,
+      "balance": 12000
+    },
+    {
+      "id": 3,
+      "client": {
+        "id": "3",
+        "name": "Daenerys Targaryen",
+        "cpf": "33333333333",
+        "accountId": "7777",
+        "salary": 2800,
+        "situation": "APPROVED",
+        "address": {
+          "type": "Commercial",
+          "street": "Dragonstone Street",
+          "number": 789,
+          "complement": "Tower",
+          "cep": 99999999,
+          "city": "King's Landing",
+          "state": "Westeros"
+        }
+      },
+      "client_name": "Daenerys Targaryen",
+      "client_cpf": "33333333333",
+      "accountId": "7777",
+      "creationDate": "2024-07-07T00:00:00.000Z",
+      "limite": 10000,
+      "balance": 5000
+    },
+    {
+      "id": 4,
+      "client": {
+        "id": "4",
+        "name": "Jon Snow",
+        "cpf": "44444444444",
+        "accountId": "6666",
+        "salary": 4000.25,
+        "situation": "APPROVED",
+        "address": {
+          "type": "Residential",
+          "street": "Winterfell Avenue",
+          "number": 10,
+          "complement": "",
+          "cep": 11111111,
+          "city": "Winterfell",
+          "state": "The North"
+        }
+      },
+      "client_name": "Jon Snow",
+      "client_cpf": "44444444444",
+      "accountId": "6666",
+      "creationDate": "2024-07-07T00:00:00.000Z",
+      "limite": 15000,
+      "balance": 4000
+    },
+    {
+      "id": 5,
+      "client": {
+        "id": "5",
+        "name": "Arya Stark",
+        "cpf": "55555555555",
+        "accountId": "5555",
+        "salary": 3500,
+        "situation": "OPEN",
+        "address": {
+          "type": "Residential",
+          "street": "Faceless Street",
+          "number": 5,
+          "complement": "",
+          "cep": 55555555,
+          "city": "Braavos",
+          "state": "Essos"
+        }
+      },
+      "client_name": "Arya Stark",
+      "client_cpf": "55555555555",
+      "accountId": "5555",
+      "creationDate": "2024-07-07T00:00:00.000Z",
+      "limite": 8000,
+      "balance": 3000
+    }
+  ],
+  "transaction": [
+    {
+      "id": "57d6",
+      "dateTime": "2024-07-08T01:45:54.742Z",
+      "type": "Deposit",
+      "amount": 123,
+      "originAccount": "8888"
+    },
+    {
+      "id": "3156",
+      "dateTime": "2024-07-08T01:55:06.133Z",
+      "type": "Withdrawl",
+      "amount": 321,
+      "originAccount": "8888"
+    },
+    {
+      "id": "4f55",
+      "dateTime": "2024-07-08T02:03:12.073Z",
+      "type": "Transfer",
+      "amount": 56,
+      "originAccount": "8888",
+      "destinationAccount": "1234"
+    }
+  ]
 }

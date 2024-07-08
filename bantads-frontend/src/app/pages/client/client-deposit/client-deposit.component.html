@@ -15,7 +15,7 @@
         </div>
         <div class="col-lg-4 my-4">
           <label for="cpf-cliente" class="form-label">CPF:</label>
-          <output type="text" class="form-control h-100" id="cpf-beneficiario">{{ accountData.client_cpf }}</output>
+          <output type="text" class="form-control h-100" id="cpf-beneficiario">{{ accountData.client_cpf ? (accountData.client_cpf | cpf) : ""}}</output>
         </div>
         <div class="col-lg-4 my-4">
           <label for="saldo-conta" class="form-label">Saldo da Conta:</label>
@@ -23,7 +23,7 @@
         </div>
 				<div class="col-lg-4 my-4">
           <label for="valor-deposito" class="form-label">Valor do Depósito:</label>
-          <input type="number" class="form-control h-100" id="valor-deposito" required />
+          <input [(ngModel)]="transaction.amount" type="number" name="ammount" class="form-control h-100" id="valor-deposito" required />
         </div>
       </div>
     </form>

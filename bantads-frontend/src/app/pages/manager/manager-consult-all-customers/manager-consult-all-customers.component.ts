@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from '../../../models/client.model';
 import { ClientService } from '../../../services/client/client.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth/auth.service';
+import { RealPipePipe, CpfPipe } from '../../../modules/shared/pipes';
 
 @Component({
   selector: 'app-manager-consult-all-customers',
@@ -50,7 +51,7 @@ export class ManagerConsultAllCustomersComponent implements OnInit {
     }
   }
 
-  public viewMoreDetails(clientCPF: string) {
-    this.router.navigate(['manager/consult/customers', clientCPF]);
+  public viewMoreDetails(clientCpf: string) {
+    this.router.navigate(['manager/consult/customers', clientCpf]);
   }
 }

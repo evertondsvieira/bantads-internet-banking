@@ -6,9 +6,9 @@
 
 <div class="modal-body text-center">
   <div>
-    <h5 *ngIf="transaction.type == 'Deposit'">Tem certeza que deseja depositar R$#{{transaction.amount}} em sua conta?</h5>
-    <h5 *ngIf="transaction.type == 'Withdrawl'">Tem certeza que deseja sacar R$#{{transaction.amount}} da sua conta?</h5>
-    <h5 *ngIf="transaction.type == 'Transfer'">Tem certeza que deseja tranferir #{{transaction.amount}} da sua conta para a conta #{{transaction.destinationAccount}}?</h5>
+    <h5 *ngIf="transaction.type == 'Deposit'">Tem certeza que deseja depositar {{transaction.amount | realPipe}} em sua conta?</h5>
+    <h5 *ngIf="transaction.type == 'Withdrawl'">Tem certeza que deseja sacar R${{transaction.amount | realPipe}} da sua conta?</h5>
+    <h5 *ngIf="transaction.type == 'Transfer'">Tem certeza que deseja tranferir R${{transaction.amount | realPipe}} da sua conta para a conta #{{transaction.destinationAccount}}?</h5>
   </div>
 </div>
 

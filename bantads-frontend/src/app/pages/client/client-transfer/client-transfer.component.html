@@ -8,38 +8,25 @@
       <div class="row">
         <div class="col-lg-4 mb-3">
           <label for="numero-conta" class="form-label"
-            >Número do CPF do beneficiário</label
+            >Número da conta do beneficiário</label
           >
           <div class="input-group">
             <input
               enter="true"
               type="text"
               class="form-control"
-              id="accountCPF"
-              name="accountCPF"
-              [(ngModel)]="accountCPF"
-              placeholder="000.000.000-00"
+              id="amount"
+              name="amount"
+              [(ngModel)]="transaction.destinationAccount"
+              placeholder="Conta"
               required
               numerico
             />
-            <button
-              (click)="searchAccount()"
-              class="btn btn-outline-secondary"
-              type="submit"
-            >
-              Procurar
-            </button>
           </div>
         </div>
       </div>
 
-      <div
-        *ngIf="searchDone && (!clientsData || clientsData.length === 0)"
-        class="d-flex align-items-center justify-content-center"
-      >
-        <p>Nenhum registro encontrado.</p>
-      </div>
-      <div class="row g-2" *ngFor="let clientData of clientsData">
+      <!-- <div class="row g-2" *ngFor="let clientData of clientsData">
         <div class="col-lg-4 mb-3">
           <label for="nome-beneficiario" class="form-label"
             >Nome do Beneficiário:</label
@@ -75,7 +62,7 @@
             clientData.accountId
           }}</output>
         </div>
-      </div>
+      </div> -->
 
       <div class="row g-3">
         <div class="col-lg-4 mb-3">
@@ -83,9 +70,11 @@
             >Valor da transferência:</label
           >
           <input
+            [(ngModel)]="transaction.amount"
             type="number"
             class="form-control"
-            id="valor-tranferencia"
+            id="amount"
+            name="amount"
             required
           />
         </div>

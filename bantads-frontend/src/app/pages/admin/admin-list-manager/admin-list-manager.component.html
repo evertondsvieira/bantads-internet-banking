@@ -25,10 +25,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let manager of managers">
-          <td>{{ manager.cpf }}</td>
-          <td colspan="2">{{ manager.name }}</td>
+          <td>{{ manager.cpf? (manager.cpf | cpf) : "" }}</td>
+          <td colspan="2">{{ manager.name | titlecase }}</td>
           <td>{{ manager.email }}</td>
-          <td>{{ manager.phone }}</td>
+          <td>{{ manager.phone ? (manager.phone | phone) : ""}}</td>
           <td>
             <div class="d-flex justify-content-around">
               <button

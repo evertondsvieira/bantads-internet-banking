@@ -32,18 +32,15 @@
     </thead>
     <tbody>
       <tr *ngFor="let client of lista">
-        <td>{{ client.cpf }}</td>
-        <td colspan="2">{{ client.name }}</td>
-        <!-- Lucas Cazionato | 07/04/2024-04:47 | Projeto nao estava compilando entao comentei essas linhas para verificacao
-            <td>{{client.cidade}}</td>
-            <td>{{client.estado}}</td>
-            -->
-        <td>{{ client.saldo }}</td>
+        <td>{{ client.cpf | cpf}}</td>
+        <td >{{ client.name }}</td>
+        <!-- Lucas Cazionato | 07/04/2024-04:47 | Projeto nao estava compilando entao comentei essas linhas para verificacao -->
+        <td>{{client.address.city}}</td>
+        <td>{{client.address.state}}</td>
+        
+        <td>{{ client.balance? (client.balance | realPipe) : ""}}</td>
         <td>
-          <!--<a [routerLink]="['manager/consult/customers', client.cpf]">Ver Mais</a>-->
-        </td>
-        <td>
-          <button class="btn btn-primary" (click)="viewMoreDetails(client.id)">
+          <button class="btn btn-primary" (click)="viewMoreDetails(client.cpf)">
             Ver mais
           </button>
         </td>

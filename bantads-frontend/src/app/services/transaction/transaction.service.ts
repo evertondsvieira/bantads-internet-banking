@@ -23,4 +23,11 @@ export class TransactionService {
       this.httpOptions
     );
   }
+
+  public getTransactions(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(
+      this.BASE_URL,
+      this.httpOptions
+    )
+  }
 }

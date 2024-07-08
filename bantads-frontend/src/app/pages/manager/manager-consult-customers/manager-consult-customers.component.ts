@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Client } from '../../../models/client.model';
 import { Account } from '../../../models/account.model';
 import { ClientService } from '../../../services/client/client.service';
@@ -12,8 +12,15 @@ import { AccountService } from '../../../services/account/account.service';
   templateUrl: './manager-consult-customers.component.html',
   styleUrl: './manager-consult-customers.component.css'
 })
-export class ManagerConsultCustomersComponent {
+export class ManagerConsultCustomersComponent implements OnInit {
+  
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => this.cpf = params['cpf']);
+    this.consultClient(this.cpf);
+  }
+
   cpf: string = '';
+  public clientId?: number;
   public clients!: Client[];
   private _client!: Client;
   public accounts!: Account[];
@@ -24,7 +31,8 @@ export class ManagerConsultCustomersComponent {
   constructor(
     private accountService: AccountService,
     private clientService: ClientService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   public get client(): Client {

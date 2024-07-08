@@ -56,6 +56,9 @@ export class RegisterComponent {
 
 
   submit() {
+    this.router.navigate(['/login']); /*Levar para página de login: Remover quando for refatorar*/
+    console.log('ops');
+    
     if (this.formRegistro) {
       let cadastro = this.formRegistro.value;
       cadastro.salary = this.salary;
@@ -64,7 +67,7 @@ export class RegisterComponent {
       cadastro.cidade = this.cidade;
       cadastro.complemento = this.complemento;
       cadastro.numero = this.numero;
-
+      
       /* Lucas Cazionato | 07/04/2024-05:43 | Projeto nao estava compilando entao deixei como comentario apenas para rodar
       this.authService.register(cadastro).subscribe(
         (response: any) => {
