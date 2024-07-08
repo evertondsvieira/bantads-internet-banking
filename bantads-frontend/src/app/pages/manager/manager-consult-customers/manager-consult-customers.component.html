@@ -7,7 +7,9 @@
       <div class="form-group">
         <label for="cpf">Informe o CPF do Cliente:</label>
         <div class="d-flex">
-          <input type="text" class="form-control" id="cpf" [(ngModel)]="cpf" />
+          <input type="text" class="form-control" id="cpf" [(ngModel)]="cpf"
+          [showMaskTyped]="true" [shownMaskExpression]="'___.___.___-__'"
+          mask="000.000.000-00"/>
           <button class="btn btn-primary ms-3" (click)="consultClient(cpf)">
             Consultar
           </button>
