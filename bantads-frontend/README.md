@@ -44,3 +44,11 @@ data:{"role": "CLIENT"}
 ## Autoriza role de cliente e gerente a acessar rota
 data:{"role": "CLIENT,MANAGER"}
 ```
+## Desenvolver com o docker
+
+Rodar os comandos para montar a imagem e rodar o docker:
+
+```sh
+docker build -t bantads-frontend .
+docker run -it --rm -p 4200:4200 -p 3000:3000 -v $(pwd)/src:/app/src bantads-frontend
+```
