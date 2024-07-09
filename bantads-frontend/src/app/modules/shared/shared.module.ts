@@ -10,6 +10,7 @@ import { CpfPipe } from './pipes';
 import { PhonePipe } from './pipes/phone.pipe';
 import { CpfDirective } from './directives/cpf.directive';
 
+
 @NgModule({
   declarations: [
     RealPipePipe,

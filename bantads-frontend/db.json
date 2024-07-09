@@ -252,7 +252,7 @@
   ],
   "account": [
     {
-      "id": "1",
+      "id": 1,
       "client": {
         "id": "1",
         "name": "Clienterson",
@@ -279,7 +279,7 @@
       "balance": 8000
     },
     {
-      "id": "2",
+      "id": 2,
       "client": {
         "id": "2",
         "name": "Tyrion Lannister",
@@ -306,7 +306,7 @@
       "balance": 12000
     },
     {
-      "id": "3",
+      "id": 3,
       "client": {
         "id": "3",
         "name": "Daenerys Targaryen",
@@ -332,7 +332,7 @@
       "balance": 5000
     },
     {
-      "id": "4",
+      "id": 4,
       "client": {
         "id": "4",
         "name": "Jon Snow",
@@ -358,7 +358,7 @@
       "balance": 4000
     },
     {
-      "id": "5",
+      "id": 5,
       "client": {
         "id": "5",
         "name": "Arya Stark",
@@ -404,36 +404,6 @@
       "dateTime": "2024-07-08T02:03:12.073Z",
       "type": "Transfer",
       "amount": 56,
-      "originAccount": "8888",
-      "destinationAccount": "1234"
-    },
-    {
-      "id": "b43d",
-      "dateTime": "2024-07-08T18:30:18.142Z",
-      "type": "Deposit",
-      "amount": 123,
-      "originAccount": "8888"
-    },
-    {
-      "id": "abf9",
-      "dateTime": "2024-07-08T18:30:57.910Z",
-      "type": "Transfer",
-      "amount": 234,
-      "originAccount": "8888",
-      "destinationAccount": "8888"
-    },
-    {
-      "id": "a727",
-      "dateTime": "2024-07-09T00:52:14.864Z",
-      "type": "Deposit",
-      "amount": 123,
-      "originAccount": "8888"
-    },
-    {
-      "id": "11d3",
-      "dateTime": "2024-07-09T01:08:34.266Z",
-      "type": "Transfer",
-      "amount": 1111,
       "originAccount": "8888",
       "destinationAccount": "1234"
     }
