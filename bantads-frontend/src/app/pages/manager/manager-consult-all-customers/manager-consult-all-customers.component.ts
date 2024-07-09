@@ -14,6 +14,7 @@ import { RealPipePipe, CpfPipe } from '../../../modules/shared/pipes';
 export class ManagerConsultAllCustomersComponent implements OnInit {
   private _lista!: Client[];
   public searchQuery: string = '';
+  public mask: string = '';
 
   constructor(
     private clientService: ClientService,
@@ -31,6 +32,16 @@ export class ManagerConsultAllCustomersComponent implements OnInit {
   public set lista(value: Client[]) {
     this._lista = value;
   }
+
+  public onInputChange(value: string): void {
+  // Verifica se a entrada contém apenas números
+    if (/^\d+$/.test(value)) {
+      this.mask = '000.000.000-00'; // Máscara de CPF
+    } else {
+      this.mask = ''; // Sem máscara para texto
+    }
+  }
+  
   public getClientsOrderedByName() {
     this.clientService.getClientsOrderedByName().subscribe(
       lista => {

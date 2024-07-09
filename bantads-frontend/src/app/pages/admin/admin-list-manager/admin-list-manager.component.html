@@ -10,6 +10,10 @@
         type="text"
         class="form-control"
         placeholder="Pesquisar por CPF ou Nome"
+        [(ngModel)]="searchQuery"
+        [mask]="mask"
+        [showMaskTyped]="true"
+        (ngModelChange)="onInputChange($event)"
         (change)="filterManager(filter.value)"
       />
     </div>
