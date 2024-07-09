@@ -71,11 +71,14 @@
           >
           <input
             [(ngModel)]="transaction.amount"
-            type="number"
             class="form-control"
             id="amount"
             name="amount"
             required
+            mask="separator.2"
+            prefix="R$ "
+            thousandSeparator="."
+            decimalMarker=","
           />
         </div>
       </div>

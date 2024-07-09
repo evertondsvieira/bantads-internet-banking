@@ -29,6 +29,7 @@ export class AdminListManagerComponent implements OnInit{
   private _user: User = this.authService.loggedUser;
   private _managers!: Manager[];
   public searchQuery: string = '';
+  public mask: string = '';
   public notFilteredManagers: Manager[] = [];
 
   constructor(
@@ -68,6 +69,15 @@ export class AdminListManagerComponent implements OnInit{
   public set modalService(value: NgbModal) {
     this._modalService = value;
   }
+
+  public onInputChange(value: string): void {
+    // Verifica se a entrada contém apenas números
+      if (/^\d+$/.test(value)) {
+        this.mask = '000.000.000-00'; // Máscara de CPF
+      } else {
+        this.mask = ''; // Sem máscara para texto
+      }
+    }
 
   public getManagersOrderedByName() {
     this.managerService.getManagersOrderedByName().subscribe((managers) => {

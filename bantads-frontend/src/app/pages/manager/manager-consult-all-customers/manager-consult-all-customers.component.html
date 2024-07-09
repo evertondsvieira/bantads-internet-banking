@@ -10,7 +10,9 @@
         class="form-control"
         placeholder="Pesquisar por CPF ou Nome"
         [(ngModel)]="searchQuery"
-        dynamicCpfName
+        [mask]="mask"
+        [showMaskTyped]="true"
+        (ngModelChange)="onInputChange($event)"
       />
     </div>
     <div class="col-2">

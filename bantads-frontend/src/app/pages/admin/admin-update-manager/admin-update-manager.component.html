@@ -20,7 +20,8 @@
           </div>
           <div class="col-md-3">
             <label for="phone" class="form-label">Telefone</label>
-            <input [(ngModel)]="manager.phone" name="phone" type="tel" id="phone" class="form-control" placeholder="Insira o telefone">
+            <input [(ngModel)]="manager.phone" name="phone" type="tel" id="phone" class="form-control" placeholder="Insira o telefone"
+            [showMaskTyped]="true" mask="(00)00000-0000">
           </div>
         </div>
         <div class="row d-flex align-items-end justify-content-end">
