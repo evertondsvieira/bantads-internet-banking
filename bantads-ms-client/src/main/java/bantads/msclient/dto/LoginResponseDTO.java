@@ -1,10 +1,17 @@
-package bantads.msaccount.dto;
+package bantads.msclient.dto;
 
 public class LoginResponseDTO {
   private boolean auth;
   private String token;
   private Long id;
   private String role;
+
+  public LoginResponseDTO(boolean auth, String token, Long id, String role) {
+    this.auth = auth;
+    this.token = token;
+    this.id = id;
+    this.role = role;
+  }
 
   public boolean isAuth() {
     return auth;

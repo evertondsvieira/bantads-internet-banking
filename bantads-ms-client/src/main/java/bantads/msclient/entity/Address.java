@@ -1,4 +1,4 @@
-package bantads.msaccount.entity;
+package bantads.msclient.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

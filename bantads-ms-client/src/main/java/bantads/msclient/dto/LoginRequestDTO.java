@@ -1,4 +1,4 @@
-package bantads.msaccount.dto;
+package bantads.msclient.dto;
 
 import jakarta.validation.constraints.Email;
 
