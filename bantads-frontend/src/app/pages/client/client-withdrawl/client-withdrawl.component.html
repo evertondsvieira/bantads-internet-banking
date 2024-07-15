@@ -7,29 +7,29 @@
       <div class="row">
         <div class="col-lg-6 my-4">
           <label for="numero-conta" class="form-label">Número da Conta:</label>
-          <output type="text" class="form-control h-100" id="numero-conta">{{
+          <output type="text" class="form-control" id="numero-conta">{{
             accountData.accountId
           }}</output>
         </div>
 
         <div class="col-lg-6 my-4">
           <label for="nome-cliente" class="form-label">Nome:</label>
-          <output type="text" class="form-control h-100" id="nome-cliente">{{
+          <output type="text" class="form-control" id="nome-cliente">{{
             accountData.client_name
           }}</output>
         </div>
 
         <div class="col-lg-6 my-4">
           <label for="cpf-cliente" class="form-label">CPF:</label>
-          <output type="text" class="form-control h-100" id="cpf-beneficiario">{{
+          <output type="text" class="form-control" id="cpf-beneficiario">{{
             accountData.client_cpf | cpf
           }}</output>
         </div>
 
         <div class="col-lg-6 my-4">
           <label for="saldo-conta" class="form-label">Saldo da Conta:</label>
-          <output type="number" class="form-control h-100" id="saldo-conta">{{
-            accountData.balance
+          <output type="number" class="form-control" id="saldo-conta">{{
+            accountData.balance | realPipe
           }}</output>
         </div>
       </div>
@@ -37,12 +37,13 @@
       <div class="row">
         <div class="col-lg-6 my-4">
           <label for="valor-saque" class="form-label">Valor do Saque:</label>
-          <input [(ngModel)]="transaction.amount" name="amount" type="number" class="form-control" id="valor-saque" required />
+          <input [(ngModel)]="transaction.amount" name="amount" class="form-control" id="valor-saque" required
+          mask="separator.2" prefix="R$ " thousandSeparator="." decimalMarker=","/>
         </div>
       </div>
 			
-      <div class="d-flex justify-content-center">
-        <div class="mx-4 text-center">
+      <div class="d-flex justify-content-center my-4">
+        <div class="mx-2">
           <button
             (click)="openModal(transaction)"
             type="button"

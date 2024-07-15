@@ -48,7 +48,8 @@
 
                 <div class="col-lg-6 mb-3">
                   <label for="salario" class="form-label">Salário:</label>
-                  <input type="number" class="form-control" id="salary" [(ngModel)]="client.salary"/>
+                  <input class="form-control" id="salary" mask="separator.2"
+                  prefix="R$ " thousandSeparator="." decimalMarker="," [(ngModel)]="client.salary"/>
                 </div>
               </div>
               <div class="row">
