@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-
+import { FormsModule } from '@angular/forms'; 
 import { ClientModule } from './modules/client/client.module'
 import { AuthModule } from './modules/auth/auth.module';
 import { AccountModule } from './modules/account/account.module';
@@ -32,7 +32,8 @@ import { ModalModule } from './components/modal/modal.module';
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    ModalModule
+    ModalModule,
+    FormsModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

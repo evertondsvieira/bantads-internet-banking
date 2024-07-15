@@ -1,60 +1,64 @@
+
 export class Address {
   constructor(
-  private _type: string,
-  private _street: string,
-  private _number: number,
-  private _complement: string,
-  private _cep: number,
-  private _city: string,
-  private _state: string,
+  public _addressType?: string,
+  public _street?: string,
+  public _number?: string,
+  public _complement?: string,
+  public _cep?: string,
+  public _city?: string ,
+  public _state?: string,
 ) {}
 
-  public get type(): string {
-    return this._type;
+  public get addressType(): string | undefined {
+    return this._addressType;  
   }
-  public set type(value: string) {
-    this._type = value;
-  }
-
-  public get street(): string {
-    return this._street;
-  }
-  public set street(value: string) {
-    this._street = value;
+  public set addressType(addressType: string) {
+    this._addressType = addressType;
   }
 
-  public get number(): number {
-    return this._number;
+  public get street(): string | undefined {
+    return this._street;  
   }
-  public set number(value: number) {
-    this._number = value;
-  }
-
-  public get complement(): string {
-    return this._complement;
-  }
-  public set complement(value: string) {
-    this._complement = value;
+  public set street(street: string){
+    this._street = street;
   }
 
-  public get cep(): number {
-    return this._cep;
-  }
-  public set cep(value: number) {
-    this._cep = value;
+  public get number(): string | undefined{
+    return this._number;  
   }
 
-  public get city(): string {
-    return this._city;
-  }
-  public set city(value: string) {
-    this._city = value;
+  public set number(number: string){
+    this._number = number;
   }
 
-  public get state(): string {
-    return this._state;
+  public get complement(): string | undefined {
+    return this._complement;  
   }
-  public set state(value: string) {
-    this._state = value;
+  public set complement(complement: string) {
+    this._complement = complement;
   }
+
+  public get cep(): string | undefined{
+    return this._cep;  
+  }
+  public set cep(cep: string) {
+    this._cep = cep;
+  }
+
+  public get city(): string | undefined{
+    return this._city;  
+  }
+
+  public set city(city: string){
+    this._city = city;
+  }
+
+  public get state(): string | undefined{
+    return this._state;  
+  }
+  public set state(state: string) {
+    this._state = state;
+  }
+  
 }
