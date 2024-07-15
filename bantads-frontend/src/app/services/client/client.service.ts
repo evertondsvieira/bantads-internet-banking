@@ -51,4 +51,12 @@ export class ClientService {
       this.BASE_URL + `/${query}`,
       this.httpOptions);
   }
+
+  public addClient(client: Client): Observable<Client>{
+    return this.http.post<Client>(
+      this.BASE_URL,
+      JSON.stringify(client),
+      this.httpOptions
+    )
+  }
 }

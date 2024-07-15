@@ -1,26 +1,3 @@
-<ng-template #accountConfirmationModal let-modal>
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="accountConfirmationModal">Deseja criar sua conta?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row justify-content-center">
-          Confira seus dados:
-        </div>
-        <div class="justify-content-center">
-          <pre>{{ formRegistro.value}}</pre>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="submit()">Confirmar</button>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
 <div class="bg-light">
   <div class="container text-center">
     <div class="hstack justify-content-center">
@@ -31,10 +8,7 @@
             <h4 class="text-center">Abra agora sua Conta!</h4>
           </div>
           <div class="card-body">
-            <!-- Lucas Cazionato | 07/04/2024-05:40 | Projeto nao estava compilando entao deixei como comentario apenas para rodar
-              <form #formRegistration="ngForm" method="post">
-            -->
-            <form #formRegistration="" method="post">
+            <form *ngIf="statusMessage && !statusMessage.status" #registerForm="ngForm">
               <div class="row">
                 <h4>Informações Pessoais</h4>
               </div>
@@ -42,32 +16,39 @@
               <div class="row g-2">
                 <div class="col-lg-2 mb-3">
                   <label for="cpf" class="form-label">CPF:</label>
-                  <!-- Lucas Cazionato | 07/04/2024-05:42 | Projeto nao estava compilando entao deixei como comentario apenas para rodar
-                    <input type="text" class="form-control bg-light" id="cpf" placeholder="000.000.000-00" [(ngModel)]="cpf" mask="000.000.000-00" inputmode="numeric" name="cpf" required cpf />
-                  -->
-                  <input type="text" class="form-control bg-light" id="cpf" placeholder="000.000.000-00" mask="000.000.000-00" inputmode="numeric" name="cpf" required cpf />
+                  <input 
+                  [(ngModel)]="client.cpf" 
+                  type="text"
+                  name="cpf"
+                  class="form-control bg-light" 
+                  id="cpf" 
+                  [showMaskTyped]="true"
+                  [shownMaskExpression]="'___.___.___-__'"
+                  mask="000.000.000-00" 
+                  required cpf />
                 </div>
 
                 <div class="col-lg-5 mb-3">
                   <label for="nome" class="form-label">Nome:</label>
-                  <input type="text" class="form-control" id="nome" />
+                  <input type="text" class="form-control" id="name" [(ngModel)]="client.name" />
                 </div>
 
                 <div class="col-lg-5 mb-3">
                   <label for="email" class="form-label">E-mail:</label>
-                  <input type="email" class="form-control" id="email" />
+                  <input type="email" class="form-control" id="email" [(ngModel)]="client.email"  />
                 </div>
-              </div>
-
+            </div> 
               <div class="row g-3">
                 <div class="col-lg-6 mb-3">
                   <label for="telefone" class="form-label">Telefone:</label>
-                  <input type="tel" class="form-control" id="telefone" />
+                  <input type="text" class="form-control" id="phone" 
+                  [showMaskTyped]="true" [specialCharacters]="['(', ')', '-', ' ']" [shownMaskExpression]="'(__) _____-____'" mask="(00) 00000-0000" 
+                  [(ngModel)]="client.phone"/>
                 </div>
 
                 <div class="col-lg-6 mb-3">
                   <label for="salario" class="form-label">Salário:</label>
-                  <input type="number" class="form-control" id="salario" />
+                  <input type="number" class="form-control" id="salary" [(ngModel)]="client.salary"/>
                 </div>
               </div>
               <div class="row">
@@ -76,65 +57,61 @@
               <div class="row g-3">
                 <div class="col-lg-2 mb-3">
                   <label for="tipoEndereco" class="form-label">Tipo de Endereço:</label>
-                  <select class="form-select" id="tipoEndereco">
-                    <option value="rua">Rua</option>
-                    <option value="avenida">Avenida</option>
-                  </select>
+                  <input type="text" class="form-control" id="addressType" [(ngModel)]="client.address.addressType"/>
                 </div>
                 <div class="col-lg-8 mb-3">
                   <label for="logradouro" class="form-label">Logradouro:</label>
-                  <input type="text" class="form-control" id="logradouro" />
+                  <input type="text" class="form-control" id="street" [(ngModel)]="client.address.street"/>
                 </div>
                 <div class="col lg-2 mb-3">
                   <label for="numero" class="form-label">Número:</label>
-                  <input type="text" class="form-control" id="numero" />
+                  <input type="text" class="form-control" id="number" [(ngModel)]="client.address.number"/>
                 </div>
               </div>
 
               <div class="row g-3">
                 <div class="col-lg-3 mb-3">
                   <label for="complemento" class="form-label">Complemento:</label>
-                  <input type="text" class="form-control" id="complemento" />
+                  <input type="text" class="form-control" id="complement" [(ngModel)]="client.address.complement"/>
                 </div>
                 <div class="col-lg-3 mb-3">
                   <label for="cep" class="form-label">CEP:</label>
-                  <input type="text" class="form-control" id="cep" />
+                  <input type="text" class="form-control" id="cep" [(ngModel)]="client.address.cep"/>
                 </div>
                 <div class="col-lg-3 mb-3">
                   <label for="cidade" class="form-label">Cidade:</label>
-                  <input type="text" class="form-control" id="cidade" />
+                  <input type="text" class="form-control" id="city" [(ngModel)]="client.address.city"/>
                 </div>
                 <div class="col-lg-3 mb-3">
                   <label for="estado" class="form-label">Estado:</label>
-                  <input type="text" class="form-control" id="estado" />
+                  <input type="text" class="form-control" id="estado" [(ngModel)]="client.address.state"/>
                 </div>
               </div>
-
-              <div class="w-auto mb-3 text-center">
-                <!-- <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="criarConta">Criar Conta</button> -->
-                <button type="button" class="btn btn-outline-danger" (click)="submit()">Criar Conta</button>
+              <div class="row">
+                <div class="h-stack gap-2">
+                  <div class="col-12">
+                    <button class="btn btn-outline-primary" type="button" >
+                      Voltar
+                    </button>
+                    <button
+                    type="submit"
+                    (click)="addClient(client)"
+                    class="btn btn-danger">
+                    Cadastrar
+                  </button>
+                  </div>
+                </div>
               </div>
-
             </form>
-
-            <div class="modal fade" id="criarConta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5">Conta criada!</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="justify-content-center">
-                      <p>Sua solicitação foi enviada. Aguarde a confirmação no e-mail enviado</p>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Ok</button>
-                  </div>
-                </div>
+            <div *ngIf="statusMessage && statusMessage.status" class="row-mb-3">
+              <div [ngClass]="statusMessage.style">
+                <span><i [ngClass]="statusMessage.icon"></i></span>
+                {{ statusMessage.message }}
               </div>
-            </div>
+              <button class="btn btn-outline-danger" type="button" (click)="newRegister()">
+                Criar Conta
+              </button>
+              
 
           </div>
         </div>
