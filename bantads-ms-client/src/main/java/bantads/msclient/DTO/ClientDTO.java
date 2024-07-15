@@ -1,17 +1,54 @@
-package bantads.msclient.DTO;
+package bantads.msclient.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ClientDTO {
-  private String id;
-  private String name;
-  private String email;
-  private String cpf;
-  private AddressDTO address;
-  private Double salary;
+    private String name;
+    private String email;
+    private String cpf;
+    private AddressDTO address;
+    private String phone;
+    private Double salary;
+    private String password; 
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getCpf() {
+        return cpf;
+    }
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    public AddressDTO getAddress() {
+        return address;
+    }
+    public void setAddress(AddressDTO address) {
+        this.address = address;
+    }
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public Double getSalary() {
+        return salary;
+    }
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

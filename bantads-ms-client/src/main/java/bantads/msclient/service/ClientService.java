@@ -1,25 +1,31 @@
 package bantads.msclient.service;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import bantads.msclient.DTO.ClientDTO;
-import bantads.msclient.model.Client;
+import bantads.msclient.dto.ClientDTO;
+import bantads.msclient.entity.Client;
+import bantads.msclient.exception.ClientAlreadyExistsException;
 import bantads.msclient.repository.ClientRepository;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ClientService {
-  
-  @Autowired
-  private ClientRepository clientRepository;
+    @Autowired
+    private ClientRepository clientRepository;
 
-  @Autowired
-  private ModelMapper mapper;
-  
-  public ClientDTO createClient(ClientDTO clientDTO) {
-    Client client = mapper.map(clientDTO, Client.class);
-    clientRepository.save(client);
-    return clientDTO;
-  }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public Client createClient(ClientDTO clientDTO) {
+        if (clientRepository.findByCpf(clientDTO.getCpf()).isPresent()) {
+            throw new ClientAlreadyExistsException("Client with CPF already exists");
+        }
+        Client client = new Client();
+        BeanUtils.copyProperties(clientDTO, client);
+        client.setSituation("OPEN");
+        client.setPassword(passwordEncoder.encode(clientDTO.getPassword()));
+        client.setRole("CLIENT");
+        return clientRepository.save(client);
+    }
 }

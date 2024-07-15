@@ -1,6 +1,7 @@
-package bantads.msaccount.entity;
+package bantads.msclient.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +32,7 @@ public class Client {
     private String cpf;
 
     @NotNull
+    @Embedded
     private Address address;
 
     @NotEmpty
@@ -45,6 +47,14 @@ public class Client {
     @NotEmpty
     @Column(nullable = false)
     private String situation;
+
+    @NotEmpty
+    @Column(nullable = false)
+    private String password;
+
+    @NotEmpty
+    @Column(nullable = false)
+    private String role;
 
     public Client() {}
 
@@ -110,5 +120,21 @@ public class Client {
 
     public void setSituation(String situation) {
         this.situation = situation;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
