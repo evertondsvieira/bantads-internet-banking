@@ -1,6 +1,5 @@
 package bantads.msclient.service;
 
-import bantads.msclient.dto.ClientDTO;
 import bantads.msclient.entity.Client;
 import bantads.msclient.exception.ClientAlreadyExistsException;
 import bantads.msclient.repository.ClientRepository;
@@ -17,14 +16,14 @@ public class ClientService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Client createClient(ClientDTO clientDTO) {
-        if (clientRepository.findByCpf(clientDTO.getCpf()).isPresent()) {
+    public Client createClient(Client newClient) {
+        if (clientRepository.findByCpf(newClient.getCpf()).isPresent()) {
             throw new ClientAlreadyExistsException("Client with CPF already exists");
         }
         Client client = new Client();
-        BeanUtils.copyProperties(clientDTO, client);
+        BeanUtils.copyProperties(newClient, client);
         client.setSituation("OPEN");
-        client.setPassword(passwordEncoder.encode(clientDTO.getPassword()));
+        client.setPassword(passwordEncoder.encode(newClient.getPassword()));
         client.setRole("CLIENT");
         return clientRepository.save(client);
     }
