@@ -1,25 +1,19 @@
-package bantads.msauthentication.model;
+package bantads.msauthentication.dto;
 
 import java.io.Serializable;
 
-import org.springframework.data.annotation.Id;
+public class UserDTO implements Serializable{
 
-public class User implements Serializable{
-
-    @Id
     private String id;
-
     private String login;
-
     private String password;
-
     private String role;
 
-    public User() {
+    public UserDTO() {
         super();
-    };
+    }
 
-    public User(String id, String login, String password, String role) {
+    public UserDTO(String id, String login, String password, String role) {
         super();
         this.id = id;
         this.login = login;
@@ -57,5 +51,5 @@ public class User implements Serializable{
 
     public void setRole(String role) {
         this.role = role;
-    }    
+    }
 }
