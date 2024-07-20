@@ -1,5 +1,7 @@
 package bantads.msclient.dto;
 
+import bantads.msclient.entity.Address;
+
 public class AddressDTO {
   private String type;
   private String street;
@@ -50,5 +52,17 @@ public class AddressDTO {
   }
   public void setState(String state) {
     this.state = state;
+  }
+
+  public Address toEntity() {
+    Address address = new Address();
+    address.setType(this.type);
+    address.setStreet(this.street);
+    address.setNumber(this.number);
+    address.setComplement(this.complement);
+    address.setCep(this.cep);
+    address.setCity(this.city);
+    address.setState(this.state);
+    return address;
   }
 }
