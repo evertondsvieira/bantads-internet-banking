@@ -25,6 +25,7 @@ export class AuthService {
   }
 
   public logout(){
+    this.userService.logout();
     delete sessionStorage[LS_CHAVE];
   }
   
@@ -32,10 +33,4 @@ export class AuthService {
     let observableUser = this.userService.login(auth);
     return observableUser;
   }
-
-  /*
-  public register(value: any) {
-    return this.userService.register(value);
- }
-  */
 }
