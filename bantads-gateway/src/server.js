@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
+const cors = require('cors');
 
 // Middleware de segurança
 app.use(helmet());
@@ -23,6 +24,9 @@ app.use(bodyParser.json());
 
 // Cookie parser
 app.use(cookieParser());
+
+// Middleware CORS
+app.use(cors());
 
 const authServiceProxy = httpProxy('http://localhost:3004', {
     changeOrigin: true,

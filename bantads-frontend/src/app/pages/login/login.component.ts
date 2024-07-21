@@ -33,9 +33,6 @@ export class LoginComponent implements OnInit {
     if (this.formLogin.form.valid) {
       this.authService.login(this.auth).subscribe(authUser => {
         let user: User | null = authUser ? authUser : null;
-        
-        // Remover quando não tiver o json-server
-        user = Array.isArray(user) ? user[0] : user;
 
         if (user != null) {
           this.authService.loggedUser = user;   
@@ -52,7 +49,13 @@ export class LoginComponent implements OnInit {
           this.errorMessage = "Email/Senha Inválidos"; // Define a mensagem de erro
           this.loading = false;
         }
-      });
+      },
+      error => {
+        this.errorMessage = error;
+        console.error('Erro ao fazer login:', error);
+        this.loading = false;
+      }
+    );
     } else {
       this.loading = false;
     }
