@@ -49,6 +49,7 @@ export class NavBarComponent {
   }
 
   logout(): void {
+    this.authService.logout();
     sessionStorage.removeItem('loggedUser')
     this.router.navigate(['/login'])
   }

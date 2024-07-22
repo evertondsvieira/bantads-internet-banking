@@ -8,7 +8,8 @@
       "mainClass": "bantads.msaccount.MsAccountApplication",
       "projectName": "ms-account",
       "args": "",
-      "envFile": "${workspaceFolder}/.env"
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=39173 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=ms-account"
     },
     {
       "type": "java",
@@ -27,6 +28,14 @@
       "cwd": "${workspaceFolder}",
       "mainClass": "bantads.account_command.AccountCommandApplication",
       "projectName": "account-command",
+    },
+    { 
+      "type": "java",
+      "name": "Spring Boot-MsManagerApplication<ms-manager>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "bantads.msmanager.MsManagerApplication",
+      "projectName": "ms-manager",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
     }
