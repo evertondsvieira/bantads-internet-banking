@@ -23,6 +23,14 @@
     },
     {
       "type": "java",
+      "name": "Spring Boot-AccountCommandApplication<account-command>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "bantads.account_command.AccountCommandApplication",
+      "projectName": "account-command",
+    },
+    { 
+      "type": "java",
       "name": "Spring Boot-MsManagerApplication<ms-manager>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
