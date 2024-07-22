@@ -1,0 +1,45 @@
+# For now it's only setted for being used to open rabbitmq 
+version: '3.8'
+services:
+  # postgres-db:
+  #   image: postgres:latest
+  #   container_name: postgres-db
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - bantads-network
+
+  # ms-account:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: account-command
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - "3001:3001"
+  #   depends_on:
+  #     - postgres-db
+  #     - rabbit-mq
+  #   networks:
+  #     - bantads-network
+  
+  rabbit-mq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/
+    networks:
+      - bantads-network
+    restart: on-failure:3
+
+networks:
+  bantads-network:
+    driver: bridge
+  
