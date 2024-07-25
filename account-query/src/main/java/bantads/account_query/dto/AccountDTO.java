@@ -1,9 +1,9 @@
-package bantads.account_command.dto;
+package bantads.account_query.dto;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import bantads.account_command.enums.AccountSituation;
+import bantads.account_query.enums.AccountSituation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
