@@ -1,4 +1,4 @@
-package bantads.account_command.dto;
+package bantads.account_query.dto;
 
 import java.io.Serializable;
 
@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ManagerDTO implements Serializable{
+public class ClientDTO implements Serializable{
   private String name;
   private String cpf;
 }

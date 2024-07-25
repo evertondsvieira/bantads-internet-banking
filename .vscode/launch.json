@@ -28,14 +28,25 @@
       "cwd": "${workspaceFolder}",
       "mainClass": "bantads.account_command.AccountCommandApplication",
       "projectName": "account-command",
+      "vmArgs": " -Dcom.sun.management.jmxremote"
     },
-    { 
+    {
       "type": "java",
       "name": "Spring Boot-MsManagerApplication<ms-manager>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "mainClass": "bantads.msmanager.MsManagerApplication",
       "projectName": "ms-manager",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-AccountQueryApplication<account-query>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "bantads.account_query.AccountQueryApplication",
+      "projectName": "account-query",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
     }

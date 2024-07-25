@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "rabbitmq.exchange.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.exchange.name'"
+  },
+  {
+    "name": "rabbitmq.transaction.routing.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.transaction.routing.name'"
+  },
+  {
+    "name": "rabbitmq.updateaccount.routing.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.updateaccount.routing.name'"
+  },
+  {
+    "name": "rabbitmq.queue.transaction.queue.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.queue.transaction.queue.name'"
+  },
+  {
+    "name": "rabbitmq.updateaccount.queue.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.updateaccount.queue.name'"
+  },
+  {
+    "name": "rabbitmq.createaccount.routing.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.createaccount.routing.name'"
+  },
+  {
+    "name": "rabbitmq.createaccount.queue.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.createaccount.queue.name'"
+  }
+]}
