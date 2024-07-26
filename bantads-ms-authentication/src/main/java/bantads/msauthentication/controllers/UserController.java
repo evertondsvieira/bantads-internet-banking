@@ -87,7 +87,7 @@ public class UserController {
         // Busca o usuário com login e senha informados
         User usu = repo.findByLoginAndPassword(userDTO.getLogin(), userDTO.getPassword());
 
-        if (usu != null) {
+        if (usu != null && usu.getPassword() != null) {
             // Usuário encontrado, retorna com código 200 (OK)
             UserDTO usuDTO = mapper.map(usu, UserDTO.class);
             AuthResponse response = new AuthResponse(true, usuDTO);

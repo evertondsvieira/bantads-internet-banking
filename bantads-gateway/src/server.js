@@ -132,6 +132,11 @@ const managerServiceProxy = httpProxy('http://localhost:3003', {
 
 const sagasServiceProxy = httpProxy('http://localhost:3005');
 
+// Requisição de autocadastro de cliente (Sem autenticação)
+app.post('/register', (req, res, next) => {
+    sagasServiceProxy(req, res, next);
+});
+
 // Requisições aos serviços, já autenticados
 app.get('/account', verifyJWT, (req, res, next) => {
     accountServiceProxy(req, res, next);

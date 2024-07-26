@@ -42,6 +42,27 @@
     },
     {
       "type": "java",
+      "name": "Spring Boot-SagaRegisterApplication<saga-register>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "bantads.saga_register.SagaRegisterApplication",
+      "projectName": "saga-register",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=34377 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=saga-register"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-MsAuthenticationApplication<ms-authentication>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "bantads.msauthentication.MsAuthenticationApplication",
+      "projectName": "ms-authentication",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-AccountQueryApplication<account-query>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
