@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  rabbit-mq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/
+    networks:
+      - bantads-network
+    restart: on-failure:3
+
   ms-account:
     build:
       context: ./bantads-ms-account
@@ -14,6 +27,8 @@ services:
       dockerfile: ./Dockerfile
     env_file:
       - ./bantads-ms-authentication/.env
+    depends_on:
+      - rabbit-mq
 
   ms-client:
     build:
@@ -21,6 +36,8 @@ services:
       dockerfile: ./Dockerfile
     env_file:
       - ./bantads-ms-client/.env
+    depends_on:
+      - rabbit-mq
 
   ms-manager:
     build:
@@ -28,3 +45,12 @@ services:
       dockerfile: ./Dockerfile
     env_file:
       - ./bantads-ms-manager/.env
+
+  saga-register:
+    build:
+      context: ./saga-register
+      dockerfile: ./Dockerfile
+    env_file:
+      - ./saga-register/.env
+    depends_on:
+      - rabbit-mq

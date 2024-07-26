@@ -1,13 +1,13 @@
-package bantads.account_command.dto;
+package bantads.saga_register.dto;
 
 import java.util.Date;
-
-import bantads.account_command.enums.AccountSituation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import bantads.saga_register.dto.enums.AccountSituation;
 
 @Getter
 @Setter
@@ -21,6 +21,6 @@ public class AccountDTO {
   private Double salary = 0.0;
   private AccountSituation situation;
   private ManagerDTO manager;
-  private ClientDTO client;
+  private ClientAccountDTO client;
   private Date criatedAt;
 }
