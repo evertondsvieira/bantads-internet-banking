@@ -3,7 +3,6 @@ package bantads.account_command.dto;
 import java.util.Date;
 
 
-import bantads.account_command.entity.Account;
 import bantads.account_command.enums.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,8 +17,8 @@ import lombok.ToString;
 @ToString
 public class TransactionDTO {
   private Long id;
-  private Account originAccount;
-  private Account destinationAccount;
+  private AccountDTO originAccount;
+  private AccountDTO destinationAccount;
   private TransactionType type;
   private Double ammount;
   private Date createdAt;

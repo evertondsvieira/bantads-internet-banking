@@ -20,8 +20,8 @@ public class AccountDTO implements Serializable{
   private Double limit = 0.0;
   private Double balance = 0.0;
   private Double salary = 0.0;
-  private AccountSituation situation;
+  private AccountSituation situation = AccountSituation.PENDING;
   private ManagerDTO manager;
   private ClientDTO client;
-  private Date criatedAt;
+  private Date createdAt;
 }
