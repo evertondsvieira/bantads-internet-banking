@@ -27,7 +27,8 @@
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "mainClass": "bantads.account_command.AccountCommandApplication",
-      "projectName": "account-command"
+      "projectName": "account-command",
+      "vmArgs": " -Dcom.sun.management.jmxremote"
     },
     {
       "type": "java",
@@ -57,6 +58,16 @@
       "cwd": "${workspaceFolder}",
       "mainClass": "bantads.msauthentication.MsAuthenticationApplication",
       "projectName": "ms-authentication",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-AccountQueryApplication<account-query>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "bantads.account_query.AccountQueryApplication",
+      "projectName": "account-query",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
     }

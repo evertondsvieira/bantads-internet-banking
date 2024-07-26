@@ -28,7 +28,11 @@ public class Client {
   @Column(nullable = false, unique = true)
   private String cpf;
 
-  public String getCpfOnlyNumber(){
-    return String.format("%011d", cpf.replaceAll("[^\\d]", cpf));
+  public void setCpf(String cpf){
+    String cleanCpf = cpf.replaceAll("[^\\d]", "");
+    if(cleanCpf.length() < 11){
+      cleanCpf = String.format("%011s", cleanCpf);
+    }
+    this.cpf = cleanCpf;
   }
 }

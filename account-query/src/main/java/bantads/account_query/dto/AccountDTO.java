@@ -1,9 +1,9 @@
-package bantads.account_command.dto;
+package bantads.account_query.dto;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import bantads.account_command.enums.AccountSituation;
+import bantads.account_query.enums.AccountSituation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +20,8 @@ public class AccountDTO implements Serializable{
   private Double limit = 0.0;
   private Double balance = 0.0;
   private Double salary = 0.0;
-  private AccountSituation situation = AccountSituation.PENDING;
+  private AccountSituation situation;
   private ManagerDTO manager;
   private ClientDTO client;
-  private Date criatedAt;
+  private Date createdAt;
 }

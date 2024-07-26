@@ -1,9 +1,9 @@
-package bantads.account_command.dto;
+package bantads.account_query.dto;
 
 import java.util.Date;
 
 
-import bantads.account_command.enums.TransactionType;
+import bantads.account_query.enums.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

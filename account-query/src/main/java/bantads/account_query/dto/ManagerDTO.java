@@ -1,4 +1,4 @@
-package bantads.account_command.dto;
+package bantads.account_query.dto;
 
 import java.io.Serializable;
 
