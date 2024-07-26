@@ -14,6 +14,9 @@ import bantads.account_command.publisher.RabbitMQProducer;
 import bantads.account_command.service.AccountService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @RestController
@@ -32,14 +35,27 @@ public class AccountController {
 	private AccountService accountService;
 
 	@PostMapping()
-	public ResponseEntity<AccountDTO> createAccount(@RequestBody AccountDTO account) {
+	public ResponseEntity<AccountDTO> createAccount(@RequestBody AccountDTO accountDTO) {
 		try{
-			AccountDTO accountDTO = accountService.createAccount(account);
-			producer.sendMessage(account, Event.CREATE_ACCOUNT);
-			return new ResponseEntity<>(accountDTO, HttpStatus.CREATED);
+			AccountDTO accountDTOCreated = accountService.createAccount(accountDTO);
+			producer.sendMessage(accountDTOCreated, Event.CREATE_ACCOUNT);
+			return new ResponseEntity<>(accountDTOCreated, HttpStatus.CREATED);
 		} catch (Exception e){
 			e.printStackTrace();
 			logger.error("Error creating account ", e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<AccountDTO> putMethodName(@PathVariable Long id, @RequestBody AccountDTO accountDTO) {
+		try {
+			AccountDTO accountDTOUpdated = accountService.updateAccount(id, accountDTO);
+			producer.sendMessage(accountDTOUpdated, Event.UPDATE_ACCOUNT);
+			return new ResponseEntity<>(accountDTOUpdated, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("Error updating account ", e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}

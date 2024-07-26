@@ -33,5 +33,20 @@
     "name": "rabbitmq.createaccount.queue.name",
     "type": "java.lang.String",
     "description": "A description for 'rabbitmq.createaccount.queue.name'"
+  },
+  {
+    "name": "rabbitmq.accountevent.routing.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.accountevent.routing.name'"
+  },
+  {
+    "name": "rabbitmq.accountevent.queue.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.accountevent.queue.name'"
+  },
+  {
+    "name": "rabbitmq.accountevent.queue.name",
+    "type": "java.lang.String",
+    "description": "A description for 'rabbitmq.accountevent.queue.name'"
   }
 ]}

@@ -25,12 +25,24 @@ public class RabbitMQConsumer {
   private ObjectMapper objectMapper;
 
   @RabbitListener(queues = {"${rabbitmq.createaccount.queue.name}"})
-  public void consume(String accountDTOMessage){
+  public void consumeCreateQueue(String accountDTOMessage){
     LOGGER.info(String.format("Received message -> %s", accountDTOMessage.toString()));
     try{
       AccountDTO accountDTO = objectMapper.readValue(accountDTOMessage, AccountDTO.class);
       AccountDTO accountDTOCreated = accountService.createAccount(accountDTO);
       LOGGER.info(String.format("Account with id %d was created!", accountDTOCreated.getId()));
+    } catch (Exception e){
+      LOGGER.info(String.format("Error -> %s", e.getMessage()));
+    }
+  }
+
+  @RabbitListener(queues = {"${rabbitmq.updateaccount.queue.name}"})
+  public void consumeUpdateQueue(String accountDTOMessage){
+    LOGGER.info(String.format("Received message -> %s", accountDTOMessage.toString()));
+    try{
+      AccountDTO accountDTO = objectMapper.readValue(accountDTOMessage, AccountDTO.class);
+      AccountDTO accountDTOUpdated = accountService.updateAccount(accountDTO);
+      LOGGER.info(String.format("Account with id %d was created!", accountDTOUpdated.getId()));
     } catch (Exception e){
       LOGGER.info(String.format("Error -> %s", e.getMessage()));
     }

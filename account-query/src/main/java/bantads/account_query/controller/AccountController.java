@@ -1,5 +1,7 @@
 package bantads.account_query.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,17 @@ public class AccountController {
       AccountDTO accountDTO = accountService.getAccountById(id);
       return ResponseEntity.ok(accountDTO);
     } catch (Exception e){
-      return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+  }
+
+  @GetMapping
+  public ResponseEntity<List<AccountDTO>> getAccounts(){
+    try{
+      List<AccountDTO> accountDTOs = accountService.getAccounts();
+      return ResponseEntity.ok(accountDTOs);
+    } catch (Exception e){
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
   }
 }

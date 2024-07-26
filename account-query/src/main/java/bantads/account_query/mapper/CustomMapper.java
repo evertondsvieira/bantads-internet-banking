@@ -24,7 +24,7 @@ public class CustomMapper {
   public AccountDTO map(Account account){
     AccountDTO accountDTO = mapper.map(account, AccountDTO.class);
     ClientDTO clientDTO = new ClientDTO(account.getClientName(), account.getClientCpf());
-    ManagerDTO managerDTO = new ManagerDTO(account.getClientName(), account.getManagerCpf());
+    ManagerDTO managerDTO = new ManagerDTO(account.getManagerName(), account.getManagerCpf());
     accountDTO.setClient(clientDTO);
     accountDTO.setManager(managerDTO);
     return accountDTO;

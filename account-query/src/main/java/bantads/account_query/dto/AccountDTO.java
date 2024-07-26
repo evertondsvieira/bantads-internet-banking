@@ -23,5 +23,5 @@ public class AccountDTO implements Serializable{
   private AccountSituation situation;
   private ManagerDTO manager;
   private ClientDTO client;
-  private Date criatedAt;
+  private Date createdAt;
 }
