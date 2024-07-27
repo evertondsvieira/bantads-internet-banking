@@ -41,7 +41,7 @@
         <td>{{client.address.city}}</td>
         <td>{{client.address.state}}</td>
         
-        <td>{{ client.balance? (client.balance | realPipe) : ""}}</td>
+        <!-- <td>{{ client.balance? (client.balance | realPipe) : ""}}</td> -->
         <td>
           <button class="btn btn-primary" (click)="viewMoreDetails(client.cpf)">
             Ver mais

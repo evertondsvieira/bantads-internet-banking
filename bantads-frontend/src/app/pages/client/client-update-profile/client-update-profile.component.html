@@ -28,15 +28,15 @@
     </div>
     <div>
       <div class="card-body">
-        <form>
+        <form (ngSubmit)="onSubmit()" #clientForm="ngForm">
           <div class="row g-2">
             <div class="col-lg-2 mb-3">
               <label for="cpf" class="form-label">CPF:</label>
               <input
                 type="text"
                 class="form-control"
-                #cpf="ngModel"
-                [(ngModel)]="user.cpf"
+                id="cpf"
+                [(ngModel)]="client.cpf"
                 name="cpf"
                 [showMaskTyped]="true"
                 [shownMaskExpression]="'___.___.___-__'"
@@ -47,14 +47,13 @@
             </div>
 
             <div class="col-lg-5 mb-3">
-              <label for="nome" class="form-label">Nome:</label>
+              <label for="name" class="form-label">Nome:</label>
               <input
-                alfabetico
                 required
                 type="text"
                 class="form-control"
-                #name="ngModel"
-                [(ngModel)]="user.name"
+                id="name"
+                [(ngModel)]="client.name"
                 name="name"
               />
             </div>
@@ -62,12 +61,11 @@
             <div class="col-lg-5 mb-3">
               <label for="email" class="form-label">E-mail:</label>
               <input
-                email
                 required
                 type="email"
                 class="form-control"
-                #email="ngModel"
-                [(ngModel)]="user.email"
+                id="email"
+                [(ngModel)]="client.email"
                 name="email"
               />
             </div>
@@ -75,12 +73,14 @@
 
           <div class="row g-3">
             <div class="col-lg-6 mb-3">
-              <label for="telefone" class="form-label">Telefone:</label>
+              <label for="phone" class="form-label">Telefone:</label>
               <input
                 type="tel"
                 required
                 class="form-control"
-                id="telefone"
+                id="phone"
+                [(ngModel)]="client.phone"
+                name="phone"
                 [showMaskTyped]="true"
                 [specialCharacters]="['(', ')', '-', ' ']"
                 [shownMaskExpression]="'(__) _____-____'"
@@ -89,98 +89,116 @@
             </div>
 
             <div class="col-lg-6 mb-3">
-              <label for="salario" class="form-label">Salário:</label>
-              <input required type="number" class="form-control" id="salario" />
+              <label for="salary" class="form-label">Salário:</label>
+              <input
+                required
+                type="number"
+                class="form-control"
+                id="salary"
+                [(ngModel)]="client.salary"
+                name="salary"
+              />
             </div>
           </div>
 
           <div class="row g-3">
             <div class="col-lg-2 mb-3">
-              <label for="tipoEndereco" class="form-label"
-                >Tipo de Endereço:</label
+              <label for="type" class="form-label">Tipo de Endereço:</label>
+              <select
+                class="form-select"
+                id="type"
+                [(ngModel)]="client.address.type"
+                name="type"
               >
-              <select class="form-select" id="tipoEndereco">
                 <option value="rua">Rua</option>
                 <option value="avenida">Avenida</option>
-                <option value="avenida">Alameda</option>
-                <option value="avenida">Estrada</option>
-                <option value="avenida">Praça</option>
-                <option value="avenida">Quadra</option>
+                <option value="alameda">Alameda</option>
+                <option value="estrada">Estrada</option>
+                <option value="praça">Praça</option>
+                <option value="quadra">Quadra</option>
               </select>
             </div>
 
             <div class="col-lg-8 mb-3">
-              <label for="logradouro" class="form-label">Logradouro:</label>
+              <label for="street" class="form-label">Logradouro:</label>
               <input
-                alfanumerico
                 required
                 type="text"
                 class="form-control"
-                id="logradouro"
+                id="street"
+                [(ngModel)]="client.address.street"
+                name="street"
               />
             </div>
 
             <div class="col-lg-2 mb-3">
-              <label for="numero" class="form-label">Número:</label>
+              <label for="number" class="form-label">Número:</label>
               <input
-                numerico
                 required
                 type="text"
                 class="form-control"
-                id="numero"
+                id="number"
+                [(ngModel)]="client.address.number"
+                name="number"
               />
             </div>
           </div>
 
           <div class="row g-3">
             <div class="col-lg-3 mb-3">
-              <label for="complemento" class="form-label">Complemento:</label>
+              <label for="complement" class="form-label">Complemento:</label>
               <input
-                alfanumerico
                 required
                 type="text"
                 class="form-control"
-                id="complemento"
+                id="complement"
+                [(ngModel)]="client.address.complement"
+                name="complement"
               />
             </div>
 
             <div class="col-lg-3 mb-3">
               <label for="cep" class="form-label">CEP:</label>
               <input
-                [showMaskTyped]="true"
-                [shownMaskExpression]="'_____-___'"
-                mask="00000-000"
                 required
                 type="text"
                 class="form-control"
                 id="cep"
+                [(ngModel)]="client.address.cep"
+                name="cep"
+                [showMaskTyped]="true"
+                [shownMaskExpression]="'_____-___'"
+                mask="00000-000"
               />
             </div>
 
             <div class="col-lg-3 mb-3">
-              <label for="cidade" class="form-label">Cidade:</label>
+              <label for="city" class="form-label">Cidade:</label>
               <input
-                alfabetico
                 required
                 type="text"
                 class="form-control"
-                id="cidade"
+                id="city"
+                [(ngModel)]="client.address.city"
+                name="city"
               />
             </div>
 
             <div class="col-lg-3 mb-3">
-              <label for="estado" class="form-label">Estado:</label>
+              <label for="state" class="form-label">Estado:</label>
               <input
-                alfabetico
                 required
                 type="text"
                 class="form-control"
-                id="estado"
+                id="state"
+                [(ngModel)]="client.address.state"
+                name="state"
               />
             </div>
           </div>
+
           <div class="w-auto mb-3 text-center">
-            <button type="button" class="btn btn-outline-danger">
+            <button type="submit" class="btn btn-outline-danger">
               Atualizar Dados
             </button>
           </div>
