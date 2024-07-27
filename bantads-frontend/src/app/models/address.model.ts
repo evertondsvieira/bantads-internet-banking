@@ -1,7 +1,7 @@
 export class Address {
   private _type: string;
   private _street: string;
-  private _number: string;
+  private _number: number;
   private _complement: string;
   private _cep: string;
   private _city: string;
@@ -10,7 +10,7 @@ export class Address {
   constructor(
     type: string,
     street: string,
-    number: string,
+    number: number,
     complement: string,
     cep: string,
     city: string,
@@ -41,11 +41,11 @@ export class Address {
     this._street = value;
   }
 
-  public get number(): string {
+  public get number(): number {
     return this._number;
   }
 
-  public set number(value: string) {
+  public set number(value: number) {
     this._number = value;
   }
 

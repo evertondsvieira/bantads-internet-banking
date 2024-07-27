@@ -11,7 +11,7 @@ import { Situation } from '../../../models/enum/situation.enum';
   styleUrl: './client-update-profile.component.css'
 })
 export class ClientUpdateProfileComponent {
-  client: Client = new Client(0, '', '', '', new Address('', '', '', '', '', '', ''), '', 0, Situation.OPEN )
+  client: Client = new Client(0, '', '', '', new Address('', '', 0, '', '', '', ''), '', 0, Situation.OPEN)
   valueVisible: boolean = false
   saldo: number = 0
   clientId: number = 0
