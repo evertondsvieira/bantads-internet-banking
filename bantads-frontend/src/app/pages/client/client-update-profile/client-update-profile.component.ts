@@ -3,6 +3,7 @@ import { Client } from '../../../models/client.model';
 import { Address } from '../../../models/address.model';
 import { ClientService } from '../../../services/client/client.service';
 import { ActivatedRoute } from '@angular/router';
+import { Situation } from '../../../models/enum/situation.enum';
 
 @Component({
   selector: 'app-client-update-profile',
@@ -10,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './client-update-profile.component.css'
 })
 export class ClientUpdateProfileComponent {
-  client: Client = new Client(0, '', '', '', new Address('', '', '', '', '', '', ''), '', 0)
+  client: Client = new Client(0, '', '', '', new Address('', '', '', '', '', '', ''), '', 0, Situation.OPEN )
   valueVisible: boolean = false
   saldo: number = 0
   clientId: number = 0

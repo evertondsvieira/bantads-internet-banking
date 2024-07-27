@@ -9,6 +9,7 @@ export class Client {
   private _address: Address;
   private _phone: string;
   private _salary: number;
+  private _situation: Situation;
 
   constructor(
     id: number,
@@ -18,6 +19,7 @@ export class Client {
     address: Address,
     phone: string,
     salary: number,
+    situation: Situation,
   ) {
     this._id = id;
     this._name = name;
@@ -26,6 +28,7 @@ export class Client {
     this._address = address;
     this._phone = phone;
     this._salary = salary;
+    this._situation = situation
   }
 
   public get id(): number {
@@ -82,5 +85,13 @@ export class Client {
 
   public set salary(value: number) {
     this._salary = value;
+  }
+
+  public get situation(): Situation {
+    return this._situation;
+  }
+
+  public set situation(value: Situation) {
+    this._situation = value;
   }
 }
