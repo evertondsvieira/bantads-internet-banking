@@ -26,12 +26,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class AccountController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
-
-	private RabbitMQProducer producer;
-
-	AccountController(RabbitMQProducer producer){
-		this.producer = producer;
-	}
 	
 	@Autowired
 	private AccountService accountService;
@@ -40,7 +34,6 @@ public class AccountController {
 	public ResponseEntity<AccountDTO> createAccount(@RequestBody AccountDTO accountDTO) {
 		try{
 			AccountDTO accountDTOCreated = accountService.createAccount(accountDTO);
-			producer.sendMessage(accountDTOCreated, Event.CREATE_ACCOUNT);
 			return new ResponseEntity<>(accountDTOCreated, HttpStatus.CREATED);
 		} 
     catch (RecordDuplicationException r) {
@@ -57,7 +50,6 @@ public class AccountController {
 	public ResponseEntity<AccountDTO> putMethodName(@PathVariable Long id, @RequestBody AccountDTO accountDTO) {
 		try {
 			AccountDTO accountDTOUpdated = accountService.updateAccount(id, accountDTO);
-			producer.sendMessage(accountDTOUpdated, Event.UPDATE_ACCOUNT);
 			return new ResponseEntity<>(accountDTOUpdated, HttpStatus.OK);
 		}catch (RecordNotFoundException r){
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

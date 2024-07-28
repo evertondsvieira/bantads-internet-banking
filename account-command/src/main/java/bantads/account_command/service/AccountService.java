@@ -17,6 +17,7 @@ import bantads.account_command.enums.Event;
 import bantads.account_command.exceptions.RecordDuplicationException;
 import bantads.account_command.exceptions.RecordNotFoundException;
 import bantads.account_command.mapper.CustomMapper;
+import bantads.account_command.publisher.RabbitMQProducer;
 import bantads.account_command.repository.AccountRepository;
 import bantads.account_command.repository.AccountTimelineRepository;
 import bantads.account_command.repository.ClientRepository;
@@ -41,7 +42,7 @@ public class AccountService {
   private AccountTimelineRepository accountTimelineRepo;
 
   @Autowired
-  private ManagerService managerService;
+  private RabbitMQProducer producer;
 
   @Autowired
   private ManagerRepository managerRepo;
@@ -55,7 +56,7 @@ public class AccountService {
     } else {
       client = clientOpt.get();
     }
-    if(accountRepo.findByClient(client).isPresent()){
+    if(accountRepo.findAccountByClientCpf(client.getCpf()).isPresent()){
       throw new RecordDuplicationException(String.format("The client with cpf %s already has an account", client.getCpf()));
     }
     Manager manager = getManagerWithLeastAccounts();
@@ -68,7 +69,9 @@ public class AccountService {
     clientRepo.save(client);
     account = accountRepo.save(account);
     saveAccountTimeline(Event.CREATE_ACCOUNT, account);
-    return mapper.map(account);
+    AccountDTO accountDTOCreated = mapper.map(account);
+    producer.sendMessage(accountDTOCreated, Event.CREATE_ACCOUNT);
+    return accountDTOCreated;
   }
 
   public AccountDTO updateAccount(Long id, AccountDTO accountDTO){
@@ -94,7 +97,9 @@ public class AccountService {
     }
     account = accountRepo.save(account);
     saveAccountTimeline(Event.UPDATE_ACCOUNT, account);
-    return mapper.map(account);
+    AccountDTO accountDTOUpdated = mapper.map(account);
+    producer.sendMessage(accountDTOUpdated, Event.UPDATE_ACCOUNT);
+    return accountDTOUpdated;
   }
 
   private Double getAppropriateLimit(Account account){
@@ -109,12 +114,12 @@ public class AccountService {
   }
 
   private Manager getManagerWithLeastAccounts(){
-    Optional<ManagerAccountInfo> cpfQuantityOpt = managerRepo.getManagerCpfWithLeastAccounts();
-    if(cpfQuantityOpt.isEmpty()){
+    Optional<ManagerAccountInfo> ManagerAccountInfoOpt = managerRepo.getManagerCpfWithLeastAccounts();
+    if(ManagerAccountInfoOpt.isEmpty()){
       throw new IllegalArgumentException(String.format("No manager present to take this account"));
     }
-    ManagerAccountInfo managerAccountInfoOpt = cpfQuantityOpt.get();
-    Optional<Manager> managerOpt = managerRepo.findByCpf(managerAccountInfoOpt.getCpf());
+    ManagerAccountInfo managerAccountInfo = ManagerAccountInfoOpt.get();
+    Optional<Manager> managerOpt = managerRepo.findByCpf(managerAccountInfo.getCpf());
     Manager manager = managerOpt.get();
     return manager;
   }

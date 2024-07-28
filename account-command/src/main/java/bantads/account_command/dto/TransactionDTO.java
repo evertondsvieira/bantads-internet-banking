@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class TransactionResponseDTO {
+public class TransactionDTO {
   private Long id;
   private AccountDTO originAccount;
   private AccountDTO destinationAccount;

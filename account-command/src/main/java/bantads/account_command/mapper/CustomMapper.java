@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import bantads.account_command.dto.AccountDTO;
 import bantads.account_command.dto.ClientDTO;
 import bantads.account_command.dto.ManagerDTO;
-import bantads.account_command.dto.TransactionResponseDTO;
+import bantads.account_command.dto.TransactionDTO;
 import bantads.account_command.entity.Account;
 import bantads.account_command.entity.Client;
 import bantads.account_command.entity.Manager;
@@ -38,7 +38,7 @@ public class CustomMapper {
     return accountDTO;
   }
 
-  public Transaction map(TransactionResponseDTO transactionDTO){
+  public Transaction map(TransactionDTO transactionDTO){
     Transaction transaction = mapper.map(transactionDTO, Transaction.class);
     transaction.setOriginAccount(mapper.map(transactionDTO.getOriginAccount(), Account.class));
     if(transactionDTO.getDestinationAccount() != null){
@@ -48,8 +48,8 @@ public class CustomMapper {
   }
 
 
-  public TransactionResponseDTO map(Transaction transaction){
-    TransactionResponseDTO transactionDTO = mapper.map(transaction, TransactionResponseDTO.class);
+  public TransactionDTO map(Transaction transaction){
+    TransactionDTO transactionDTO = mapper.map(transaction, TransactionDTO.class);
     transactionDTO.setOriginAccount(mapper.map(transaction.getOriginAccount(), AccountDTO.class));
     if(transaction.getDestinationAccount() != null){
       transactionDTO.setDestinationAccount(mapper.map(transaction.getDestinationAccount(), AccountDTO.class));

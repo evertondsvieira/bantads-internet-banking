@@ -27,4 +27,7 @@ public class Manager {
 
   @Column(nullable = false, unique = true)
   private String cpf;
+
+  @Column(name = "deleted")
+  private Character deleted = 'N';
 }
