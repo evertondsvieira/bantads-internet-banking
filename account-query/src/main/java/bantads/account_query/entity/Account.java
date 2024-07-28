@@ -44,6 +44,7 @@ public class Account {
 
   private String clientName;
   
+  @Column(nullable = false, unique = true)
   private String clientCpf;
   
   @Column(name = "created_at", nullable = false, updatable = false)
