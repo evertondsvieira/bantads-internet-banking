@@ -57,7 +57,6 @@ public class ClientRegister {
             else {
                 Client createdClient = clientService.createClient(convertToEntity(clientDTO));
                 ClientDTO createdClientDTO = convertToDTO(createdClient);
-                createdClientDTO.setPassword(clientDTO.getPassword());
                 String clientStr = objectMapper.writeValueAsString(createdClientDTO);
                 SuccessMessage successMessage = new SuccessMessage(clientStr);
                 String successStr = objectMapper.writeValueAsString(successMessage);
@@ -110,7 +109,6 @@ public class ClientRegister {
         client.setCpf(clientDTO.getCpf());
         client.setPhone(clientDTO.getPhone());
         client.setSalary(clientDTO.getSalary());
-        client.setPassword(clientDTO.getPassword());
 
         AddressDTO addressDTO = clientDTO.getAddress();
         if (addressDTO != null) {

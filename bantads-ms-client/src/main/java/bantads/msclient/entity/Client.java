@@ -50,10 +50,6 @@ public class Client {
 
     @NotEmpty
     @Column(nullable = false)
-    private String password;
-
-    @NotEmpty
-    @Column(nullable = false)
     private String role;
 
     public Client() {}
@@ -120,14 +116,6 @@ public class Client {
 
     public void setSituation(String situation) {
         this.situation = situation;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getRole() {
