@@ -17,11 +17,11 @@ import lombok.ToString;
 @ToString
 public class AccountDTO implements Serializable{
   private Long id;
-  private Double limit = 0.0;
-  private Double balance = 0.0;
-  private Double salary = 0.0;
-  private AccountSituation situation = AccountSituation.PENDING;
+  private Double limit;
+  private Double balance;
+  private Double salary;
+  private AccountSituation situation;
   private ManagerDTO manager;
   private ClientDTO client;
-  private Date criatedAt;
+  private Date createdAt;
 }

@@ -1,10 +1,13 @@
-package bantads.account_command.entity;
+package bantads.account_command.entity.timeline;
 
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import bantads.account_command.entity.Client;
+import bantads.account_command.entity.Manager;
 import bantads.account_command.enums.AccountSituation;
+import bantads.account_command.enums.Event;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,17 +22,22 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
-@Table(name = "t_account")
-public class Account {
+@Table(name = "t_account_timeline")
+public class AccountTimeline  {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+  private Long timelineId;
+
+  @Enumerated(EnumType.STRING)
+  Event accountEvent;
 
   @Column(name = "account_limit")
   private Double limit = 0.0;
@@ -38,7 +46,6 @@ public class Account {
 
   private Double salary = 0.0;
 
-  @Enumerated(EnumType.STRING)
   private AccountSituation situation = AccountSituation.PENDING;
 
   @ManyToOne
@@ -46,10 +53,10 @@ public class Account {
   private Manager manager;
 
   @ManyToOne
-  @JoinColumn(name = "client_id", nullable = false, unique = true)
+  @JoinColumn(name = "client_id", nullable = false)
   private Client client;
 
   @Column(name = "created_at", nullable = false, updatable = false)
   @CreationTimestamp
-  private Date createdAt;
+  private Date criatedAt;
 }
