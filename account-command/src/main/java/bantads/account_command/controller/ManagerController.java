@@ -1,5 +1,7 @@
 package bantads.account_command.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,25 @@ public class ManagerController {
     }
   }
 
+  @GetMapping
+  public ResponseEntity<List<ManagerDTO>> getManagers(){
+    try {
+      List<ManagerDTO> managerDTOs = managerService.getManagers(); 
+      return ResponseEntity.ok(managerDTOs);
+    } 
+    catch (RecordNotFoundException r){
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    } 
+    catch (RecordDuplicationException r) {
+      return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    } 
+    catch (Exception e) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+  }
+
+
+
   @PostMapping
   public ResponseEntity<ManagerDTO> createManager(@RequestBody ManagerDTO managerDTO) {
     try {
@@ -92,6 +113,7 @@ public class ManagerController {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     } 
     catch (Exception e) {
+      e.printStackTrace();
       logger.info(String.format("Error when deleting manager with cpf %s", cpf));
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     } 

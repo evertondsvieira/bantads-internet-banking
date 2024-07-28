@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bantads.account_command.dto.AccountDTO;
 import bantads.account_command.dto.ManagerDTO;
 import bantads.account_command.entity.ManagerAccountInfo;
 import bantads.account_command.entity.Account;
@@ -14,6 +15,7 @@ import bantads.account_command.entity.Manager;
 import bantads.account_command.exceptions.RecordCannotBeDeleted;
 import bantads.account_command.exceptions.RecordDuplicationException;
 import bantads.account_command.exceptions.RecordNotFoundException;
+import bantads.account_command.mapper.CustomMapper;
 import bantads.account_command.repository.AccountRepository;
 import bantads.account_command.repository.ManagerRepository;
 
@@ -21,16 +23,22 @@ import bantads.account_command.repository.ManagerRepository;
 public class ManagerService {
   
   // Remove this when RealService is implemented
-  private static Manager mockManager = new Manager(Long.parseLong("100"), "The Cool Manager", "12345678910");
+  private static Manager mockManager = new Manager(Long.parseLong("100"), "The Cool Manager", "12345678910", 'N');
   
   @Autowired
   private ModelMapper mapper;
+
+  @Autowired
+  private CustomMapper customMapper;
 
   @Autowired
   private ManagerRepository managerRepo;
 
   @Autowired
   private AccountRepository accountRepo;
+
+  @Autowired
+  private AccountService accountService;
 
   public Manager getManagerWithLeastAccounts(){
     return mockManager;
@@ -53,12 +61,16 @@ public class ManagerService {
      * Manager with more accounts has more than one account
     */
     ManagerAccountInfo managerAccountInfo = managerAccountInfoOpt.get();
+    System.out.println(managerAccountInfo.getCpf());
+    System.out.println(managerAccountInfo.getHasAccount());
+    System.out.println(managerAccountInfo.getQuantity());
     if (managerAccountInfo.getHasAccount() && managerAccountInfo.getQuantity() > 1) {
       Manager managerWithMoreAccounts = managerRepo.findByCpf(managerAccountInfo.getCpf()).get();
       List<Account> accounts = accountRepo.findByManager(managerWithMoreAccounts);
       Account account = accounts.get(0);
-      account.setManager(manager);
-      accountRepo.save(account);
+      AccountDTO accountDTO = customMapper.map(account);
+      accountDTO.setManager(mapper.map(manager, ManagerDTO.class));
+      accountDTO = accountService.updateAccount(account.getId(), accountDTO);
     }
 
     return mapper.map(manager, ManagerDTO.class);
@@ -73,6 +85,14 @@ public class ManagerService {
     manager = managerOpt.get();
     manager.setName(managerDTO.getName());
     manager = managerRepo.save(manager);
+    Manager managerToUpdate = manager;
+    List<Account> accounts = accountRepo.findByManager(manager);
+    accounts.stream()
+      .forEach((acc) -> {
+        acc.setManager(managerToUpdate);
+        AccountDTO accountDTO = customMapper.map(acc);
+        accountService.updateAccount(acc.getId(), accountDTO);
+      });
     return mapper.map(manager, ManagerDTO.class);
   }
 
@@ -99,9 +119,11 @@ public class ManagerService {
     accounts.stream()
       .forEach((acc) -> {
         acc.setManager(managerWithLessAccounts);
-        accountRepo.save(acc);
+        AccountDTO accountDTO = customMapper.map(acc);
+        accountService.updateAccount(acc.getId(), accountDTO);
       });
-    managerRepo.delete(manager);
+    manager.setDeleted('S');
+    managerRepo.save(manager);
   }
 
   public ManagerDTO getManagerByCpf(String cpf){
@@ -111,4 +133,15 @@ public class ManagerService {
     }
     return mapper.map(managerOpt.get(),ManagerDTO.class);
   }  
+
+  public List<ManagerDTO> getManagers(){
+    List<Manager> managers = managerRepo.findAll();
+    List<ManagerDTO> managersDTOs = managers.stream()
+      .map((m) -> mapper.map(m, ManagerDTO.class))
+      .toList();
+    if(managersDTOs.size() == 0){
+      throw new RecordNotFoundException("There are no managers");
+    }
+    return managersDTOs;
+  }
 }
