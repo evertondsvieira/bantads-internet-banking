@@ -119,7 +119,6 @@ public class ClientController {
         client.setCpf(clientDTO.getCpf());
         client.setPhone(clientDTO.getPhone());
         client.setSalary(clientDTO.getSalary());
-        client.setPassword(clientDTO.getPassword());
 
         AddressDTO addressDTO = clientDTO.getAddress();
         if (addressDTO != null) {

@@ -8,7 +8,6 @@ import bantads.msclient.repository.ClientRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,15 +19,11 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public Client createClient(Client newClient) {
         if (clientRepository.findByCpf(newClient.getCpf()).isPresent()) {
             throw new ClientAlreadyExistsException("Client with CPF already exists");
         }
         newClient.setSituation("OPEN");
-        newClient.setPassword(passwordEncoder.encode(newClient.getPassword()));
         newClient.setRole("CLIENT");
         return clientRepository.save(newClient);
     }
@@ -38,10 +33,6 @@ public class ClientService {
         Client client = clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException("Client not found"));
 
         BeanUtils.copyProperties(updateClientDTO, client, "password");
-
-        if (updateClientDTO.getPassword() != null && !updateClientDTO.getPassword().isEmpty()) {
-            client.setPassword(passwordEncoder.encode(updateClientDTO.getPassword()));
-        }
 
         if (updateClientDTO.getSalary() != null) {
             client.setSalary(updateClientDTO.getSalary());

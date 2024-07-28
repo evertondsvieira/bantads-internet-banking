@@ -7,7 +7,6 @@ public class UpdateClientDTO {
     private String phone;
     private Double salary;
     private String situation;
-    private String password;
     private String role;
     
     public String getName() {
@@ -45,12 +44,6 @@ public class UpdateClientDTO {
     }
     public void setSituation(String situation) {
       this.situation = situation;
-    }
-    public String getPassword() {
-      return password;
-    }
-    public void setPassword(String password) {
-      this.password = password;
     }
     public String getRole() {
       return role;
