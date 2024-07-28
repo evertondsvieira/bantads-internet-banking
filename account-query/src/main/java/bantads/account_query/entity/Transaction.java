@@ -7,6 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import bantads.account_query.enums.TransactionType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,8 +35,12 @@ public class Transaction {
   private Long destinationAccountId;
   private String destinationAccountName;
   private Double currentBalance;
+
+  @Enumerated(EnumType.STRING)
   private TransactionType transactionType;
+  
   private Double ammount;
+  
   @Column(name = "time", nullable = false, updatable = false)
   @CreationTimestamp
   private Date time;
