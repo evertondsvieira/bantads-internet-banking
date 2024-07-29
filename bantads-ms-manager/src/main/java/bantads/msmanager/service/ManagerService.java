@@ -33,6 +33,12 @@ public class ManagerService {
         return managerRepository.save(manager);
     }
 
+    public Manager deleteManager(Long id) {
+        Manager manager = managerRepository.findById(id).orElseThrow(() -> new ManagerNotFoundException("Manager not found"));
+        managerRepository.delete(manager);
+        return manager;
+    }
+
     public Optional<Manager> getManagerById(Long id) {
         return managerRepository.findById(id);
     }

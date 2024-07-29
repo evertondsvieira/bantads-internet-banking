@@ -84,6 +84,20 @@ public class ManagerController {
         }
     }
 
+    @DeleteMapping("/manager/{id}")
+    public ResponseEntity<ManagerDTO> deleteManager(@PathVariable Long id) {
+      try {
+          managerService.deleteManager(id);
+          return ResponseEntity.noContent().build();
+      } catch (ManagerNotFoundException e) {
+          logger.error("Manager not found: {}", e.getMessage());
+          return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+      } catch (Exception e) {
+          logger.error("Error deleting manager: {}", e.getMessage());
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+      }
+    }
+
     private ManagerDTO convertToDTO(Manager manager) {
         ManagerDTO managerDTO = new ManagerDTO();
         managerDTO.setName(manager.getName());
