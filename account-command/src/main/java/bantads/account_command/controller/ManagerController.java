@@ -31,7 +31,7 @@ public class ManagerController {
   @Autowired
   private ManagerService managerService;
 
-  private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
+  private static final Logger logger = LoggerFactory.getLogger(ManagerController.class);
 
   @GetMapping("/{cpf}")
   public ResponseEntity<ManagerDTO> getManager(@PathVariable String cpf){

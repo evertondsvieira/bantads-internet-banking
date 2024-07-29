@@ -32,8 +32,10 @@ public class Transaction {
   private Long id;
   private Long originAccountId;
   private String originAccountClientName;
+  private String originAccountClientCpf;
   private Long destinationAccountId;
-  private String destinationAccountName;
+  private String destinationAccountClientName;
+  private String destinationAccountClientCpf;
   private Double currentBalance;
 
   @Enumerated(EnumType.STRING)

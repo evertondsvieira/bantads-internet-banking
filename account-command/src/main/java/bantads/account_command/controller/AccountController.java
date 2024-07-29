@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bantads.account_command.dto.AccountDTO;
-import bantads.account_command.enums.Event;
 import bantads.account_command.exceptions.RecordDuplicationException;
 import bantads.account_command.exceptions.RecordNotFoundException;
-import bantads.account_command.publisher.RabbitMQProducer;
 import bantads.account_command.service.AccountService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
