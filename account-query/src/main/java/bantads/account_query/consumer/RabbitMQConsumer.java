@@ -6,12 +6,12 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import bantads.account_query.dto.AccountDTO;
-import bantads.account_query.entity.Account;
+import bantads.account_query.dto.TransactionDTO;
 import bantads.account_query.service.AccountService;
+import bantads.account_query.service.TransactionService;
 
 @Service
 public class RabbitMQConsumer {
@@ -20,6 +20,9 @@ public class RabbitMQConsumer {
 
   @Autowired
   private AccountService accountService;
+
+  @Autowired
+  private TransactionService transactionService;
 
   @Autowired 
   private ObjectMapper objectMapper;
@@ -45,6 +48,27 @@ public class RabbitMQConsumer {
       LOGGER.info(String.format("Account with id %d was created!", accountDTOUpdated.getId()));
     } catch (Exception e){
       LOGGER.info(String.format("Error -> %s", e.getMessage()));
+    }
+  }
+
+  @RabbitListener(queues = {"${rabbitmq.queue.transaction.queue.name}"})
+  public void consumeTransactionQueue(String transactionDTOMessage){
+    LOGGER.info("Received message -> %s", transactionDTOMessage.toString());
+    try{
+      TransactionDTO transactionDTO = objectMapper.readValue(transactionDTOMessage, TransactionDTO.class);
+      TransactionDTO transactionDTOCreated = transactionService.createTransaction(transactionDTO);
+      LOGGER.info(
+        String.format("Transaction with id %d was created. Type: %s; value: %.2f",
+          transactionDTOCreated.getId(),
+          transactionDTOCreated.getType(),
+          transactionDTOCreated.getAmmount())
+      );
+    }
+    catch (Exception e){
+      LOGGER.info(
+        String.format(
+          "Error when creating transaction -> %s", e.getMessage()
+      ));
     }
   }
 }

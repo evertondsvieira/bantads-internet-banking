@@ -5,6 +5,7 @@ import java.util.Date;
 import org.hibernate.annotations.CreationTimestamp;
 
 import bantads.account_command.enums.AccountSituation;
+import bantads.account_command.exceptions.OperationBlockedByBusinessRule;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -52,4 +53,41 @@ public class Account {
   @Column(name = "created_at", nullable = false, updatable = false)
   @CreationTimestamp
   private Date createdAt;
+
+  public Double deposit(Double ammount){
+    if(ammount < 0){
+      throw new OperationBlockedByBusinessRule(
+        String.format(
+          "Can't deposit a negative value (%.2f)", ammount
+        ));
+    }
+    if(ammount == 0){
+      throw new OperationBlockedByBusinessRule(
+        String.format("Ammount informed is zero"));
+    }
+    return this.balance += ammount;
+  }
+
+  public Double withdrawl(Double ammount){
+    if(ammount < 0){
+      throw new OperationBlockedByBusinessRule(
+        String.format(
+          "Can't withdraw a negative value (%.2f)", ammount
+        ));
+    }
+    if(ammount == 0){
+      throw new OperationBlockedByBusinessRule(
+        String.format("Ammount informed is zero"));
+    }
+    if(ammount > this.balance + this.limit){
+      throw new OperationBlockedByBusinessRule(
+        String.format(
+          "Ammount of %2.f is higher than balance + limit = %.2f + %.2f", 
+          ammount,
+          this.balance,
+          this.limit
+        ));
+    }
+    return this.balance -= ammount;
+  }
 }

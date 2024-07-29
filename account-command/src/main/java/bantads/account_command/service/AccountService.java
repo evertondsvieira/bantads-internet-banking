@@ -107,7 +107,7 @@ public class AccountService {
     return account.getSalary()/2;
   }
 
-  private void saveAccountTimeline(Event event, Account account){
+  public void saveAccountTimeline(Event event, Account account){
     AccountTimeline accountTimeline = modelMapper.map(account, AccountTimeline.class);
     accountTimeline.setAccountEvent(event);
     accountTimelineRepo.saveAndFlush(accountTimeline);
