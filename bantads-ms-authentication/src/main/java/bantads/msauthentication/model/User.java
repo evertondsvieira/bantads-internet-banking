@@ -15,16 +15,19 @@ public class User implements Serializable{
 
     private String role;
 
+    private String salt;
+
     public User() {
         super();
     };
 
-    public User(String id, String login, String password, String role) {
+    public User(String id, String login, String password, String role, String salt) {
         super();
         this.id = id;
         this.login = login;
         this.password = password;
         this.role = role;
+        this.salt = salt;
     }
 
     public String getId() {
@@ -57,5 +60,13 @@ public class User implements Serializable{
 
     public void setRole(String role) {
         this.role = role;
+    }
+    
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }    
 }

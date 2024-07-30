@@ -7,7 +7,6 @@ public class ClientDTO {
     private AddressDTO address;
     private String phone;
     private Double salary;
-    private String password; 
 
     public String getName() {
         return name;
@@ -44,11 +43,5 @@ public class ClientDTO {
     }
     public void setSalary(Double salary) {
         this.salary = salary;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

@@ -7,17 +7,19 @@ public class UserDTO implements Serializable {
     private String login;
     private String password;
     private String role;
+    private String salt;
 
     public UserDTO() {
         super();
     }
 
-    public UserDTO(String id, String login, String password, String role) {
+    public UserDTO(String id, String login, String password, String role, String salt) {
         super();
         this.id = id;
         this.login = login;
         this.password = password;
         this.role = role;
+        this.salt = salt;
     }
 
     public String getId() {
@@ -50,5 +52,13 @@ public class UserDTO implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

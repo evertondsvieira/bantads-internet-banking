@@ -13,6 +13,7 @@ import bantads.msauthentication.model.User;
 import bantads.msauthentication.dto.AuthResponse;
 import bantads.msauthentication.dto.UserDTO;
 import bantads.msauthentication.repository.UserRepository;
+import bantads.msauthentication.services.GeneratePassword;
 
 @CrossOrigin
 @RestController
@@ -64,38 +65,54 @@ public class UserController {
 
     @PostMapping
     ResponseEntity<?> inserir(@RequestBody UserDTO userDTO) {
+        try {
+            // Verifica se já existe um usuário com o login fornecido
+            User existingUser = repo.findByLogin(userDTO.getLogin());
+            if (existingUser != null) {
+                // Retorna um código de status 409 (Conflict) se o usuário já existir
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Usuario com este Login ja cadastrado no sistema.");
+            }
+            GeneratePassword passwordGenerator = new GeneratePassword();
+            String salt = passwordGenerator.generateSalt();
+            String hashedPassword = passwordGenerator.hashPassword(userDTO.getPassword(), salt);
+            userDTO.setSalt(salt);
+            userDTO.setPassword(hashedPassword);
 
-        // Verifica se já existe um usuário com o login fornecido
-        User existingUser = repo.findByLogin(userDTO.getLogin());
-        if (existingUser != null) {
-            // Retorna um código de status 409 (Conflict) se o usuário já existir
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Usuario com este Login ja cadastrado no sistema.");
+            // salva a Entidade convertida do DTO
+            repo.save(mapper.map(userDTO, User.class));
+
+            // busca o usuario com o login inserido
+            User usu = repo.findByLogin(userDTO.getLogin());
+
+            // retorna o DTO equivalente à entidade
+            return ResponseEntity.status(HttpStatus.CREATED).body(mapper.map(usu, UserDTO.class));
+        } catch(Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro no processamento do cadastro do usuario.");            
         }
-
-        // salva a Entidade convertida do DTO
-        repo.save(mapper.map(userDTO, User.class));
-
-        // busca o usuario com o login inserido
-        User usu = repo.findByLogin(userDTO.getLogin());
-
-        // retorna o DTO equivalente à entidade
-        return ResponseEntity.status(HttpStatus.CREATED).body(mapper.map(usu, UserDTO.class));
     }
 
     @PostMapping("/login")
     ResponseEntity<AuthResponse> autenticar(@RequestBody UserDTO userDTO) {
-        // Busca o usuário com login e senha informados
-        User usu = repo.findByLoginAndPassword(userDTO.getLogin(), userDTO.getPassword());
+        try {
+            User usu = repo.findByLogin(userDTO.getLogin());
+            GeneratePassword passwordGenerator = new GeneratePassword();
+            String hashedPassword = passwordGenerator.hashPassword(userDTO.getPassword(), usu.getSalt());
 
-        if (usu != null && usu.getPassword() != null) {
-            // Usuário encontrado, retorna com código 200 (OK)
-            UserDTO usuDTO = mapper.map(usu, UserDTO.class);
-            AuthResponse response = new AuthResponse(true, usuDTO);
-            return ResponseEntity.ok(response);
-        } else {
-            // Usuário não encontrado, retorna com código 401 (Unauthorized)
+            if (hashedPassword.equals(usu.getPassword()) && usu != null && usu.getPassword() != null) {
+                // Usuário encontrado, retorna com código 200 (OK)
+                UserDTO usuDTO = mapper.map(usu, UserDTO.class);
+                AuthResponse response = new AuthResponse(true, usuDTO);
+                return ResponseEntity.ok(response);
+            } else {
+                // Autenticação falhou, retorna com código 401 (Unauthorized)
+                AuthResponse response = new AuthResponse(false, null);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
             AuthResponse response = new AuthResponse(false, null);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);            
         }
     }
 
