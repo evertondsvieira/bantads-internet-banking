@@ -58,7 +58,7 @@ const authServiceProxy = httpProxy('http://localhost:3004', {
             const login = objBody.user.login;
             const role = objBody.user.role;
             const token = jwt.sign({ login, role }, process.env.SECRET, {
-                expiresIn: 300 //expira em 5 min
+                expiresIn: 600 //expira em 5 min
             });
             userRes.status(200);
             return { auth: true, token: token, data: objBody };

@@ -1,6 +1,8 @@
 package bantads.saga_register.dto;
 
+import java.io.Serializable;
 import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,13 +16,13 @@ import bantads.saga_register.dto.enums.AccountSituation;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AccountDTO {
+public class AccountDTO implements Serializable{
   private Long id;
-  private Double limit = 0.0;
-  private Double balance = 0.0;
-  private Double salary = 0.0;
+  private Double limit;
+  private Double balance;
+  private Double salary;
   private AccountSituation situation;
   private ManagerDTO manager;
   private ClientAccountDTO client;
-  private Date criatedAt;
+  private Date createdAt;
 }

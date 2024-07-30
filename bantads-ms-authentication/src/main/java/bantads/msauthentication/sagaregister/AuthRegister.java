@@ -8,12 +8,15 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.mail.*;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import bantads.msauthentication.dto.UserDTO;
 import bantads.msauthentication.repository.UserRepository;
 import bantads.msauthentication.model.User;
 import bantads.msauthentication.sagaregister.response.ErrorMessage;
 import bantads.msauthentication.sagaregister.response.SuccessMessage;
+import bantads.msauthentication.services.GeneratePassword;
 
 @Service
 public class AuthRegister {
@@ -30,7 +33,17 @@ public class AuthRegister {
     @Autowired
     private ModelMapper mapper;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
     private ObjectMapper objectMapper = new ObjectMapper();
+
+    private SimpleMailMessage createTemplateMessage() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("bantads@email.com");
+        message.setSubject("BANTADS - Cadastro realizado com sucesso");
+        return message;
+    }
 
     @RabbitListener(queues = "authRequestQueue")
     public void createAuth(String mensagem) {
@@ -44,6 +57,16 @@ public class AuthRegister {
 
             User existingUser = userRepository.findByLogin(userDTO.getLogin());
             if (existingUser == null) {
+                GeneratePassword passwordGenerator = new GeneratePassword();
+                String pass = passwordGenerator.generateRandomPassword();
+                String salt = passwordGenerator.generateSalt();
+                String hashedPassword = passwordGenerator.hashPassword(pass, salt);
+                SimpleMailMessage msg = createTemplateMessage();
+		        msg.setTo(userDTO.getLogin());
+		        msg.setText("Prezado(a) Cliente, Cadastro realizado com sucesso. Sua senha de acesso é: " + pass);
+                this.mailSender.send(msg);
+                userDTO.setSalt(salt);
+                userDTO.setPassword(hashedPassword);
                 User createdUser = mapper.map(userDTO, User.class);
                 userRepository.save(createdUser);
                 UserDTO createdUserDTO = mapper.map(createdUser, UserDTO.class);

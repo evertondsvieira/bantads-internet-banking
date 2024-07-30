@@ -57,7 +57,6 @@ public class SagaClientService {
                 System.out.println(clientStr);
                 UserDTO userDTO = new UserDTO();
                 userDTO.setLogin(clientDTO.getEmail());
-                userDTO.setPassword(clientDTO.getPassword());
                 userDTO.setRole("CLIENT");
 
                 System.out.println("SagaClientService envia UsuarioDTO para SagaAuthService"); 
