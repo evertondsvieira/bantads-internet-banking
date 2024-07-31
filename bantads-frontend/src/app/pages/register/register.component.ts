@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { NumericoDirective } from '../../modules/shared/directives/numerico.directive';
 import { Client } from '../../models/client.model';
-import { ClientService } from '../../services/client/client.service';
 import { Address } from '../../models/address.model';
 import { Situation } from '../../models/enum/situation.enum';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user/user.service';
 
 interface IStatusMessage {
   status: boolean;
@@ -21,7 +21,9 @@ interface IStatusMessage {
   viewProviders: [NumericoDirective, CurrencyPipe],
 })
 export class RegisterComponent {
-  client: Client = new Client(0, '', '', '', new Address('', '', 0, '', '', '', ''), '', 0, Situation.OPEN)
+  address: Address = new Address('', '', 0, '', '', '', '').toAddressObject()
+  client: Client = new Client(0, '', '', '', this.address, '', 0, Situation.PENDING).toClientObject()
+  
   public statusMessage: IStatusMessage = {
     status: false,
     message: '',
@@ -29,10 +31,12 @@ export class RegisterComponent {
     icon: '',
   };
 
-  constructor(private clientService: ClientService, private router: Router) {} 
+  constructor(private userService: UserService, private router: Router) {}
 
-  addClient(client: Client) {
-    this.clientService.addClient(client).subscribe({
+  addClient(): void {
+    const clientData = this.client
+
+    this.userService.register(clientData).subscribe({
       next: (response) => {
         console.log("Cliente criado com sucesso!", response)
         this.statusMessage = {
