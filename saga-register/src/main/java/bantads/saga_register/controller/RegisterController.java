@@ -1,6 +1,7 @@
 package bantads.saga_register.controller;
 
 import bantads.saga_register.dto.ClientDTO;
+import bantads.saga_register.dto.ResponseDTO;
 import bantads.saga_register.service.SagaClientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,16 @@ public class RegisterController {
     private SagaClientService sagaClientService;
     
     @PostMapping("/register")
-    public ResponseEntity<String> registerClient(@RequestBody ClientDTO clientDTO) {
-        sagaClientService.createClient(clientDTO);
+    public ResponseEntity<Object> registerClient(@RequestBody ClientDTO clientDTO) {
         try {
-            return ResponseEntity.ok("Solicitação de cadastro recebida com sucesso");
+            sagaClientService.createClient(clientDTO);
+            return ResponseEntity.ok(
+                new ResponseDTO("Solicitação de cadastro recebida com sucesso", true)
+            );
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                new ResponseDTO("Erro no processamento da solicitação de cadastro", false)
+            );
         }
-        catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro no processamento da solicitação de cadastro");
-        }
-    }    
+    }
 }

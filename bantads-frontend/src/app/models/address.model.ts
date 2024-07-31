@@ -80,4 +80,16 @@ export class Address {
   public set state(value: string) {
     this._state = value;
   }
+
+  public toAddressObject(): any {
+    return {
+      type: this._type,
+      street: this._street,
+      number: this._number,
+      complement: this._complement,
+      cep: this._cep,
+      city: this._city,
+      state: this._state
+    };
+  }
 }
