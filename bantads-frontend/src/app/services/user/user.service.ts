@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Auth } from '../../models/auth.model';
 import { User } from '../../models/user.model';
+import { Client } from '../../models/client.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,31 +20,31 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  public getUsers(): Observable<User[]>{
+  public getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.BASE_URL,
-                                          this.httpOptions);
+      this.httpOptions);
   }
-  
-  public buscarPorId(id: number): Observable<User>{
+
+  public buscarPorId(id: number): Observable<User> {
     return this.http.get<User>(this.BASE_URL + id,
-                                        this.httpOptions);
+      this.httpOptions);
   }
 
-  public inserir(user: User){
-    return this.http.post<User>(this.BASE_URL+"/cadastro",
-                                   JSON.stringify(user),
-                                   this.httpOptions)
+  public register(user: Client) {
+    return this.http.post<Client>(this.BASE_URL + "/register",
+      JSON.stringify(user),
+      this.httpOptions)
   }
 
-  public remover(id: number): Observable<User>{
+  public remover(id: number): Observable<User> {
     return this.http.delete<User>(this.BASE_URL + `/${id}`,
-                                           this.httpOptions)
+      this.httpOptions)
   }
 
-  public alterar(user: User): Observable<User>{
+  public alterar(user: User): Observable<User> {
     return this.http.put<User>(this.BASE_URL + `/${user.id}`,
-                                        JSON.stringify(user),
-                                        this.httpOptions)
+      JSON.stringify(user),
+      this.httpOptions)
   }
 
   public login(auth: Auth): Observable<User> {
@@ -52,10 +53,10 @@ export class UserService {
         map(response => {
           const userData = response.data.user;
           const token = response.token; // Extrai o token da resposta
-  
+
           // Armazena o token em localStorage
           localStorage.setItem('authToken', token);
-  
+
           // Cria e retorna o objeto User
           return new User(
             undefined,

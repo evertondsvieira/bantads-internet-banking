@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../models/client.model';
 import { Address } from '../../../models/address.model';
 import { ClientService } from '../../../services/client/client.service';
@@ -10,11 +10,16 @@ import { Situation } from '../../../models/enum/situation.enum';
   templateUrl: './client-update-profile.component.html',
   styleUrl: './client-update-profile.component.css'
 })
-export class ClientUpdateProfileComponent {
-  client: Client = new Client(0, '', '', '', new Address('', '', 0, '', '', '', ''), '', 0, Situation.OPEN)
-  valueVisible: boolean = false
-  saldo: number = 0
-  clientId: number = 0
+export class ClientUpdateProfileComponent implements OnInit { 
+  address: Address = new Address('', '', 0, '', '', '', '');
+  client: Client = new Client(0, '', '', '', this.address, '', 0, Situation.PENDING);
+
+  clientData: any;
+  addressData: any;
+
+  valueVisible: boolean = false;
+  saldo: number = 0;
+  clientId: number = 0;
 
   constructor(
     private clientService: ClientService,
@@ -26,10 +31,10 @@ export class ClientUpdateProfileComponent {
       const idParam = params.get("id")
 
       if (idParam && !isNaN(+idParam)) {
-        this.clientId = +params.get('id')!
+        this.clientId = +idParam
         this.loadClient()
       } else {
-        console.log("Id do cliente é invalido")
+        console.log("Id do cliente é inválido")
       }
     })
   }
@@ -37,8 +42,11 @@ export class ClientUpdateProfileComponent {
   loadClient(): void {
     if (this.clientId) {
       this.clientService.getClientById(this.clientId.toString()).subscribe({
-        next: (client) => {
+        next: (client: Client) => {
           this.client = client
+          this.address = client.address
+          this.clientData = this.client.toClientObject()
+          this.addressData = this.address.toAddressObject()
           console.log('Cliente carregado com sucesso', this.client)
         },
         error: (error) => {
@@ -52,20 +60,20 @@ export class ClientUpdateProfileComponent {
 
   onSubmit(): void {
     if (this.client.id) {
-      this.clientService.updateClient(this.client).subscribe({
-        next: (updatedClient) => {
+      this.clientService.updateClient(this.client.toClientObject()).subscribe({
+        next: (updatedClient: Client) => {
           console.log('Cliente atualizado com sucesso!', updatedClient)
         },
         error: (error) => {
           console.error('Erro ao atualizar cliente', error)
         }
-      })
+      });
     } else {
       console.error('Cliente não encontrado ou não definido')
     }
   }
 
   toggleValue(): void {
-    this.valueVisible = !this.valueVisible
+    this.valueVisible = !this.valueVisible;
   }
 }
