@@ -1,43 +1,44 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms'; 
-import { ClientModule } from './modules/client/client.module'
+import { AppComponent } from './app.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { MaskComponent } from './components/mask/mask.component';
+import { ClientModule } from './modules/client/client.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { AccountModule } from './modules/account/account.module';
 import { SharedModule } from './modules/shared/shared.module';
-import { CommonModule } from '@angular/common';
-import { BrowserModule, platformBrowser } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
 import { ManagerModule } from './modules/manager/manager.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { MaskComponent } from './components/mask/mask.component';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminModule } from './modules/admin/admin.module';
 import { ModalModule } from './components/modal/modal.module';
+import { AuthInterceptor } from './services/auth/auth.interceptor';
 
 @NgModule({
   declarations: [AppComponent, NavBarComponent, MaskComponent],
   imports: [
-    MatIconModule,
     BrowserModule,
     CommonModule,
+    HttpClientModule,
+    FormsModule,
+    MatIconModule,
+    NgbModule,
+    AppRoutingModule,
     ClientModule,
     ManagerModule,
     AdminModule,
     AuthModule,
     AccountModule,
     SharedModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgbModule,
-    ModalModule,
-    FormsModule
+    ModalModule
   ],
-  providers: [HttpClientModule],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-platformBrowser().bootstrapModule(AppModule);
