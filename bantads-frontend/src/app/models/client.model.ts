@@ -94,4 +94,17 @@ export class Client {
   public set situation(value: Situation) {
     this._situation = value;
   }
+  
+  public toClientObject(): any {
+    return {
+      id: this._id,
+      name: this._name,
+      email: this._email,
+      cpf: this._cpf,
+      address: this._address, 
+      phone: this._phone,
+      salary: this._salary,
+      situation: this._situation
+    };
+  }
 }
