@@ -1,4 +1,3 @@
-
 package bantads.msmanager.entity;
 
 import jakarta.persistence.Column;
