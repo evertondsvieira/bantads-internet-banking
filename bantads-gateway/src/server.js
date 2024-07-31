@@ -127,7 +127,8 @@ const sagaManagerProxy = httpProxy('http://localhost:3006');
 // Requisição de inserção de gerente (Sem autenticação)
 app.post('/manager', (req, res, next) => {
     sagaManagerProxy(req, res, next);
-  
+});
+
 // Requisições aos serviços, já autenticados
   
 // Requisições para account
