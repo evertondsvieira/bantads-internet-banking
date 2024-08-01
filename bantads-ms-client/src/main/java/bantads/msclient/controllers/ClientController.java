@@ -90,11 +90,14 @@ public class ClientController {
 
     private ClientDTO convertToDTO(Client client) {
         ClientDTO clientDTO = new ClientDTO();
+        clientDTO.setId(client.getId()); 
         clientDTO.setName(client.getName());
         clientDTO.setCpf(client.getCpf());
         clientDTO.setEmail(client.getEmail());
         clientDTO.setPhone(client.getPhone());
         clientDTO.setSalary(client.getSalary());
+        clientDTO.setSituation(client.getSituation());
+        clientDTO.setRole(client.getRole());
 
         Address address = client.getAddress();
         if (address != null) {

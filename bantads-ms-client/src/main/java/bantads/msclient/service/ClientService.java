@@ -32,7 +32,7 @@ public class ClientService {
     public Client updateClient(Long id, UpdateClientDTO updateClientDTO) {
         Client client = clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException("Client not found"));
 
-        BeanUtils.copyProperties(updateClientDTO, client, "password");
+        BeanUtils.copyProperties(updateClientDTO, client);
 
         if (updateClientDTO.getSalary() != null) {
             client.setSalary(updateClientDTO.getSalary());
