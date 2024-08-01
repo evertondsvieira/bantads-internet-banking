@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable, of, from } from 'rxjs';
-import { switchMap, tap, catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { Client } from '../../models/client.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  private tokenSubject = new BehaviorSubject<string | null>(null)
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const token = localStorage.getItem('authToken')
+    this.tokenSubject.next(token)
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken = localStorage.getItem('authToken');
+    const authToken = this.tokenSubject.value
 
     if (authToken) {
       console.log('Token encontrado:', authToken);
@@ -30,6 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
             const decodedToken: any = jwtDecode(token)
 
             localStorage.setItem('authToken', token)
+            this.tokenSubject.next(token)
 
             const email = decodedToken.login
             this.getUserByEmail(email).subscribe(user => {
