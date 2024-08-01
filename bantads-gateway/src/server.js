@@ -114,6 +114,24 @@ app.post('/logout', function (req, res) {
     res.json({ auth: false, token: null });
 });
 
+const sagaClientProxy = httpProxy('http://localhost:3005');
+
+// Requisição de autocadastro de cliente (Sem autenticação)
+app.post('/register', (req, res, next) => {
+    sagaClientProxy(req, res, next);
+});
+
+const sagaManagerProxy = httpProxy('http://localhost:3006');
+
+// Requisição de inserção de gerente (Sem autenticação)
+app.post('/manager', (req, res, next) => {
+    sagaManagerProxy(req, res, next);
+});
+
+// Requisições aos serviços, já autenticados
+  
+// Requisições para account
+
 const accountServiceProxy = httpProxy('http://localhost:3001', {
     changeOrigin: true,
     proxyReqPathResolver: function (req) {
@@ -122,13 +140,11 @@ const accountServiceProxy = httpProxy('http://localhost:3001', {
     },
 });
 
-const clientServiceProxy = httpProxy('http://localhost:3002', {
-    changeOrigin: true,
-    proxyReqPathResolver: function (req) {
-        return req.url.replace(/^\/client/, '/api/client');
-    },
+app.get('/account', verifyJWT, (req, res, next) => {
+    accountServiceProxy(req, res, next);
 });
-
+  
+// Requisições para manager
 
 const managerServiceProxy = httpProxy('http://localhost:3003', {
     changeOrigin: true,
@@ -138,23 +154,18 @@ const managerServiceProxy = httpProxy('http://localhost:3003', {
     },
 });
 
-const sagasServiceProxy = httpProxy('http://localhost:3005');
-
-// Requisição de autocadastro de cliente (Sem autenticação)
-app.post('/register', (req, res, next) => {
-    sagasServiceProxy(req, res, next);
-});
-
-// Requisições aos serviços, já autenticados
-app.get('/account', verifyJWT, (req, res, next) => {
-    accountServiceProxy(req, res, next);
-});
-
 app.get('/manager', verifyJWT, verifyRole(['ADMIN', 'MANAGER']), (req, res, next) => {
     managerServiceProxy(req, res, next);
 });
 
 // Requisições para o cliente
+
+const clientServiceProxy = httpProxy('http://localhost:3002', {
+    changeOrigin: true,
+    proxyReqPathResolver: function (req) {
+        return req.url.replace(/^\/client/, '/api/client');
+    },
+});
 
 app.get('/client', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);

@@ -23,6 +23,7 @@ services:
       - postgres-db
     networks:
       - bantads-network
+    restart: on-failure
 
 networks:
   bantads-network:

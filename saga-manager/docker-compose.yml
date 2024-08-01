@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  saga-manager:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: saga-manager
+    ports:
+      - "3006:3006"
+    depends_on:
+      - rabbit-mq
+    networks:
+      - bantads-network
+
+networks:
+  bantads-network:
+    driver: bridge

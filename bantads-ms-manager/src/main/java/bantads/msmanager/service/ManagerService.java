@@ -18,8 +18,6 @@ public class ManagerService {
     @Autowired
     private ManagerRepository managerRepository;
 
-    @Autowired
-
     public Manager createManager(Manager newManager) {
         if (managerRepository.findByCpf(newManager.getCpf()).isPresent()) {
             throw new ManagerAlreadyExistsException("Manager with CPF already exists");

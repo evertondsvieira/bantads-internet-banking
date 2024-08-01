@@ -19,7 +19,8 @@
       "mainClass": "bantads.msclient.MsClientApplication",
       "projectName": "ms-client",
       "args": "",
-      "envFile": "${workspaceFolder}/.env"
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=33419 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=ms-client"
     },
     {
       "type": "java",
@@ -38,7 +39,8 @@
       "mainClass": "bantads.msmanager.MsManagerApplication",
       "projectName": "ms-manager",
       "args": "",
-      "envFile": "${workspaceFolder}/.env"
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=45615 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=ms-manager"
     },
     {
       "type": "java",
@@ -68,6 +70,16 @@
       "cwd": "${workspaceFolder}",
       "mainClass": "bantads.account_query.AccountQueryApplication",
       "projectName": "account-query",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-SagaManagerApplication<saga-manager>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "bantads.saga_manager.SagaManagerApplication",
+      "projectName": "saga-manager",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
     }
