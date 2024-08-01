@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import bantads.msclient.dto.AddressDTO;
 import bantads.msclient.dto.ClientDTO;
+import bantads.msclient.dto.ClientSagaDTO;
 import bantads.msclient.service.ClientService;
 import bantads.msclient.entity.Address;
 import bantads.msclient.entity.Client;
@@ -57,7 +58,8 @@ public class ClientRegister {
             else {
                 Client createdClient = clientService.createClient(convertToEntity(clientDTO));
                 ClientDTO createdClientDTO = convertToDTO(createdClient);
-                String clientStr = objectMapper.writeValueAsString(createdClientDTO);
+                ClientSagaDTO clientSagaDTO = new ClientSagaDTO(createdClientDTO.getName(), createdClientDTO.getEmail(), createdClientDTO.getCpf(), createdClientDTO.getAddress(), createdClientDTO.getPhone(), createdClientDTO.getSalary());
+                String clientStr = objectMapper.writeValueAsString(clientSagaDTO);
                 SuccessMessage successMessage = new SuccessMessage(clientStr);
                 String successStr = objectMapper.writeValueAsString(successMessage);
                 template.convertAndSend(senderTopic.getName(), "clientReply", successStr);
