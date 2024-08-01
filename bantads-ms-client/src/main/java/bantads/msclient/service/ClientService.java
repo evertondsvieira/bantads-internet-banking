@@ -32,7 +32,7 @@ public class ClientService {
     public Client updateClient(Long id, UpdateClientDTO updateClientDTO) {
         Client client = clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException("Client not found"));
 
-        BeanUtils.copyProperties(updateClientDTO, client, "password");
+        BeanUtils.copyProperties(updateClientDTO, client);
 
         if (updateClientDTO.getSalary() != null) {
             client.setSalary(updateClientDTO.getSalary());
@@ -64,5 +64,9 @@ public class ClientService {
 
     public List<Client> getClientsBySituation(String situation) {
         return clientRepository.findBySituation(situation);
+    }
+
+    public Client getClientByEmail(String email) {
+        return clientRepository.findByEmail(email).orElseThrow(() -> new ClientNotFoundException("Client with email not found"));
     }
 }

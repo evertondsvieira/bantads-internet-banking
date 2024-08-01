@@ -1,13 +1,22 @@
 package bantads.msclient.dto;
 
 public class ClientDTO {
+    private Long id;
     private String name;
     private String email;
     private String cpf;
     private AddressDTO address;
     private String phone;
     private Double salary;
+    private String situation;
+    private String role;
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
@@ -43,5 +52,17 @@ public class ClientDTO {
     }
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+    public String getSituation() {
+        return situation;
+    }
+    public void setSituation(String situation) {
+        this.situation = situation;
+    }
+    public String getRole() {
+        return role;
+    }
+    public void setRole(String role) {
+        this.role = role;
     }
 }

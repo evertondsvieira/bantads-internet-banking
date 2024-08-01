@@ -88,13 +88,30 @@ public class ClientController {
         }
     }
 
+    @GetMapping("/client/email/{email}")
+    public ResponseEntity<ClientDTO> getClientByEmail(@PathVariable String email) {
+        try {
+            Client client = clientService.getClientByEmail(email);
+            return ResponseEntity.ok(convertToDTO(client));
+        } catch (ClientNotFoundException e) {
+            logger.error("Client with email {} not found: {}", email, e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } catch (Exception e) {
+            logger.error("Error fetching client by email: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }   
+
     private ClientDTO convertToDTO(Client client) {
         ClientDTO clientDTO = new ClientDTO();
+        clientDTO.setId(client.getId()); 
         clientDTO.setName(client.getName());
         clientDTO.setCpf(client.getCpf());
         clientDTO.setEmail(client.getEmail());
         clientDTO.setPhone(client.getPhone());
         clientDTO.setSalary(client.getSalary());
+        clientDTO.setSituation(client.getSituation());
+        clientDTO.setRole(client.getRole());
 
         Address address = client.getAddress();
         if (address != null) {

@@ -11,8 +11,8 @@ import { Situation } from '../../../models/enum/situation.enum';
   styleUrl: './client-update-profile.component.css'
 })
 export class ClientUpdateProfileComponent implements OnInit { 
-  address: Address = new Address('', '', 0, '', '', '', '');
-  client: Client = new Client(0, '', '', '', this.address, '', 0, Situation.PENDING);
+  address: Address = new Address('', '', 0, '', '', '', '').toAddressObject()
+  client: Client = new Client(0, '', '', '', this.address, '', 0, Situation.PENDING).toClientObject()
 
   clientData: any;
   addressData: any;
@@ -41,12 +41,12 @@ export class ClientUpdateProfileComponent implements OnInit {
 
   loadClient(): void {
     if (this.clientId) {
-      this.clientService.getClientById(this.clientId.toString()).subscribe({
+      this.clientService.getClientById(this.clientId).subscribe({
         next: (client: Client) => {
           this.client = client
           this.address = client.address
-          this.clientData = this.client.toClientObject()
-          this.addressData = this.address.toAddressObject()
+          this.clientData = this.client
+          this.addressData = this.address
           console.log('Cliente carregado com sucesso', this.client)
         },
         error: (error) => {
@@ -60,7 +60,7 @@ export class ClientUpdateProfileComponent implements OnInit {
 
   onSubmit(): void {
     if (this.client.id) {
-      this.clientService.updateClient(this.client.toClientObject()).subscribe({
+        this.clientService.updateClient(this.client).subscribe({
         next: (updatedClient: Client) => {
           console.log('Cliente atualizado com sucesso!', updatedClient)
         },
@@ -71,6 +71,7 @@ export class ClientUpdateProfileComponent implements OnInit {
     } else {
       console.error('Cliente não encontrado ou não definido')
     }
+    console.log(this.client.id)
   }
 
   toggleValue(): void {

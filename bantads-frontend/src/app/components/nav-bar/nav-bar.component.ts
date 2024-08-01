@@ -17,13 +17,15 @@ interface INavItems {
 export class NavBarComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
+  userId = localStorage.getItem('userId');
+
   navItems: INavItems[] = [
     { name: 'Início', icon: 'home', link: 'home', role: 'CLIENT' },
     { name: 'Saldo Atual', icon: 'account_balance', link: 'current/balance', role: 'CLIENT' },
     { name: 'Depósito', icon: 'arrow_upward', link: 'deposit', role: 'CLIENT' },
     { name: 'Extrato', icon: 'description', link: 'statement', role: 'CLIENT' },
     { name: 'Transferência', icon: 'swap_horiz', link: 'transfer', role: 'CLIENT' },
-    { name: 'Atualizar Perfil', icon: 'person', link: 'update/profile', role: 'CLIENT' },
+    { name: 'Atualizar Perfil', icon: 'person', link: `update/profile/${this.userId}`, role: 'CLIENT' },
     { name: 'Retirada', icon: 'arrow_downward', link: 'withdrawl', role: 'CLIENT' },
     { name: 'Início do Gerente', icon: 'business', link: 'manager/home', role: 'MANAGER' },
     { name: 'Consultar Todos os Clientes', icon: 'people', link: 'manager/consult/all', role: 'MANAGER' },
