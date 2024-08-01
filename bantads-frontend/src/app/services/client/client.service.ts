@@ -31,11 +31,12 @@ export class ClientService {
   }
 
   public updateClient(client: Client): Observable<Client> {
-    return this.http.put<Client>(`${this.BASE_URL}/${client.id}`, client);
+    const { id, cpf, ...clientToUpdate } = client;
+    return this.http.put<Client>(`${this.BASE_URL}/${client.id}`, clientToUpdate);
   }
 
-  public getClientById(query: string): Observable<Client> {
-    return this.http.get<Client>(`${this.BASE_URL}/${query}`);
+  public getClientById(id: Client['id']): Observable<Client> {
+    return this.http.get<Client>(`${this.BASE_URL}/${id}`);
   }
 
   public addClient(client: Client): Observable<Client> {
