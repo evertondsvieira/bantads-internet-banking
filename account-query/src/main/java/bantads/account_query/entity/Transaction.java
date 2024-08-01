@@ -45,5 +45,5 @@ public class Transaction {
   
   @Column(name = "time", nullable = false, updatable = false)
   @CreationTimestamp
-  private Date time;
+  private Date createdAt;
 }
