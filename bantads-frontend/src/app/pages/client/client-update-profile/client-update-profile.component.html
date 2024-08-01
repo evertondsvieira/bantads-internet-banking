@@ -27,7 +27,7 @@
       </div>
     </div>
     <div>
-      <div class="card-body">
+      <div class="card-body" *ngIf="client && client.address">
         <form (ngSubmit)="onSubmit()" #clientForm="ngForm">
           <div class="row g-2">
             <div class="col-lg-2 mb-3">
