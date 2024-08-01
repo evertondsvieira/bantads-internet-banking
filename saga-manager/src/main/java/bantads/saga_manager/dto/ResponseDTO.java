@@ -1,30 +1,30 @@
 package bantads.saga_manager.dto;
 
 public class ResponseDTO {
-    private boolean managerCreated;
-    private ManagerDTO manager;
+    private boolean solicitacaoRecebida;
+    private String mensagem;
     
     public ResponseDTO() {
     }
 
-    public ResponseDTO(boolean managerCreated, ManagerDTO manager) {
-        this.managerCreated = managerCreated;
-        this.manager = manager;
+    public ResponseDTO(boolean solicitacaoRecebida, String mensagem) {
+        this.solicitacaoRecebida = solicitacaoRecebida;
+        this.mensagem = mensagem;
     }
 
-    public boolean isCreated() {
-        return managerCreated;
+    public boolean solicitacaoRecebida() {
+        return solicitacaoRecebida;
     }
 
-    public void setManagerCreated(boolean managerCreated) {
-        this.managerCreated = managerCreated;
+    public void setSolicitacaoRecebida(boolean solicitacaoRecebida) {
+        this.solicitacaoRecebida = solicitacaoRecebida;
     }
 
-    public ManagerDTO getManager() {
-        return manager;
+    public String getMensagem() {
+        return mensagem;
     }
 
-    public void setManager(ManagerDTO manager) {
-        this.manager = manager;
+    public void setMensagem (String mensagem) {
+        this.mensagem = mensagem;
     }
 }
