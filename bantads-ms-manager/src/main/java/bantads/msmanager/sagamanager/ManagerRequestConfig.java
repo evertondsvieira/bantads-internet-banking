@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ManagerInsertRequestConfig {
+public class ManagerRequestConfig {
     @Bean
     public TopicExchange receiverManagerTopic() {
         return new TopicExchange("sagaManagerRequest");
@@ -22,6 +22,16 @@ public class ManagerInsertRequestConfig {
     @Bean
     public Binding managerInsertRequestBinding(TopicExchange receiverManagerTopic, Queue managerInsertRequestQueue) {
         return BindingBuilder.bind(managerInsertRequestQueue).to(receiverManagerTopic).with("managerInsertRequest");
+    }
+
+    @Bean
+    public Queue managerDeleteRequestQueue() {
+        return new Queue("managerDeleteRequestQueue");
+    }
+
+    @Bean
+    public Binding managerDeleteRequestBinding(TopicExchange receiverManagerTopic, Queue managerDeleteRequestQueue) {
+        return BindingBuilder.bind(managerDeleteRequestQueue).to(receiverManagerTopic).with("managerDeleteRequest");
     }
 
 }

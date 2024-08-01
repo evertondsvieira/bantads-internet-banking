@@ -6,11 +6,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import bantads.saga_manager.dto.ManagerAccountDTO;
-import bantads.saga_manager.response.ErrorMessage;
-import bantads.saga_manager.response.SuccessMessage;
 
 @Service
 public class AccountService {
