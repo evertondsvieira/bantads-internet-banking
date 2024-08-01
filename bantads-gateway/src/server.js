@@ -58,7 +58,7 @@ const authServiceProxy = httpProxy('http://localhost:3004', {
             const login = objBody.user.login;
             const role = objBody.user.role;
             const token = jwt.sign({ login, role }, process.env.SECRET, {
-                expiresIn: 600 //expira em 5 min
+                expiresIn: 10000000000000000000
             });
             userRes.status(200);
             userRes.setHeader('Content-Type', 'application/json');
@@ -94,7 +94,6 @@ function verifyJWT(req, res, next) {
     });
 }
 
-
 function verifyRole(requiredRoles) {
     return function (req, res, next) {
         console.log('Papel do usuário:', req.userRole);
@@ -126,8 +125,7 @@ const accountServiceProxy = httpProxy('http://localhost:3001', {
 const clientServiceProxy = httpProxy('http://localhost:3002', {
     changeOrigin: true,
     proxyReqPathResolver: function (req) {
-        // Modifica o caminho da requisição para /
-        return '/client';
+        return req.url.replace(/^\/client/, '/api/client');
     },
 });
 
@@ -162,7 +160,7 @@ app.get('/client', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.get('/client/:id', verifyJWT, (req, res, next) => {
+app.get('/client/:id', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
