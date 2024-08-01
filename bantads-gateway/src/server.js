@@ -164,6 +164,9 @@ app.get('/client/:id', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
+app.get('/client/email/:email', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
+    clientServiceProxy(req, res, next);
+});
 
 app.post('/client', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
     clientServiceProxy(req, res, next);
