@@ -6,7 +6,7 @@
         <div class="row mb-3">
           <div class="col-md-3">
             <label for="cpf" class="form-label">CPF</label>
-            <input [(ngModel)]="manager.cpf" name="cpf" type="text" class="form-control" id="cpf" [showMaskTyped]="true" [shownMaskExpression]="'___.___.___-__'" mask="000.000.000-00">
+            <input [(ngModel)]="manager.cpf" name="cpf" type="text" class="form-control" id="cpf" [showMaskTyped]="true" [shownMaskExpression]="'___.___.___-__'" mask="000.000.000-00" readonly disabled>
           </div>
           <div class="col-md-9">
             <label for="name" class="form-label">Nome</label>
@@ -16,7 +16,7 @@
         <div class="row mb-3">
           <div class="col-md-9">
             <label for="email" class="form-label">Email</label>
-            <input [(ngModel)]="manager.email" name="email" type="email" class="form-control" id="email" placeholder="Insira o email/login">
+            <input [(ngModel)]="manager.email" name="email" type="email" class="form-control" id="email" placeholder="Insira o email/login" readonly disabled>
           </div>
           <div class="col-md-3">
             <label for="phone" class="form-label">Telefone</label>

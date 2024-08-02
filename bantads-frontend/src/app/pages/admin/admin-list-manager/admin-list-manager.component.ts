@@ -95,12 +95,12 @@ export class AdminListManagerComponent implements OnInit{
       console.log(modalRes.updatedManager);
       
       if(modalRes.changed){
-        let updateIndex = this.managers.findIndex(manager => manager.id == modalRes.updatedManager.id)
+        let updateIndex = this.managers.findIndex(manager => manager.email == modalRes.updatedManager.email)
         this.managers[updateIndex] = modalRes.updatedManager;
       } 
       else if (modalRes.deleted){
-        let deletedManagerId = manager.id; 
-        let deletedManagerIndex: number = this.managers.findIndex(manager => manager.id == deletedManagerId)
+        let deletedManagerEmail = manager.email; 
+        let deletedManagerIndex: number = this.managers.findIndex(manager => manager.email == deletedManagerEmail)
         this.managers.splice(deletedManagerIndex, 1);
       }
     });

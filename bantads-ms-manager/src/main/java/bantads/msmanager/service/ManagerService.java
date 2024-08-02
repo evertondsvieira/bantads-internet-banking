@@ -7,6 +7,7 @@ import bantads.msmanager.exception.ManagerNotFoundException;
 import bantads.msmanager.repository.ManagerRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +27,10 @@ public class ManagerService {
     }
 
     @Transactional
-    public Manager updateManager(Long id, UpdateManagerDTO updateManagerDTO) {
-        Manager manager = managerRepository.findById(id).orElseThrow(() -> new ManagerNotFoundException("Manager not found"));
+    public Manager updateManager(String email, UpdateManagerDTO updateManagerDTO) {
+        Manager manager = managerRepository.findByEmail(email).orElseThrow(() -> new ManagerNotFoundException("Manager not found"));
+        manager.setName(updateManagerDTO.getName());
+        manager.setPhone(updateManagerDTO.getPhone());
         return managerRepository.save(manager);
     }
 
@@ -42,6 +45,6 @@ public class ManagerService {
     }
 
     public List<Manager> getAllManagers() {
-        return managerRepository.findAll();
+        return managerRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 }
