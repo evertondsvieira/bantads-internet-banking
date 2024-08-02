@@ -7,19 +7,19 @@
       <div class="row">
         <div class="col-lg-6 my-4">
           <label for="numero-conta" class="form-label">Número da Conta:</label>
-          <output type="text" class="form-control" id="numero-conta">{{ accountData?.id }}</output>
+          <output type="text" class="form-control" id="numero-conta">{{ accountData.id }}</output>
         </div>
         <div class="col-lg-6 my-4">
           <label for="nome-cliente" class="form-label">Nome:</label>
-          <output type="text" class="form-control" id="nome-cliente">{{ accountData?.client?.name }}</output>
+          <output type="text" class="form-control" id="nome-cliente">{{ accountData.client.name }}</output>
         </div>
         <div class="col-lg-6 my-4">
           <label for="cpf-cliente" class="form-label">CPF:</label>
-          <output type="text" class="form-control" id="cpf-beneficiario">{{ accountData?.client?.cpf ? (accountData.client.cpf | cpf) : ""}}</output>
+          <output type="text" class="form-control" id="cpf-beneficiario">{{ accountData.client.cpf ? (accountData.client.cpf | cpf) : ""}}</output>
         </div>
         <div class="col-lg-6 my-4">
           <label for="saldo-conta" class="form-label">Saldo da Conta:</label>
-          <output type="number" class="form-control" id="saldo-conta">{{ accountData?.balance | realPipe }}</output>
+          <output type="number" class="form-control" id="saldo-conta">{{ accountData.balance | realPipe }}</output>
         </div>
       </div>
       
