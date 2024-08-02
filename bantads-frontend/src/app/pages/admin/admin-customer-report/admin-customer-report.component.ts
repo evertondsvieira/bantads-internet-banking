@@ -41,7 +41,7 @@ export class AdminCustomerReportComponent implements OnInit {
   }
 
   getClientsOrderedByName(): void {
-    this.clientService.getClientsOrderedByName().subscribe(clients => {
+    this.clientService.getClient().subscribe(clients => {
       this.clients = clients;
     });
   }
