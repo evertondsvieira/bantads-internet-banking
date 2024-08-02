@@ -2,7 +2,6 @@
   <div class="card-header">
     <h4 class="text-center">Transferir</h4>
   </div>
-
   <div class="card-body">
     <form>
       <div class="row">
@@ -12,12 +11,11 @@
           >
           <div class="input-group">
             <input
-              enter="true"
               type="text"
               class="form-control"
-              id="amount"
-              name="amount"
-              [(ngModel)]="transaction.destinationAccount"
+              id="destination-account"
+              name="destinationAccountId"
+              [(ngModel)]="transaction.destinationAccountId"
               placeholder="Conta"
               required
               numerico
@@ -25,55 +23,16 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="row g-2" *ngFor="let clientData of clientsData">
-        <div class="col-lg-4 mb-3">
-          <label for="nome-beneficiario" class="form-label"
-            >Nome do Beneficiário:</label
-          >
-          <output type="text" class="form-control" id="nome-beneficiario">{{
-            clientData.name
-          }}</output>
-        </div>
-
-        <div class="col-lg-4 mb-3">
-          <label for="cpf-beneficiario" class="form-label"
-            >CPF do Beneficiário:</label
-          >
-          <output type="text" class="form-control" id="cpf-beneficiario">{{
-            clientData.cpf
-          }}</output>
-        </div>
-
-        <div class="col-lg-4 mb-3">
-          <label for="email-beneficiario" class="form-label"
-            >E-mail do Beneficiário:</label
-          >
-          <output type="email" class="form-control" id="email-beneficiario">{{
-            clientData.name
-          }}</output>
-        </div>
-
-        <div class="col-lg-4 mb-3">
-          <label for="telefone-beneficiario" class="form-label"
-            >Telefone do Beneficiário:</label
-          >
-          <output type="text" class="form-control" id="telefone-beneficiario">{{
-            clientData.accountId
-          }}</output>
-        </div>
-      </div> -->
-
       <div class="row g-3">
         <div class="col-lg-4 mb-3">
           <label for="valor-tranferencia" class="form-label"
             >Valor da transferência:</label
           >
           <input
-            [(ngModel)]="transaction.amount"
+            [(ngModel)]="transaction.ammount"
             class="form-control"
-            id="amount"
-            name="amount"
+            id="ammount"
+            name="ammount"
             required
             mask="separator.2"
             prefix="R$ "

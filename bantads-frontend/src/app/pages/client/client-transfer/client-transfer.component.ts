@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Client } from '../../../models/client.model';
 import { Transaction } from '../../../models/transaction.model';
 import { ClientService } from '../../../services/client/client.service';
@@ -6,50 +6,60 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalTransactionComponent } from '../../../components/modal/modal-transaction/modal-transaction.component';
 import { AccountService } from '../../../services/account/account.service';
 import { Account } from '../../../models/account.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-client-transfer',
   templateUrl: './client-transfer.component.html',
   styleUrl: './client-transfer.component.css'
 })
-export class ClientTransferComponent {
-  accountData!: Account;
-  accountCPF!: string;
-  clientData!: Client;
-  clientsData!: Client[];
-  transaction: Transaction = new Transaction(new Date(), "Transfer");
-  searchDone!: boolean;
+export class ClientTransferComponent implements OnInit {
+  accountData!: Account
+  transaction: Transaction = new Transaction("TRANSFER");
+  userId: number = 0;
   
   constructor (
     private accountService: AccountService,
-    private clientService: ClientService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private route: ActivatedRoute
   ){}
 
   ngOnInit(): void {
-    this.getAccount();
-    this.searchDone = false;
+    this.route.paramMap.subscribe(params => {
+      const idParam = params.get("id")
+
+      if (idParam && !isNaN(+idParam)) {
+        this.userId = +idParam
+        this.loadAccount()
+      } else {
+        console.log("Id do cliente é inválido")
+      }
+    })
   }
 
-  getAccount() {
-    this.accountService.getAccountByCPF(/*this.user.cpf*/'11111111111').subscribe(
-      (accountsData: Account[]) => {
-        this.accountData = accountsData[0];
-        this.transaction.originAccount = accountsData[0].accountId;
-      }
-    )
+  loadAccount(): void {
+    this.getAccount();
   }
-  searchAccount() {
-    this.searchDone = true;
-    this.clientService.getClientByCPF(this.accountCPF).subscribe(
-      (clientsData: Client[]) => {
-        this.clientData = clientsData[0];
-        this.clientsData = clientsData;
-      }
-    )
+
+  getAccount(): void {
+    if (this.userId) {
+      this.accountService.getAccountById(this.userId).subscribe({
+        next: (account: Account) => {
+          this.accountData = account
+          this.transaction = new Transaction("TRANSFER", undefined, this.accountData.id, this.transaction.destinationAccountId)
+        },
+        error: (error) => {
+          console.error('Erro ao carregar cliente', error)
+        }
+      })
+    } else {
+      console.error('ID do cliente não fornecido')
+    }
   }
 
   openModal(transaction: Transaction){
+    this.transaction.destinationAccountId = Number(this.transaction.destinationAccountId);
+
     const modalRef = this.modalService.open(ModalTransactionComponent);
     modalRef.componentInstance.transaction = this.transaction;
   }
