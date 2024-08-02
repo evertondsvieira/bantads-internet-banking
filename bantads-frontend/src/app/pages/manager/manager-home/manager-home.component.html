@@ -6,19 +6,19 @@
     <thead>
       <tr>
         <th>CPF</th>
-        <th colspan="2">Nome</th>
-        <th>Salário</th>
+        <th colspan="4">Nome</th>
+        <th class="text-center">Salário</th>
         <th class="text-center">Ação</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let client of clients">
         <td>{{ client.cpf | cpf }}</td>
-        <td colspan="2">{{ client.name }}</td>
-        <td>0</td>
+        <td colspan="4">{{ client.name }}</td>
+        <td class="text-center">0</td>
         <!-- <td>{{ client.salary | realPipe }}</td> -->
         <td>
-          <div class="d-flex justify-content-around">
+          <div class="d-flex justify-content-center gap-2">
             <button
               *ngFor="let acao of acoes"
               [ngClass]="['btn', acao.buttonStyle]"
