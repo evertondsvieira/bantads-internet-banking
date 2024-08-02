@@ -114,22 +114,13 @@ app.post('/logout', function (req, res) {
     res.json({ auth: false, token: null });
 });
 
+// SAGA 1
+// Requisição de autocadastro de cliente (Sem autenticação)
+
 const sagaClientProxy = httpProxy('http://localhost:3005');
 
-// Requisição de autocadastro de cliente (Sem autenticação)
 app.post('/register', (req, res, next) => {
     sagaClientProxy(req, res, next);
-});
-
-const sagaManagerProxy = httpProxy('http://localhost:3006');
-
-// Requisição de inserção de gerente
-app.post('/manager', (req, res, next) => {
-    sagaManagerProxy(req, res, next);
-});
-
-app.delete('/manager/:email', (req, res, next) => {
-    sagaManagerProxy(req, res, next);
 });
 
 // Requisições aos serviços, já autenticados
@@ -150,15 +141,32 @@ app.get('/account', verifyJWT, (req, res, next) => {
   
 // Requisições para manager
 
+// SAGAS 2 E 3
+const sagaManagerProxy = httpProxy('http://localhost:3006');
+
+// SAGA 2 - Inserção de gerente
+app.post('/manager', (req, res, next) => {
+    sagaManagerProxy(req, res, next);
+});
+
+// SAGA 3 - Remoção de gerente
+app.delete('/manager/:email', (req, res, next) => {
+    sagaManagerProxy(req, res, next);
+});
+
+// GET e PUT (Sem SAGA)
 const managerServiceProxy = httpProxy('http://localhost:3003', {
     changeOrigin: true,
     proxyReqPathResolver: function (req) {
-        // Modifica o caminho da requisição para /
-        return '/';
+        return req.url.replace(/^\/manager/, '/api/manager');
     },
 });
 
-app.get('/manager', verifyJWT, (req, res, next) => {
+app.get('/manager', (req, res, next) => {
+    managerServiceProxy(req, res, next);
+});
+
+app.put('/manager/:email', (req, res, next) => {
     managerServiceProxy(req, res, next);
 });
 

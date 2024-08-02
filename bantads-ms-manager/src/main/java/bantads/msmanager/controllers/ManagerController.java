@@ -70,10 +70,10 @@ public class ManagerController {
         }
     }
 
-    @PutMapping("/manager/{id}")
-    public ResponseEntity<ManagerDTO> updateManager(@PathVariable Long id, @RequestBody UpdateManagerDTO updateManagerDTO) {
+    @PutMapping("/manager/{email}")
+    public ResponseEntity<ManagerDTO> updateManager(@PathVariable String email, @RequestBody UpdateManagerDTO updateManagerDTO) {
         try {
-            Manager updatedManager = managerService.updateManager(id, updateManagerDTO);
+            Manager updatedManager = managerService.updateManager(email, updateManagerDTO);
             return ResponseEntity.ok(convertToDTO(updatedManager));
         } catch (ManagerNotFoundException e) {
             logger.error("Manager not found: {}", e.getMessage());
