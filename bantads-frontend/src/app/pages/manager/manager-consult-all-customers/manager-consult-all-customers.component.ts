@@ -48,9 +48,9 @@ export class ManagerConsultAllCustomersComponent implements OnInit {
           data => this.clientData = data
         );
       }
-    } 
-  
-    this.getClientsOrderedByName();
+    } else {
+      this.getClientsOrderedByName();
+    }
   }
 
   public viewMoreDetails(clientCpf: string): void {
