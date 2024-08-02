@@ -16,10 +16,9 @@ export class AccountService {
 
   constructor(private http: HttpClient) {}
 
-  public getAccountById(query: string): Observable<Account> {
+  public getAccountById(id: number): Observable<Account> {
     return this.http.get<Account>(
-      this.BASE_URL + `/${query}`,
-      this.httpOptions);
+      this.BASE_URL + `/${id}`);
   }
   public getAccountByCPF(query: string): Observable<Account[]> {
     return this.http.get<Account[]>(
