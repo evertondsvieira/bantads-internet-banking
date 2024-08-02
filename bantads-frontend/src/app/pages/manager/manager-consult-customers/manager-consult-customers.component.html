@@ -7,7 +7,15 @@
       <div class="form-group">
         <label for="cpf">Informe o CPF do Cliente:</label>
         <div class="d-flex">
-          <input type="text" class="form-control" id="cpf" [(ngModel)]="cpf" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Pesquisar CPF"
+            [(ngModel)]="cpf"
+            [mask]="mask"
+            [showMaskTyped]="true"
+            (ngModelChange)="onInputChange($event)"
+          />
           <button class="btn btn-primary ms-3" (click)="consultClient(cpf)">
             Consultar
           </button>
@@ -17,13 +25,11 @@
   </div>
   <div *ngIf="client" class="mx-4">
     <h3>Dados do Cliente</h3>
-    <h6>
-      <strong>Nome: </strong> {{ client.name | titlecase}}
-    </h6>
-    <p><strong>CPF:</strong> {{ client.cpf | cpf}}</p>
+    <p><strong>Nome:</strong> {{ client.name | titlecase }}</p>
+    <p><strong>CPF:</strong> {{ client.cpf | cpf }}</p>
     <p><strong>E-mail:</strong> {{ client.email }}</p>
-    <p><strong>Telefone:</strong> {{ client.phone | phone}}</p>
-    <p><strong>Salário:</strong> {{ client.salary | realPipe}}</p>
+    <p><strong>Telefone:</strong> {{ client.phone | phone }}</p>
+    <p><strong>Salário:</strong> {{ client.salary | realPipe }}</p>
     <p>
       <strong>Endereço Completo:</strong>
       {{
