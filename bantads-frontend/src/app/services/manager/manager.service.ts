@@ -19,7 +19,7 @@ export class ManagerService {
 
   public getManagersOrderedByName(): Observable<Manager[]> {
     return this.http.get<Manager[]>(
-      this.BASE_URL + '?_sort=name',
+      this.BASE_URL,
       this.httpOptions
     );
   }
@@ -34,7 +34,7 @@ export class ManagerService {
 
   public updateManager(manager: Manager): Observable<Manager>{
     return this.http.put<Manager>(
-      this.BASE_URL + `/${manager.id}`,
+      this.BASE_URL + `/${manager.email}`,
       JSON.stringify(manager),
       this.httpOptions
     )
@@ -42,7 +42,7 @@ export class ManagerService {
 
   public deleteManager(manager: Manager): Observable<Manager>{
     return this.http.delete<Manager>(
-      this.BASE_URL + `/${manager.id}`,
+      this.BASE_URL + `/${manager.email}`,
       this.httpOptions
     )
   }
