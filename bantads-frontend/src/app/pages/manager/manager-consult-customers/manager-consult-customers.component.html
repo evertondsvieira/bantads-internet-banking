@@ -49,8 +49,8 @@
     </p>
 
     <h3>Dados da Conta</h3>
-    <p><strong>Número da Conta:</strong> {{ account.accountId }}</p>
-    <p><strong>Data de Criação:</strong> {{ account.creationDate | date }}</p>
+    <p><strong>Número da Conta:</strong> {{ account.id }}</p>
+    <p><strong>Data de Criação:</strong> {{ account.createdAt | date }}</p>
     <p><strong>Saldo da conta:</strong> {{ account.balance }}</p>
   </div>
   <div *ngIf="mensagemErro" class="alert alert-danger">

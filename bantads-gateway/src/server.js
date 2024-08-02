@@ -125,20 +125,34 @@ app.post('/register', (req, res, next) => {
 
 // Requisições aos serviços, já autenticados
   
-// Requisições para account
-
-const accountServiceProxy = httpProxy('http://localhost:3001', {
+// Requisições para transaction
+const transactionServiceProxy = httpProxy('http://localhost:3010', {
     changeOrigin: true,
     proxyReqPathResolver: function (req) {
-        // Modifica o caminho da requisição para /
-        return '/';
+        return '/transaction';
+    },
+});
+
+app.post('/transaction', verifyJWT, (req, res, next) => {
+    transactionServiceProxy(req, res, next);
+});
+
+// Requisições para account
+const accountServiceProxy = httpProxy('http://localhost:3011', {
+    changeOrigin: true,
+    proxyReqPathResolver: function (req) {
+        return req.url.replace(/^\/client/, '/api/client');
     },
 });
 
 app.get('/account', verifyJWT, (req, res, next) => {
     accountServiceProxy(req, res, next);
 });
-  
+
+app.get('/account/:id', verifyJWT, (req, res, next) => {
+    accountServiceProxy(req, res, next);
+});
+ 
 // Requisições para manager
 
 // SAGAS 2 E 3

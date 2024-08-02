@@ -10,7 +10,7 @@
           type="text"
           class="form-control"
           id="nomeGerente"
-          value="John Doe"
+          value="{{ accountData.manager.name }}"
           readonly
           disabled
         />
@@ -21,7 +21,7 @@
           <button class="btn btn-secondary me-5" (click)="toggleValue()">
             <i [className]="valueVisible ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
           </button>
-          <span *ngIf="valueVisible">{{ saldo | realPipe }}</span>
+          <span *ngIf="valueVisible">{{ accountData.balance | realPipe }}</span>
           <span *ngIf="!valueVisible">*******</span>
         </div>
       </div>

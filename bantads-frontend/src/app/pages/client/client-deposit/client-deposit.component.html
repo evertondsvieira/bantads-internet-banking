@@ -7,15 +7,15 @@
       <div class="row">
         <div class="col-lg-6 my-4">
           <label for="numero-conta" class="form-label">Número da Conta:</label>
-          <output type="text" class="form-control" id="numero-conta">{{ accountData.accountId }}</output>
+          <output type="text" class="form-control" id="numero-conta">{{ accountData.id }}</output>
         </div>
         <div class="col-lg-6 my-4">
           <label for="nome-cliente" class="form-label">Nome:</label>
-          <output type="text" class="form-control" id="nome-cliente">{{ accountData.client_name }}</output>
+          <output type="text" class="form-control" id="nome-cliente">{{ accountData.client.name }}</output>
         </div>
         <div class="col-lg-6 my-4">
           <label for="cpf-cliente" class="form-label">CPF:</label>
-          <output type="text" class="form-control" id="cpf-beneficiario">{{ accountData.client_cpf ? (accountData.client_cpf | cpf) : ""}}</output>
+          <output type="text" class="form-control" id="cpf-beneficiario">{{ accountData.client.cpf ? (accountData.client.cpf | cpf) : ""}}</output>
         </div>
         <div class="col-lg-6 my-4">
           <label for="saldo-conta" class="form-label">Saldo da Conta:</label>
@@ -26,7 +26,7 @@
       <div class="row">
 				<div class="col-lg-6 my-4">
           <label for="valor-deposito" class="form-label">Valor do Depósito:</label>
-          <input [(ngModel)]="transaction.amount" name="ammount" class="form-control" id="valor-deposito" required
+          <input [(ngModel)]="transaction.ammount" name="ammount" class="form-control" id="valor-deposito" required
           mask="separator.2" prefix="R$ " thousandSeparator="." decimalMarker=","/>
         </div>
       </div>
