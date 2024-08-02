@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AccountInsertRequestConfig {
+public class SagaManagerRequestConfig {
     @Bean
     public TopicExchange receiverManagerTopic() {
         return new TopicExchange("sagaManagerRequest");
@@ -22,5 +22,15 @@ public class AccountInsertRequestConfig {
     @Bean
     public Binding accountInsertRequestBinding(TopicExchange receiverManagerTopic, Queue accountInsertRequestQueue) {
         return BindingBuilder.bind(accountInsertRequestQueue).to(receiverManagerTopic).with("accountInsertRequest");
+    }
+
+    @Bean
+    public Queue accountDeleteRequestQueue() {
+        return new Queue("accountDeleteRequestQueue");
+    }
+
+    @Bean
+    public Binding accountDeleteRequestBinding(TopicExchange receiverManagerTopic, Queue accountDeleteRequestQueue) {
+        return BindingBuilder.bind(accountDeleteRequestQueue).to(receiverManagerTopic).with("accountDeleteRequest");
     }
 }

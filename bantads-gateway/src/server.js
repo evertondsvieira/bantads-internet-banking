@@ -123,8 +123,12 @@ app.post('/register', (req, res, next) => {
 
 const sagaManagerProxy = httpProxy('http://localhost:3006');
 
-// Requisição de inserção de gerente (Sem autenticação)
+// Requisição de inserção de gerente
 app.post('/manager', (req, res, next) => {
+    sagaManagerProxy(req, res, next);
+});
+
+app.delete('/manager/:email', (req, res, next) => {
     sagaManagerProxy(req, res, next);
 });
 

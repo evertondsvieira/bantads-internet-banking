@@ -2,7 +2,6 @@ package bantads.account_command.dto;
 
 import java.util.Date;
 
-
 import bantads.account_command.enums.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

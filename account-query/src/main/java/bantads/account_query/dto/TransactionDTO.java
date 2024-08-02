@@ -2,6 +2,9 @@ package bantads.account_query.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
 import bantads.account_query.enums.TransactionType;
 import lombok.AllArgsConstructor;
@@ -15,6 +18,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@JsonInclude(Include.NON_NULL)
 public class TransactionDTO {
   private Long id;
   private AccountDTO originAccount;

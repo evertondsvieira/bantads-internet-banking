@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration 
-public class AccountInsertReplyConfig {
+public class SagaManagerReplyConfig {
 
     @Bean
     public TopicExchange senderManagerTopic() {
@@ -23,5 +23,15 @@ public class AccountInsertReplyConfig {
     @Bean
     public Binding accountInsertReplyBinding(TopicExchange senderManagerTopic, Queue accountInsertReplyQueue) {
         return BindingBuilder.bind(accountInsertReplyQueue).to(senderManagerTopic).with("accountInsertReply");
+    }
+
+    @Bean
+    public Queue accountDeleteReplyQueue() {
+        return new Queue("accountDeleteReplyQueue");
+    }
+
+    @Bean
+    public Binding accountDeleteReplyBinding(TopicExchange senderManagerTopic, Queue accountDeleteReplyQueue) {
+        return BindingBuilder.bind(accountDeleteReplyQueue).to(senderManagerTopic).with("accountDeleteReply");
     }
 }
