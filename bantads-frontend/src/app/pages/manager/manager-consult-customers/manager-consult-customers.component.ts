@@ -26,7 +26,7 @@ export class ManagerConsultCustomersComponent implements OnInit {
   public accounts!: Account[];
   private _account!: Account;
   mensagemErro: string | undefined;
-
+  mask: string = '';
 
   constructor(
     private accountService: AccountService,
@@ -74,4 +74,12 @@ export class ManagerConsultCustomersComponent implements OnInit {
       }
     );
   }
+
+  public onInputChange(value: string): void {
+    if (/^\d+$/.test(value)) {
+      this.mask = '000.000.000-00';
+    } else {
+      this.mask = '';
+    }
+  }  
 }
