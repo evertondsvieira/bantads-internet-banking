@@ -190,11 +190,11 @@ app.get('/client/email/:email', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.get('/client/:cpf', verifyJWT, (req, res, next) => {
+app.get('/client/cpf/:cpf', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.get('/client/search', verifyJWT, (req, res, next) => {
+app.get('/client/search/:search', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
