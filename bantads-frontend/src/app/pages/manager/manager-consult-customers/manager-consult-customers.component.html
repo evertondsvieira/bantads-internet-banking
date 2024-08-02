@@ -15,10 +15,10 @@
       </div>
     </div>
   </div>
-  <div *ngIf="client">
+  <div *ngIf="client" class="mx-4">
     <h3>Dados do Cliente</h3>
     <h6>
-      <strong>{{ client.name | titlecase}} </strong>
+      <strong>Nome: </strong> {{ client.name | titlecase}}
     </h6>
     <p><strong>CPF:</strong> {{ client.cpf | cpf}}</p>
     <p><strong>E-mail:</strong> {{ client.email }}</p>
