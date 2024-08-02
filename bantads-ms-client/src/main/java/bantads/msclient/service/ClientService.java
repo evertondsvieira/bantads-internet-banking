@@ -69,4 +69,12 @@ public class ClientService {
     public Client getClientByEmail(String email) {
         return clientRepository.findByEmail(email).orElseThrow(() -> new ClientNotFoundException("Client with email not found"));
     }
+
+    public List<Client> getClientsByCpf(String cpf) {
+        return clientRepository.findListByCpf(cpf);
+    }
+
+    public List<Client> getClientsByName(String name) {
+        return clientRepository.findByNameContainingIgnoreCase(name);
+    }
 }

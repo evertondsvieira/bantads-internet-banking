@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,6 +36,7 @@ public class ClientController {
                     : clientService.getAllClients())
                     .stream()
                     .map(this::convertToDTO)
+                    .sorted(Comparator.comparing(ClientDTO::getName))
                     .collect(Collectors.toList());
 
             return ResponseEntity.ok(clientDTOs);
@@ -100,11 +102,53 @@ public class ClientController {
             logger.error("Error fetching client by email: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-    }   
+    }
+
+    @GetMapping("/client/cpf")
+    public ResponseEntity<List<ClientDTO>> getClientByCPF(@RequestParam String cpf) {
+        try {
+            List<Client> clients = clientService.getClientsByCpf(cpf);
+            List<ClientDTO> clientDTOs = clients.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(clientDTOs);
+        } catch (Exception e) {
+            logger.error("Error retrieving client by CPF: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/client/name")
+    public ResponseEntity<List<ClientDTO>> getClientsByName(@RequestParam String name) {
+        try {
+            List<Client> clients = clientService.getClientsByName(name);
+            List<ClientDTO> clientDTOs = clients.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(clientDTOs);
+        } catch (Exception e) {
+            logger.error("Error searching clients: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/client/situation")
+    public ResponseEntity<List<ClientDTO>> getClientsBySituation(@RequestParam String situation) {
+        try {
+            List<Client> clients = clientService.getClientsBySituation(situation);
+            List<ClientDTO> clientDTOs = clients.stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(clientDTOs);
+        } catch (Exception e) {
+            logger.error("Error fetching clients by situation: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
     private ClientDTO convertToDTO(Client client) {
         ClientDTO clientDTO = new ClientDTO();
-        clientDTO.setId(client.getId()); 
+        clientDTO.setId(client.getId());
         clientDTO.setName(client.getName());
         clientDTO.setCpf(client.getCpf());
         clientDTO.setEmail(client.getEmail());

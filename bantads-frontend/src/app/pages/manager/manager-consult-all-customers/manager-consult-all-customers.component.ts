@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Client } from '../../../models/client.model';
 import { ClientService } from '../../../services/client/client.service';
-import { User } from '../../../models/user.model';
-import { AuthService } from '../../../services/auth/auth.service';
-import { RealPipePipe, CpfPipe } from '../../../modules/shared/pipes';
 
 @Component({
   selector: 'app-manager-consult-all-customers',
   templateUrl: './manager-consult-all-customers.component.html',
-  styleUrl: './manager-consult-all-customers.component.css',
+  styleUrls: ['./manager-consult-all-customers.component.css'],
 })
 export class ManagerConsultAllCustomersComponent implements OnInit {
-  private _lista!: Client[];
-  public searchQuery: string = '';
+  clientData: Client[] = [];
+
   public mask: string = '';
+  public searchQuery: string = '';
 
   constructor(
     private clientService: ClientService,
@@ -25,44 +23,37 @@ export class ManagerConsultAllCustomersComponent implements OnInit {
     this.getClientsOrderedByName();
   }
 
-  public get lista(): Client[] {
-    return this._lista;
-  }
-
-  public set lista(value: Client[]) {
-    this._lista = value;
-  }
-
   public onInputChange(value: string): void {
-  // Verifica se a entrada contém apenas números
     if (/^\d+$/.test(value)) {
-      this.mask = '000.000.000-00'; // Máscara de CPF
+      this.mask = '000.000.000-00';
     } else {
-      this.mask = ''; // Sem máscara para texto
+      this.mask = '';
     }
   }
-  
-  public getClientsOrderedByName() {
-    this.clientService.getClientsOrderedByName().subscribe(
-      lista => {
-      this._lista = lista;
-    });
+
+  public getClientsOrderedByName(): void {
+    this.clientService.getClient().subscribe(
+      data => this.clientData = data
+    );
   }
 
-  public searchClients() {
+  public searchClients(): void {
     if (this.searchQuery.trim() !== '') {
-      this.clientService
-        .searchClients(this.searchQuery)
-        .subscribe(
-          lista => {
-          this._lista = lista;
-        });
-    } else {
-      this.getClientsOrderedByName();
-    }
+      if (/^\d{11}$/.test(this.searchQuery)) {
+        this.clientService.getClientByCPF(this.searchQuery).subscribe(
+          data => this.clientData = data
+        );
+      } else {
+        this.clientService.getClientByName(this.searchQuery).subscribe(
+          data => this.clientData = data
+        );
+      }
+    } 
+  
+    this.getClientsOrderedByName();
   }
 
-  public viewMoreDetails(clientCpf: string) {
+  public viewMoreDetails(clientCpf: string): void {
     this.router.navigate(['manager/consult/customers', clientCpf]);
   }
 }

@@ -22,7 +22,7 @@
     </div>
   </div>
   
-  <table [hidden]="lista ? false : true" class="table table-striped">
+  <table [hidden]="clientData ? false : true" class="table table-striped">
     <thead>
       <tr>
         <th>CPF</th>
@@ -34,14 +34,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let client of lista">
+      <tr *ngFor="let client of clientData">
         <td>{{ client.cpf | cpf}}</td>
         <td >{{ client.name }}</td>
-        <!-- Lucas Cazionato | 07/04/2024-04:47 | Projeto nao estava compilando entao comentei essas linhas para verificacao -->
         <td>{{client.address.city}}</td>
         <td>{{client.address.state}}</td>
-        
-        <!-- <td>{{ client.balance? (client.balance | realPipe) : ""}}</td> -->
+        <td>0</td>
         <td>
           <button class="btn btn-primary" (click)="viewMoreDetails(client.cpf)">
             Ver mais
@@ -50,7 +48,7 @@
       </tr>
     </tbody>
   </table>
-  <div *ngIf="!lista" class="container-fluid">
+  <div *ngIf="!clientData" class="container-fluid">
     <div class="d-flex px-4 py-5 px-md-5 text-center w-90 bg-danger text-white">
       Nenhuma conta registrada!
     </div>

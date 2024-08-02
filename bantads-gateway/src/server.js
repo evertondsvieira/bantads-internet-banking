@@ -158,16 +158,23 @@ const managerServiceProxy = httpProxy('http://localhost:3003', {
     },
 });
 
-app.get('/manager', verifyJWT, verifyRole(['ADMIN', 'MANAGER']), (req, res, next) => {
+app.get('/manager', verifyJWT, (req, res, next) => {
     managerServiceProxy(req, res, next);
 });
 
 // Requisições para o cliente
+const clientPathRewriteMap = {
+    '/client/name': '/api/client/name',
+    '/client/cpf': '/api/client/cpf',
+    '/client/situation': '/api/client/situation'
+};
 
 const clientServiceProxy = httpProxy('http://localhost:3002', {
     changeOrigin: true,
     proxyReqPathResolver: function (req) {
-        return req.url.replace(/^\/client/, '/api/client');
+        const path = Object.keys(clientPathRewriteMap).find(key => req.url.startsWith(key));
+        return path ? `${clientPathRewriteMap[path]}${req.url.replace(path, '')}` 
+        : req.url.replace(/^\/client/, '/api/client');
     },
 });
 
@@ -175,19 +182,27 @@ app.get('/client', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.get('/client/:id', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
+app.get('/client/:id', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.get('/client/email/:email', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
+app.get('/client/email/:email', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.post('/client', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
+app.get('/client/:cpf', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.put('/client/:id', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
+app.get('/client/search', verifyJWT, (req, res, next) => {
+    clientServiceProxy(req, res, next);
+});
+
+app.post('/client', verifyJWT, (req, res, next) => {
+    clientServiceProxy(req, res, next);
+});
+
+app.put('/client/:id', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
