@@ -145,12 +145,12 @@ app.get('/account', verifyJWT, (req, res, next) => {
 const sagaManagerProxy = httpProxy('http://localhost:3006');
 
 // SAGA 2 - Inserção de gerente
-app.post('/manager', (req, res, next) => {
+app.post('/manager', verifyJWT, (req, res, next) => {
     sagaManagerProxy(req, res, next);
 });
 
 // SAGA 3 - Remoção de gerente
-app.delete('/manager/:email', (req, res, next) => {
+app.delete('/manager/:email', verifyJWT, (req, res, next) => {
     sagaManagerProxy(req, res, next);
 });
 
@@ -162,11 +162,11 @@ const managerServiceProxy = httpProxy('http://localhost:3003', {
     },
 });
 
-app.get('/manager', (req, res, next) => {
+app.get('/manager', verifyJWT, (req, res, next) => {
     managerServiceProxy(req, res, next);
 });
 
-app.put('/manager/:email', (req, res, next) => {
+app.put('/manager/:email', verifyJWT, (req, res, next) => {
     managerServiceProxy(req, res, next);
 });
 
