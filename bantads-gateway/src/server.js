@@ -159,11 +159,18 @@ app.get('/manager', verifyJWT, verifyRole(['ADMIN', 'MANAGER']), (req, res, next
 });
 
 // Requisições para o cliente
+const clientPathRewriteMap = {
+    '/client/name': '/api/client/name',
+    '/client/cpf': '/api/client/cpf',
+    '/client/situation': '/api/client/situation'
+};
 
 const clientServiceProxy = httpProxy('http://localhost:3002', {
     changeOrigin: true,
     proxyReqPathResolver: function (req) {
-        return req.url.replace(/^\/client/, '/api/client');
+        const path = Object.keys(clientPathRewriteMap).find(key => req.url.startsWith(key));
+        return path ? `${clientPathRewriteMap[path]}${req.url.replace(path, '')}` 
+        : req.url.replace(/^\/client/, '/api/client');
     },
 });
 
