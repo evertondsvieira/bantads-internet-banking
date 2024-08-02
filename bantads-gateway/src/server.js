@@ -154,7 +154,7 @@ const managerServiceProxy = httpProxy('http://localhost:3003', {
     },
 });
 
-app.get('/manager', verifyJWT, verifyRole(['ADMIN', 'MANAGER']), (req, res, next) => {
+app.get('/manager', verifyJWT, (req, res, next) => {
     managerServiceProxy(req, res, next);
 });
 
@@ -178,19 +178,27 @@ app.get('/client', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.get('/client/:id', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
+app.get('/client/:id', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.get('/client/email/:email', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
+app.get('/client/email/:email', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.post('/client', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
+app.get('/client/:cpf', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.put('/client/:id', verifyJWT, verifyRole(['CLIENT']), (req, res, next) => {
+app.get('/client/search', verifyJWT, (req, res, next) => {
+    clientServiceProxy(req, res, next);
+});
+
+app.post('/client', verifyJWT, (req, res, next) => {
+    clientServiceProxy(req, res, next);
+});
+
+app.put('/client/:id', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
