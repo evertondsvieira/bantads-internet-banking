@@ -1,7 +1,6 @@
 package bantads.account_query.dto;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonInclude;

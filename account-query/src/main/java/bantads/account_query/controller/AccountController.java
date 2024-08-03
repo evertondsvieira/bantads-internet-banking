@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bantads.account_query.dto.AccountDTO;
+import bantads.account_query.entity.ManagerAccountReport;
 import bantads.account_query.exceptions.RecordNotFoundException;
 import bantads.account_query.service.AccountService;
 
@@ -74,6 +76,16 @@ public class AccountController {
     } 
     catch (Exception e){
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+  }
+
+  @GetMapping("/manager-report")
+  public ResponseEntity<List<ManagerAccountReport>> getManagerAccountReports(){
+    try{
+      return new ResponseEntity<List<ManagerAccountReport>>(accountService.getManagerAccountReports(), HttpStatus.OK);
+
+    } catch(Exception e) {
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
 }
