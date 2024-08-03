@@ -8,30 +8,23 @@ import { Observable } from 'rxjs';
 })
 export class AccountService {
   private BASE_URL: string = 'http://localhost:3000/';
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'content-type': 'application/json',
-    }),
-  };
 
   constructor(private http: HttpClient) {}
 
-  public getAccountById(id: number): Observable<Account> {
-    return this.http.get<Account>(
-      this.BASE_URL + `account/${id}`);
+  public getAccounts(): Observable<Account[]> {
+    return this.http.get<Account[]>(this.BASE_URL + 'account')
   }
+
+  public getAccountById(id: number): Observable<Account> {
+    return this.http.get<Account>(this.BASE_URL + `account/${id}`);
+  }
+
   public getAccountByCPF(query: string): Observable<Account[]> {
-    return this.http.get<Account[]>(
-      this.BASE_URL + `account?client_cpf=${query}`,
-      this.httpOptions);
+    return this.http.get<Account[]>(this.BASE_URL + `account?client_cpf=${query}`)
   }
   
   public updateAccount(account: Account): Observable<Account> {
-    return this.http.put<Account>(
-      this.BASE_URL + `account/${account.id}`,
-      JSON.stringify(account),
-      this.httpOptions
-    );
+    return this.http.put<Account>(this.BASE_URL + `account/${account.id}`, account)
   }
 
   getTransactions(id: number, start: string, end: string): Observable<any[]> {
