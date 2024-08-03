@@ -2,6 +2,8 @@ package bantads.msauthentication.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -128,6 +130,28 @@ public class UserController {
         } else {
             // Retorna uma mensagem de erro com código 404 (Not Found) se o usuário não for encontrado
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");
+        }
+    }
+    
+    @EventListener(ApplicationReadyEvent.class)
+    public void createAdminIfNotExists(){
+        User user = repo.findByLogin("admin");
+        if(user == null){
+            try{
+                user = new User();
+                GeneratePassword passwordGenerator = new GeneratePassword();
+                String salt = passwordGenerator.generateSalt();
+                String hashedPassword = passwordGenerator.hashPassword("admin", salt);
+                user.setLogin("admin");
+                user.setRole("ADMIN");
+                user.setSalt(salt);
+                user.setPassword(hashedPassword);
+                repo.save(user);
+                System.out.println("Admin criado com sucesso");
+            } catch (Exception e){
+                e.printStackTrace();
+                System.out.println("Erro ao criar o admin");
+            }
         }
     }
 }
