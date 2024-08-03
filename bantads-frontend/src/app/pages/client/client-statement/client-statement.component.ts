@@ -1,3 +1,6 @@
+import { ActivatedRoute } from '@angular/router';
+import { Account } from '../../../models/account.model';
+import { AccountService } from './../../../services/account/account.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,40 +9,67 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './client-statement.component.css'
 })
 export class ClientStatementComponent implements OnInit {
+  userId: number = 0
+  accountData!: Account
+
+  start: string = new Date().toISOString().split('T')[0]
+  end: string = new Date().toISOString().split('T')[0]
+  currentDate: Date = new Date()
+
+  statements: any[] = []
+
+  constructor(
+    private accountService: AccountService,
+    private route: ActivatedRoute
+  ) {}
+
   ngOnInit(): void {
-    this.start = '2024-01-01';   
-    this.end = '2024-12-31' 
+    this.route.paramMap.subscribe(params => {
+      const idParam = params.get("id")
+
+      if (idParam && !isNaN(+idParam)) {
+        this.userId = +idParam
+        this.loadAccount()
+        this.loadStatements()
+      } else {
+        console.log("Id do cliente é inválido")
+      }
+    })
   }
 
-  currentDate: Date = new Date()
-  initialValue = 0
-  start: string = ''
-  end: string = ''
+  loadAccount(): void {
+    if (this.userId) {
+      this.accountService.getAccountById(this.userId).subscribe({
+        next: (account: Account) => {
+          this.accountData = account
+        },
+        error: (error) => {
+          console.error('Erro ao carregar cliente', error)
+        }
+      })
+    } else {
+      console.error('ID do cliente não fornecido')
+    }
+  }
 
-
-  statements = [
-    { id: 1, timestamp: '2024-03-11T10:30:45', operation: 'Transferência', origin: 'Cliente A', destiny: 'Cliente B', value: -100.00 },
-    { id: 2, timestamp: '2024-03-12T11:45:30', operation: 'Depósito', origin: 'Cliente A', destiny: '', value: 150.00 },
-    { id: 3, timestamp: '2024-03-13T15:20:10', operation: 'Saque', origin: 'Cliente A', destiny: '', value: -30.00 },
-    { id: 4, timestamp: '2024-03-14T14:05:55', operation: 'Depósito', origin: 'Cliente A', destiny: '', value: 50.00 },
-  ]
+  loadStatements(): void {
+    if (this.start && this.end) {
+      this.accountService.getTransactions(this.accountData.id, this.start, this.end).subscribe({
+        next: (response) => {
+          this.statements = response
+          console.log('Filtros aplicados com sucesso', response)
+        },
+        error: (error) => {
+          console.error('Erro ao carregar transações', error)
+        }
+      })
+    }
+  }
 
   getBalance(): number {
     return this.statements.reduce(
       (acc, current) => acc + current.value,
-      this.initialValue
-    )
-  }
-
-  filterStatements(start: string, end: string): any[] {
-    const filteredStatements = this.statements.filter(statement => {
-      const statementDate = new Date(statement.timestamp)
-      const startDateObj = new Date(start)
-      const endDateObj = new Date(end)
-      return statementDate >= startDateObj && statementDate <= endDateObj
-    })
-    console.log({ start, end })
-
-    return filteredStatements
+      0
+    );
   }
 }

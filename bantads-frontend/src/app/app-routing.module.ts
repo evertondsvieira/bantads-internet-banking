@@ -28,7 +28,7 @@ export const clientRoutes: Routes = [
   { path: "home", component: ClientHomeComponent, canActivate: [authGuard], data:{"role": "CLIENT"}},
   { path: "current/balance/:id", component: ClientCurrentBalanceComponent, canActivate: [authGuard], data:{"role": "CLIENT"}},
   { path: "deposit/:id", component: ClientDepositComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
-  { path: "statement", component: ClientStatementComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
+  { path: "statement/:id", component: ClientStatementComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
   { path: "transfer/:id", component: ClientTransferComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
   { path: "update/profile/:id", component: ClientUpdateProfileComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
   { path: "withdrawl/:id", component: ClientWithdrawlComponent, canActivate: [authGuard], data:{"role": "CLIENT"} },
