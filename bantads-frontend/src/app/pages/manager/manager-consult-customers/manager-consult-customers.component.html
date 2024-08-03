@@ -23,35 +23,35 @@
       </div>
     </div>
   </div>
-  <div *ngIf="client" class="mx-4">
+  <div *ngIf="clientData" class="mx-4">
     <h3>Dados do Cliente</h3>
-    <p><strong>Nome:</strong> {{ client.name | titlecase }}</p>
-    <p><strong>CPF:</strong> {{ client.cpf | cpf }}</p>
-    <p><strong>E-mail:</strong> {{ client.email }}</p>
-    <p><strong>Telefone:</strong> {{ client.phone | phone }}</p>
-    <p><strong>Salário:</strong> {{ client.salary | realPipe }}</p>
+    <p><strong>Nome:</strong> {{ clientData.name | titlecase }}</p>
+    <p><strong>CPF:</strong> {{ clientData.cpf | cpf }}</p>
+    <p><strong>E-mail:</strong> {{ clientData.email }}</p>
+    <p><strong>Telefone:</strong> {{ clientData.phone | phone }}</p>
+    <p><strong>Salário:</strong> {{ clientData.salary | realPipe }}</p>
     <p>
       <strong>Endereço Completo:</strong>
       {{
-        client.address.type +
+        clientData.address.type +
           " " +
-          client.address.street +
+          clientData.address.street +
           ", " +
-          client.address.number +
+          clientData.address.number +
           " " +
           "(" +
-          client.address.cep +
+          clientData.address.cep +
           ")" +
-          client.address.city +
+          clientData.address.city +
           " - " +
-          client.address.state
+          clientData.address.state
       }}
     </p>
 
     <h3>Dados da Conta</h3>
-    <p><strong>Número da Conta:</strong> {{ account.id }}</p>
-    <p><strong>Data de Criação:</strong> {{ account.createdAt | date }}</p>
-    <p><strong>Saldo da conta:</strong> {{ account.balance }}</p>
+    <p *ngIf="accountData"><strong>Número da Conta:</strong> {{ accountData.id }}</p>
+    <p *ngIf="accountData"><strong>Data de Criação:</strong> {{ accountData.createdAt | date }}</p>
+    <p *ngIf="accountData"><strong>Saldo da conta:</strong> {{ accountData.balance }}</p>
   </div>
   <div *ngIf="mensagemErro" class="alert alert-danger">
     {{ mensagemErro }}

@@ -15,8 +15,7 @@
       <tr *ngFor="let client of clients">
         <td>{{ client.cpf | cpf }}</td>
         <td colspan="4">{{ client.name }}</td>
-        <td class="text-center">0</td>
-        <!-- <td>{{ client.salary | realPipe }}</td> -->
+        <td>{{ client.salary | realPipe }}</td>
         <td>
           <div class="d-flex justify-content-center gap-2">
             <button

@@ -1,27 +1,25 @@
 <div class="card">
   <div class="card-header">
-    <h4 class="text-center">Três melhores clientes</h4>
+    <h4 class="text-center">Três Melhores Clientes</h4>
   </div>
-    <table class="table table-striped">
-      <thead class="container">
-        <tr>
-          <th scope="col">Nome</th>
-          <th scope="col">Cidade</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Saldo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of sortedClients">
-          <td>{{ item.name }}</td>
-          <td>{{ item.city }}</td>
-          <td>{{ item.state }}</td>
-          <td>{{ item.balance | realPipe}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <table class="table table-striped">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">CPF</th>
+        <th scope="col">Saldo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let account of sortedAccounts">
+        <td>{{ account.client.name }}</td>
+        <td>{{ account.client.cpf }}</td>
+        <td>{{ account.balance | number:'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-    <div *ngIf="!sortedClients || sortedClients.length === 0" class="d-flex align-items-center justify-content-center">
-      <p>Nenhum registro encontrado</p>
-    </div>
+  <div *ngIf="!sortedAccounts || sortedAccounts.length === 0" class="d-flex align-items-center justify-content-center">
+    <p>Nenhum registro encontrado</p>
+  </div>
 </div>

@@ -1,85 +1,75 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Client } from '../../../models/client.model';
 import { Account } from '../../../models/account.model';
 import { ClientService } from '../../../services/client/client.service';
-import { User } from '../../../models/user.model';
-import { AuthService } from '../../../services/auth/auth.service';
 import { AccountService } from '../../../services/account/account.service';
 
 @Component({
   selector: 'app-manager-consult-customers',
   templateUrl: './manager-consult-customers.component.html',
-  styleUrl: './manager-consult-customers.component.css'
+  styleUrl: './manager-consult-customers.component.css',
 })
 export class ManagerConsultCustomersComponent implements OnInit {
-  
-  ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => this.cpf = params['cpf']);
-    this.consultClient(this.cpf);
-  }
-
   cpf: string = '';
-  public clientId?: number;
-  public clients!: Client[];
-  private _client!: Client;
-  public accounts!: Account[];
-  private _account!: Account;
-  mensagemErro: string | undefined;
-  mask: string = '';
+  clientData: Client | null = null
+  accountData: Account | null = null
+  mensagemErro?: string
+  mask: string = ''
 
   constructor(
     private accountService: AccountService,
     private clientService: ClientService,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  public get client(): Client {
-    return this._client;
-  }
-  public set client(value: Client) {
-    this._client = value;
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.cpf = params['cpf'];
+      if (this.cpf) {
+        this.consultClient(this.cpf);
+        this.loadAccount(this.cpf);
+      }
+    });
   }
 
-  public get account(): Account {
-    return this._account;
-  }
-  public set account (value: Account) {
-    this._account = value;
-  }
-//retomar
-  public consultClient(cpf: string) {
-    this.clientService.getClientByCPF(cpf).subscribe(      
-      clients => {
-        if (clients) {
-          this.client = clients[0];
-          this.mensagemErro = undefined;
-          // Se o cliente foi encontrado, busca a conta associada
-          this.accountService.getAccountByCPF(this.client.cpf).subscribe(
-            account => {
-              this.account = this.accounts[0];
-            },
-            error => {
-              console.error('Erro ao consultar conta:', error);
-            }
-          );
+  consultClient(cpf: string): void {
+    this.clientService.getClientByCPF(cpf).subscribe({
+      next: (clientData: Client[]) => {
+        if (clientData.length > 0) {
+          this.clientData = clientData[0]
         } else {
-          this.mensagemErro = 'Cliente não encontrado.';
+          this.mensagemErro = 'Cliente não encontrado.'
+          this.clientData = null
         }
       },
-      error => {
-        console.error('Erro ao consultar cliente:', error);
-        this.mensagemErro = 'Ocorreu um erro ao consultar o cliente.';
-      }
-    );
+      error: (error) => {
+        console.error('Erro ao consultar cliente:', error)
+        this.mensagemErro = 'Ocorreu um erro ao consultar o cliente.'
+        this.clientData = null
+      },
+    });
   }
 
-  public onInputChange(value: string): void {
-    if (/^\d+$/.test(value)) {
-      this.mask = '000.000.000-00';
-    } else {
-      this.mask = '';
-    }
-  }  
+  loadAccount(cpf: string): void {
+    this.accountService.getAccountByCPF(cpf).subscribe({
+      next: (accountData: Account[]) => {
+        if (accountData.length > 0) {
+          this.accountData = accountData[0]
+        } else {
+          this.mensagemErro = 'Conta não encontrada.'
+          this.accountData = null
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao consultar conta:', error)
+        this.mensagemErro = 'Ocorreu um erro ao consultar a conta.'
+        this.accountData = null
+      },
+    });
+  }
+
+  onInputChange(value: string): void {
+    this.mask = /^\d+$/.test(value) ? '000.000.000-00' : ''
+  }
 }
