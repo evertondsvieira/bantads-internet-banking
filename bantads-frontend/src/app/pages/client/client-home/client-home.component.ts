@@ -24,7 +24,7 @@ export class ClientHomeComponent implements OnInit {
     { title: 'Depositar', icon: 'attach_money', link: `deposit/${this.userId}` },
     { title: 'Sacar', icon: 'money_off', link: `withdrawl/${this.userId}` },
     { title: 'Transferir', icon: 'compare_arrows', link: `transfer/${this.userId}` },
-    { title: 'Extrato', icon: 'description', link: 'statement' },
+    { title: 'Extrato', icon: 'description', link: `statement/${this.userId}` },
   ]
 
   initializeOperations(): void {
