@@ -152,6 +152,10 @@ app.get('/account', verifyJWT, (req, res, next) => {
 app.get('/account/:id', verifyJWT, (req, res, next) => {
     accountServiceProxy(req, res, next);
 });
+
+app.get('/transaction/account/:id', verifyJWT, (req, res, next) => {
+    accountServiceProxy(req, res, next);
+});
  
 // Requisições para manager
 
