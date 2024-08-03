@@ -67,8 +67,7 @@ public class AuthRegister {
                 this.mailSender.send(msg);
                 userDTO.setSalt(salt);
                 userDTO.setPassword(hashedPassword);
-                User createdUser = mapper.map(userDTO, User.class);
-                userRepository.save(createdUser);
+                User createdUser = userRepository.save(mapper.map(userDTO, User.class));
                 UserDTO createdUserDTO = mapper.map(createdUser, UserDTO.class);
                 String userStr = objectMapper.writeValueAsString(createdUserDTO);
                 SuccessMessage successMessage = new SuccessMessage(userStr);
