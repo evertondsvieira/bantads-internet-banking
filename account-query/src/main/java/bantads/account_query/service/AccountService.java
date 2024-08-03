@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import bantads.account_query.dto.AccountDTO;
 import bantads.account_query.entity.Account;
+import bantads.account_query.entity.ManagerAccountReport;
 import bantads.account_query.exceptions.RecordNotFoundException;
 import bantads.account_query.mapper.CustomMapper;
 import bantads.account_query.repository.AccountRepository;
@@ -73,5 +74,9 @@ public class AccountService {
     Account account = mapper.map(accountDTO);
     account = accountRepo.save(account);
     return mapper.map(account);
+  }
+
+  public List<ManagerAccountReport> getManagerAccountReports(){
+    return accountRepo.getManagerAccountReports();
   }
 }
