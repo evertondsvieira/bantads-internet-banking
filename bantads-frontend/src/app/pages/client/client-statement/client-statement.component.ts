@@ -57,6 +57,12 @@ export class ClientStatementComponent implements OnInit {
       this.accountService.getTransactions(this.accountData.id, this.start, this.end).subscribe({
         next: (response) => {
           this.statements = response
+          
+          this.statements = this.statements.map(item => ({
+            ...item,
+            createdAt: new Date(item.createdAt).toISOString()
+          }));
+          
           console.log('Filtros aplicados com sucesso', response)
         },
         error: (error) => {
@@ -68,7 +74,7 @@ export class ClientStatementComponent implements OnInit {
 
   getBalance(): number {
     return this.statements.reduce(
-      (acc, current) => acc + current.value,
+      (acc, current) => acc + current.ammount,
       0
     );
   }

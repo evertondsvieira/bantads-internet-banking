@@ -34,11 +34,11 @@
       <tbody>
         <tr *ngFor="let statement of statements">
           <th scope="row">{{ statement.id }}</th>
-          <td>{{ statement.timestamp | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-          <td>{{ statement.operation }}</td>
-          <td>{{ statement.origin }}</td>
-          <td>{{ statement.destiny !== '' ? statement.destiny : statement.origin }}</td>
-          <td [ngClass]="{'text-danger': statement.value < 0, 'text-primary': statement.value >= 0}">{{ statement.value | currency }}</td>
+          <td>{{ statement.createdAt | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+          <td>{{ statement.type }}</td>
+          <td>{{ statement.originAccount.id }}</td>
+          <td>{{ statement.destinationAccount !== '' ? statement.destinationAccount.id : statement.originAccount.id }}</td>
+          <td [ngClass]="{'text-danger': statement.value < 0, 'text-primary': statement.value >= 0}">{{ statement.ammount | currency }}</td>
         </tr>
       </tbody>
     </table>
