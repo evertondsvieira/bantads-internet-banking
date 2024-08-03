@@ -141,7 +141,7 @@ app.post('/transaction', verifyJWT, (req, res, next) => {
 const accountServiceProxy = httpProxy('http://localhost:3011', {
     changeOrigin: true,
     proxyReqPathResolver: function (req) {
-        return req.url.replace(/^\/client/, '/api/client');
+        return req.originalUrl;
     },
 });
 
@@ -150,6 +150,10 @@ app.get('/account', verifyJWT, (req, res, next) => {
 });
 
 app.get('/account/:id', verifyJWT, (req, res, next) => {
+    accountServiceProxy(req, res, next);
+});
+
+app.get('/transaction/account/:id', verifyJWT, (req, res, next) => {
     accountServiceProxy(req, res, next);
 });
  
