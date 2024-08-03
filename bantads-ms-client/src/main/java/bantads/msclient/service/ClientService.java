@@ -23,7 +23,7 @@ public class ClientService {
         if (clientRepository.findByCpf(newClient.getCpf()).isPresent()) {
             throw new ClientAlreadyExistsException("Client with CPF already exists");
         }
-        newClient.setSituation("OPEN");
+        newClient.setSituation("PENDING");
         newClient.setRole("CLIENT");
         return clientRepository.save(newClient);
     }
