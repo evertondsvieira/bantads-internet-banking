@@ -20,6 +20,9 @@ public class TransactionService {
   private CustomMapper mapper;
 
   public TransactionDTO createTransaction(TransactionDTO transactionDTO){
+    if(transactionDTO.getType() != TransactionType.TRANSFER){
+      transactionDTO.setDestinationAccount(null);
+    }
     Transaction transaction = mapper.map(transactionDTO);
     transaction = transactionRepo.save(transaction);  
     return mapper.map(transaction);
