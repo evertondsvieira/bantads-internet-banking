@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bantads.saga_manager.dto.ManagerAccountDTO;
 import bantads.saga_manager.dto.ManagerDTO;
-import bantads.saga_manager.dto.ManagerPassDTO;
 import bantads.saga_manager.dto.ResponseDTO;
 import bantads.saga_manager.dto.UserDTO;
 import bantads.saga_manager.service.DeleteManagerService;
@@ -41,15 +40,13 @@ public class ManagerController {
     private EmailStore emailManagerStore;
 
     @PostMapping("/manager")
-    public ResponseEntity<ResponseDTO> registerManager(@RequestBody ManagerPassDTO managerPassDTO) {        
+    public ResponseEntity<ResponseDTO> registerManager(@RequestBody ManagerDTO managerDTO) {        
         try {
-            ManagerDTO managerDTO = new ManagerDTO(managerPassDTO.getName(), managerPassDTO.getEmail(), managerPassDTO.getCpf(), managerPassDTO.getPhone());
             UserDTO userDTO = new UserDTO();
-            userDTO.setLogin(managerPassDTO.getEmail());
-            userDTO.setPassword(managerPassDTO.getPassword());
+            userDTO.setLogin(managerDTO.getEmail());
             userDTO.setRole("MANAGER");
             userStoreDTO.setUserStoreDTO(userDTO);
-            ManagerAccountDTO managerAccountDTO = new ManagerAccountDTO(managerPassDTO.getName(), managerPassDTO.getCpf());
+            ManagerAccountDTO managerAccountDTO = new ManagerAccountDTO(managerDTO.getName(), managerDTO.getCpf());
             managerStoreDTO.setManagerStoreDTO(managerAccountDTO);
             managerService.createManager(managerDTO);
             ResponseDTO response = new ResponseDTO(true, "Solicitação de cadastro de gerente recebida com sucesso");
