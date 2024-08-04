@@ -7,6 +7,7 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import bantads.msclient.dto.AddressDTO;
@@ -23,7 +24,7 @@ import bantads.msclient.sagashandler.sagaregister.response.SuccessMessage;
 public class ClientRegister {
 
     @Autowired
-    private RabbitTemplate simpleRabbitTemplate;
+    private @Qualifier("simpleRabbitTemplate") RabbitTemplate simpleRabbitTemplate;
 
     @Autowired
 	private TopicExchange senderTopic;

@@ -43,7 +43,11 @@ public class SagaClientService {
     @RabbitListener(queues = "clientReplyQueue")
     public void handleClient(String mensagem) {
         try {
+            System.out.println(mensagem);
             JsonNode node = objectMapper.readTree(mensagem);
+            System.out.println(node);
+            System.out.println(node.toString());
+            System.out.println();
             String type = node.get("type").asText();
 
             if ("sucesso".equals(type)) {

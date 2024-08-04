@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,9 @@ public class ClientService {
 
     @Autowired 
     private ModelMapper mapper;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     public Client createClient(Client newClient) {
         if (clientRepository.findByCpf(newClient.getCpf()).isPresent()) {
@@ -49,6 +54,12 @@ public class ClientService {
             client.setSalary(updateClientDTO.getSalary());
         }
         if(updateClientDTO.getSituation() != null){
+            System.out.println(updateClientDTO.getSituation());
+            System.out.println(client.getSituation());
+            if(!updateClientDTO.getSituation().equalsIgnoreCase(client.getSituation())){
+                System.out.println("Manda o email");
+                sendMessage(updateClientDTO.getSituation(), client.getEmail());
+            }
             client.setSituation(updateClientDTO.getSituation());
         }
 
@@ -78,4 +89,20 @@ public class ClientService {
     public List<Client> getClientsByName(String name) {
         return clientRepository.findByNameContainingIgnoreCase(name);
     }
+
+    private void sendMessage(String situation, String email) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("bantads@email.com");
+        message.setTo(email);
+        if(situation.equals("APPROVED")){
+            message.setSubject("BANTADS - Sua conta foi aprovada");
+            message.setText("Pode acessar sua conta com email e senha recebidos na etapa de cadastro");
+        }
+        if(situation.equals("REJECTED")){
+            message.setSubject("BANTADS - Sua conta foi rejeitada");
+            message.setText("Entre em contato com seu gerente BANTADS para saber mais detalhes");
+        }
+        mailSender.send(message);
+    }
+
 }
