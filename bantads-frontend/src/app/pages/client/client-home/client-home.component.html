@@ -1,4 +1,4 @@
-<div class="card m-2 p-4">
+<div class="card m-2 p-4" *ngIf="accountData">
   <div class="d-flex">
     <div class="container-fluid d-flex flex-column gap-4">
       <h4>Bem-vindo, {{ accountData.client.name }}!</h4>

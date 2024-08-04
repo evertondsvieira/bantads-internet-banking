@@ -27,7 +27,11 @@ export class AccountService {
   public getAccountByCPF(query: string): Observable<Account[]> {
     return this.http.get<Account[]>(this.BASE_URL + `account?client_cpf=${query}`)
   }
-  
+
+  public getAccountByUserId(userId: number): Observable<Account> {
+    return this.http.get<Account>(this.BASE_URL + `account/by-user/${userId}`);
+  }
+
   public updateAccount(account: Account): Observable<Account> {
     return this.http.put<Account>(this.BASE_URL + `account/${account.id}`, account)
   }

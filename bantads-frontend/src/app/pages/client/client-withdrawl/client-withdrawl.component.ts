@@ -41,10 +41,10 @@ export class ClientWithdrawlComponent implements OnInit {
 
   getAccount(): void {
     if (this.userId) {
-      this.accountService.getAccountById(this.userId).subscribe({
+      this.accountService.getAccountByUserId(this.userId).subscribe({
         next: (account: Account) => {
           this.accountData = account
-          this.transaction = new Transaction("WITHDRAWL", undefined, this.accountData.id, this.accountData.id)
+          this.transaction = new Transaction("WITHDRAWL", undefined, this.accountData.id, undefined)
         },
         error: (error) => {
           console.error('Erro ao carregar cliente', error)
