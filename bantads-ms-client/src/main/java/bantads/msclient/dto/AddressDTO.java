@@ -1,6 +1,8 @@
 package bantads.msclient.dto;
 
-public class AddressDTO {
+import java.io.Serializable;
+
+public class AddressDTO implements Serializable{
   private String type;
   private String street;
   private int number;

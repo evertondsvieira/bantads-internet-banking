@@ -1,6 +1,8 @@
 package bantads.msclient.dto;
 
-public class ClientDTO {
+import java.io.Serializable;
+
+public class ClientDTO implements Serializable{
     private Long id;
     private String name;
     private String email;

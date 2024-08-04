@@ -82,6 +82,16 @@
       "projectName": "saga-manager",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-SagaProfileUpdateApplication<saga-profile-update>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "bantads.saga_profile_update.SagaProfileUpdateApplication",
+      "projectName": "saga-profile-update",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
