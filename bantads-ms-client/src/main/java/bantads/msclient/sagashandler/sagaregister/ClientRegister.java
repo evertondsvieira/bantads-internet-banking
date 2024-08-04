@@ -62,7 +62,6 @@ public class ClientRegister {
                 String clientStr = objectMapper.writeValueAsString(clientSagaDTO);
                 SuccessMessage successMessage = new SuccessMessage(clientStr);
                 String successStr = objectMapper.writeValueAsString(successMessage);
-                System.out.println(successStr);
                 simpleRabbitTemplate.convertAndSend(senderTopic.getName(), "clientReply", successStr);
                 System.out.println("Cadastro de cliente realizado com sucesso");
             }
