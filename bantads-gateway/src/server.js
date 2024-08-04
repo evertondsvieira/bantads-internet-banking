@@ -273,8 +273,13 @@ app.post('/client', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
+// SAGA 4
+// Atualização de perfil de cliente
+
+const sagaProfileUpdateProxy = httpProxy('http://localhost:3007');
+
 app.put('/client/:id', verifyJWT, (req, res, next) => {
-    clientServiceProxy(req, res, next);
+    sagaProfileUpdateProxy(req, res, next);
 });
 
 // Cria o servidor na porta 3000
