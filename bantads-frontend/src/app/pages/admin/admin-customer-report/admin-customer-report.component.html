@@ -14,10 +14,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let client of clients">
-        <td>{{ client.name | titlecase}}</td>
-        <td>{{ client.cpf }}</td>
-        <!-- <td>{{ client.balance ? (client.balance | realPipe) : '' }}</td> -->
+      <tr *ngFor="let account of accounts">
+        <td>{{ account.client.name | titlecase}}</td>
+        <td>{{ account.client.cpf | cpf }}</td>
+        <td>{{ account.limit | realPipe }}</td>
+        <td>{{ account.manager.name | titlecase }}</td>
+        <td>{{ account.balance | realPipe }}</td>
         <td></td>
         <td></td>
       </tr>

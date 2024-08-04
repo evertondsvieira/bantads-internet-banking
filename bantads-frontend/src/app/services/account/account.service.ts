@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Account } from '../../models/account.model';
+import { AccountReport } from '../../models/account-report.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,6 +14,10 @@ export class AccountService {
 
   public getAccounts(): Observable<Account[]> {
     return this.http.get<Account[]>(this.BASE_URL + 'account')
+  }
+
+  public getAccountsReport(): Observable<AccountReport[]> {
+    return this.http.get<AccountReport[]>(this.BASE_URL + 'account/manager-report')
   }
 
   public getAccountById(id: number): Observable<Account> {

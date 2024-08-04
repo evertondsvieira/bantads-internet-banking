@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth/auth.service';
-import { Client } from '../../../models/client.model';
-import { ClientService } from '../../../services/client/client.service';
+import { AccountService } from '../../../services/account/account.service';
 import { CommonModule } from '@angular/common';
 import { RealPipePipe } from '../../../modules/shared/pipes';
+import { Account } from '../../../models/account.model';
 
 @Component({
   selector: 'app-admin-customer-report',
@@ -13,17 +13,16 @@ import { RealPipePipe } from '../../../modules/shared/pipes';
 })
 export class AdminCustomerReportComponent implements OnInit {
   private _user: User = this.authService.loggedUser;
-  private _clients!: Client[];
+  public accounts!: Account[];
 
   constructor(
     private authService: AuthService,
-    private clientService: ClientService
+    private accountService: AccountService
   ){
   }
 
   ngOnInit(): void {
-    this.user = this.authService.loggedUser;
-    this.getClientsOrderedByName();
+    this.getAccountsInfo();
   }
 
   public get user(): User {
@@ -32,22 +31,18 @@ export class AdminCustomerReportComponent implements OnInit {
   public set user(user: User) {
     this._user = user;
   }
-   
-  public get clients(): Client[] {
-    return this._clients;
-  }
-  public set clients(value: Client[]) {
-    this._clients = value;
-  }
 
-  getClientsOrderedByName(): void {
-    this.clientService.getClient().subscribe(clients => {
-      this.clients = clients;
+  getAccountsInfo(): void {
+    this.accountService.getAccounts().subscribe(accounts => {
+      this.accounts = accounts.sort((a, b) => {
+        if (a.client.name < b.client.name) {
+          return -1;
+        } else if (a.client.name > b.client.name) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
     });
-  }
-
-  getManagerName(accountId: string): string {
-    // Implementar lógica mais tarde
-    return 'Nome do Gerente';
   }
 }
