@@ -28,7 +28,7 @@ export class ClientHomeComponent implements OnInit {
     if (this.userId) {
       this.operations = [
         { title: 'Depositar', icon: 'attach_money', link: `deposit/${this.userId}` },
-        { title: 'Sacar', icon: 'money_off', link: `withdraw/${this.userId}` },
+        { title: 'Sacar', icon: 'money_off', link: `withdrawl/${this.userId}` },
         { title: 'Transferir', icon: 'compare_arrows', link: `transfer/${this.userId}` },
         { title: 'Extrato', icon: 'description', link: `statement/${this.userId}` },
       ];
