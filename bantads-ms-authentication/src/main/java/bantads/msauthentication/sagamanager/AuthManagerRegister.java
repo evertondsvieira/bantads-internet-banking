@@ -7,6 +7,8 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import bantads.msauthentication.dto.UserDTO;
@@ -31,7 +33,17 @@ public class AuthManagerRegister {
     @Autowired
     private ModelMapper mapper;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
     private ObjectMapper objectMapper = new ObjectMapper();
+
+    private SimpleMailMessage createTemplateMessage() {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("bantads@email.com");
+        message.setSubject("BANTADS - Cadastro realizado com sucesso");
+        return message;
+    }
 
     @RabbitListener(queues = "authInsertRequestQueue")
     public void createAuth(String mensagem) {
@@ -46,8 +58,13 @@ public class AuthManagerRegister {
             User existingUser = userRepository.findByLogin(userDTO.getLogin());
             if (existingUser == null) {
                 GeneratePassword passwordGenerator = new GeneratePassword();
+                String pass = passwordGenerator.generateRandomPassword();
                 String salt = passwordGenerator.generateSalt();
-                String hashedPassword = passwordGenerator.hashPassword(userDTO.getPassword(), salt);
+                String hashedPassword = passwordGenerator.hashPassword(pass, salt);
+                SimpleMailMessage msg = createTemplateMessage();
+		        msg.setTo(userDTO.getLogin());
+		        msg.setText("Prezado(a) Gerente, Cadastro realizado com sucesso. Sua senha de acesso é: " + pass);
+                this.mailSender.send(msg);
                 userDTO.setSalt(salt);
                 userDTO.setPassword(hashedPassword);
                 User createdUser = userRepository.save(mapper.map(userDTO, User.class));

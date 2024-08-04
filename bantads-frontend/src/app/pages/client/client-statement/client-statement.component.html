@@ -37,7 +37,7 @@
           <td>{{ statement.createdAt | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
           <td>{{ statement.type }}</td>
           <td>{{ statement.originAccount.id }}</td>
-          <td>{{ statement.destinationAccount !== '' ? statement.destinationAccount.id : statement.originAccount.id }}</td>
+          <td>{{ statement.destinationAccount?.id || statement.originAccount?.id }}</td>
           <td [ngClass]="{'text-danger': statement.value < 0, 'text-primary': statement.value >= 0}">{{ statement.ammount | currency }}</td>
         </tr>
       </tbody>

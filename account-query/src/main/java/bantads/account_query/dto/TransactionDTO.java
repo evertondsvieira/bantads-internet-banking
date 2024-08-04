@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 
 import bantads.account_query.enums.TransactionType;
 import lombok.AllArgsConstructor;
