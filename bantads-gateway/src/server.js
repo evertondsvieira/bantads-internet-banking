@@ -257,7 +257,7 @@ app.get('/client/:id', verifyJWT, (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 
-app.get('/client/email/:email', verifyJWT, (req, res, next) => {
+app.get('/client/email/:email', (req, res, next) => {
     clientServiceProxy(req, res, next);
 });
 

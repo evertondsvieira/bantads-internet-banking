@@ -3,6 +3,7 @@ import { Observable, filter, map, of} from 'rxjs';
 import { Auth } from '../../models/auth.model';
 import { User } from '../../models/user.model';
 import { UserService } from '../user/user.service';
+import { HttpClient } from '@angular/common/http';
 
 const LS_CHAVE: string = "loggedUser";
 
@@ -12,7 +13,9 @@ const LS_CHAVE: string = "loggedUser";
 
 export class AuthService {
   private user?: User;
-  constructor(private userService: UserService) {
+  constructor(
+    private http: HttpClient,
+    private userService: UserService) {
   }
   
   public get loggedUser() : User {
@@ -32,5 +35,9 @@ export class AuthService {
   public login(auth: Auth): Observable<User | undefined>{
     let observableUser = this.userService.login(auth);
     return observableUser;
+  }
+
+  getUserByEmail(email: string): Observable<User> {
+    return this.http.get<User>(`http://localhost:3000/client/email/${email}`);
   }
 }

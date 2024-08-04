@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Auth } from '../../models/auth.model';
 import { AuthService } from '../../services/auth/auth.service';
 import { User } from '../../models/user.model';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -34,6 +35,21 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.auth).subscribe(authUser => {
         let user: User | null = authUser ? authUser : null;
 
+        if (user) {
+          this.authService.getUserByEmail(user?.email!).pipe(
+            delay(1000)
+          ).subscribe({
+            next: (userData) => {
+              if (userData) {
+                localStorage.setItem('userId', String(userData.id));
+              }
+            },
+            error: (error) => {
+              console.error('Erro ao obter dados do usuário:', error);
+            }
+          });
+        }
+        
         if (user != null) {
           this.authService.loggedUser = user;   
           this.loading = false;

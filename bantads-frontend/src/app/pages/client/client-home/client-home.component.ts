@@ -72,12 +72,14 @@ export class ClientHomeComponent implements OnInit {
               this.getAccount();
             } else {
               console.error('ID do cliente ainda não disponível');
+              window.location.reload();
             }
           });
-        }, 100)
+        }, 3000)
       }
     }, error => {
       console.error('Erro ao obter ID do usuário', error);
+      window.location.reload();
     });
   }  
 }
