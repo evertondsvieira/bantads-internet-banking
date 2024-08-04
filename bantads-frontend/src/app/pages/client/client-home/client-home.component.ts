@@ -59,15 +59,25 @@ export class ClientHomeComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserId().subscribe(id => {
       this.userId = id;
-      console.log('User ID no ngOnInit:', this.userId);
-
-      if (!this.userId) {
-        console.error('ID do cliente não encontrado no UserService');
-        return;
+  
+      if (this.userId) {
+        this.initializeOperations();
+        this.getAccount();
+      } else {
+        setTimeout(() => {
+          this.userService.getUserId().subscribe(id => {
+            this.userId = id;
+            if (this.userId) {
+              this.initializeOperations();
+              this.getAccount();
+            } else {
+              console.error('ID do cliente ainda não disponível');
+            }
+          });
+        }, 100)
       }
-
-      this.initializeOperations();
-      this.getAccount();
+    }, error => {
+      console.error('Erro ao obter ID do usuário', error);
     });
-  }
+  }  
 }
