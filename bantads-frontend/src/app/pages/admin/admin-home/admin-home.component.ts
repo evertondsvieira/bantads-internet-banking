@@ -20,6 +20,7 @@ export class AdminHomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.user = this.authService.loggedUser;
     this.getReports();
   }
 

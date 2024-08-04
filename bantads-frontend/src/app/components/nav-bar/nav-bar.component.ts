@@ -18,6 +18,8 @@ interface INavItems {
 })
 export class NavBarComponent implements OnInit {
   userId: string | null = null;
+  userLogin: string | null = null;
+  userRole: string | null = null;
   navItems: INavItems[] = [];
 
   private userIdSubscription: Subscription = new Subscription();
@@ -29,9 +31,11 @@ export class NavBarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userId = localStorage.getItem('userId')
+    this.userId = localStorage.getItem('userId');
+    this.userLogin = this.authService.loggedUser?.email ?? null;
+    this.userRole = this.authService.loggedUser?.profile ?? null;
 
-    if (this.userId) {
+    if (this.userId || this.userLogin || this.userRole) {
       this.updateNavItems()
     } else {
       this.userIdSubscription = interval(1000).subscribe(() => {

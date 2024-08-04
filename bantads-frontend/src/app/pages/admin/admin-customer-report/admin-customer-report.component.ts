@@ -22,6 +22,7 @@ export class AdminCustomerReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.authService.loggedUser;
     this.getAccountsInfo();
   }
 
