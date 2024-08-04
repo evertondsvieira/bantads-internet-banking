@@ -23,7 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "q_account")
+@Table(name = "t_account")
 public class Account {
   @Id
   private Long id;
