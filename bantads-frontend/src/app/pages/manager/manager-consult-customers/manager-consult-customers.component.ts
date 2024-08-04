@@ -69,6 +69,11 @@ export class ManagerConsultCustomersComponent implements OnInit {
     });
   }
 
+  consultClientAndAccount(cpf: string): void {
+    this.consultClient(cpf);
+    this.loadAccount(cpf);
+  }
+
   onInputChange(value: string): void {
     this.mask = /^\d+$/.test(value) ? '000.000.000-00' : ''
   }
