@@ -39,7 +39,6 @@ export class AdminListManagerComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this._user = this.authService.loggedUser;
     this.getManagersOrderedByName();
     
   }

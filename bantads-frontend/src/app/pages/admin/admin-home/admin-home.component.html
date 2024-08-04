@@ -13,11 +13,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let manager of managerData">
-        <td>{{ manager.name | titlecase}}</td>
-        <td>{{ manager.quantity }}</td>
-        <td>{{ manager.positiveBalance | realPipe}}</td>
-        <td>{{ manager.negativeBalance | realPipe}}</td>
+      <tr *ngFor="let report of reports">
+        <td>{{ report.name| titlecase}}</td>
+        <td>{{ report.quantity }}</td>
+        <td>{{ report.positiveBalance | realPipe}}</td>
+        <td>{{ report.negativeBalance | realPipe}}</td>
       </tr>
     </tbody>
   </table>
