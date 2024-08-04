@@ -25,7 +25,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "t_transaction")
+@Table(name = "q_transaction")
 public class Transaction {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

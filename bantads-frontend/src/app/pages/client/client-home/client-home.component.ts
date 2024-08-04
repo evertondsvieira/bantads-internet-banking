@@ -39,7 +39,7 @@ export class ClientHomeComponent implements OnInit {
 
   getAccount(): void {
     if (this.userId) {
-      this.accountService.getAccountById(Number(this.userId)).subscribe({
+      this.accountService.getAccountByUserId(Number(this.userId)).subscribe({
         next: (account: Account) => {
           this.accountData = account;
         },

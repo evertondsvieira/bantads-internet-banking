@@ -23,7 +23,7 @@ import bantads.msclient.sagashandler.sagaregister.response.SuccessMessage;
 public class ClientRegister {
 
     @Autowired
-    private RabbitTemplate template;
+    private RabbitTemplate simpleRabbitTemplate;
 
     @Autowired
 	private TopicExchange senderTopic;
@@ -52,7 +52,7 @@ public class ClientRegister {
                 msgErro = "Erro no cadastro de cliente. CPF/Email já cadastrado";
                 errorMessage = new ErrorMessage(msgErro);
                 errorStr = objectMapper.writeValueAsString(errorMessage);             
-                template.convertAndSend(senderTopic.getName(), "clientReply", errorStr);
+                simpleRabbitTemplate.convertAndSend(senderTopic.getName(), "clientReply", errorStr);
                 System.out.println(errorStr);
             }
             else {
@@ -62,7 +62,8 @@ public class ClientRegister {
                 String clientStr = objectMapper.writeValueAsString(clientSagaDTO);
                 SuccessMessage successMessage = new SuccessMessage(clientStr);
                 String successStr = objectMapper.writeValueAsString(successMessage);
-                template.convertAndSend(senderTopic.getName(), "clientReply", successStr);
+                System.out.println(successStr);
+                simpleRabbitTemplate.convertAndSend(senderTopic.getName(), "clientReply", successStr);
                 System.out.println("Cadastro de cliente realizado com sucesso");
             }
         } catch (Exception e) {
@@ -70,7 +71,7 @@ public class ClientRegister {
             errorMessage = new ErrorMessage(msgErro);
             try {
                 errorStr = objectMapper.writeValueAsString(errorMessage);
-                template.convertAndSend(senderTopic.getName(), "clientReply", errorStr);
+                simpleRabbitTemplate.convertAndSend(senderTopic.getName(), "clientReply", errorStr);
             } catch (Exception innerEx) {
                 System.out.println("Erro ao enviar mensagem de erro: " + innerEx.getMessage());
                 innerEx.printStackTrace();

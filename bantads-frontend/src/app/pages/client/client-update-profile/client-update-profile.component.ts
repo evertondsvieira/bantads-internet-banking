@@ -65,7 +65,7 @@ export class ClientUpdateProfileComponent implements OnInit {
 
   loadAccount(): void {
     if (this.clientId) {
-      this.accountService.getAccountById(this.clientId).subscribe({
+      this.accountService.getAccountByUserId(this.clientId).subscribe({
         next: (account: Account) => {
           this.accountData = account;
           console.log('Conta carregada com sucesso', this.accountData)
