@@ -156,7 +156,48 @@ app.get('/account/:id', verifyJWT, (req, res, next) => {
 app.get('/transaction/account/:id', verifyJWT, (req, res, next) => {
     accountServiceProxy(req, res, next);
 });
- 
+
+app.get('/account/by-user/:userId', verifyJWT, (req, res, next) => {
+    const userId = req.params.userId;
+
+    http.get(`http://localhost:3002/api/client/${userId}`, (response) => {
+        let data = ''
+
+        response.on('data', (chunk) => {
+            data += chunk
+        })
+
+        response.on('end', () => {
+            const clientData = JSON.parse(data)
+
+            const cpf = clientData.cpf
+
+            if (!cpf) {
+                return res.status(404).json({ error: 'CPF não encontrado' })
+            }
+
+            http.get(`http://localhost:3011/account/client/${cpf}`, (response) => {
+                let accountData = '';
+
+                response.on('data', (chunk) => {
+                    accountData += chunk
+                })
+
+                response.on('end', () => {
+                    res.setHeader('Content-Type', 'application/json')
+                    res.send(accountData)
+                })
+            }).on('error', (err) => {
+                console.error('Erro ao pegar a conta:', err)
+                res.status(500).json({ error: 'Erro ao pegar a conta' })
+            })
+        })
+    }).on('error', (err) => {
+        console.error('Erro ao pegar CPF do cliente:', err)
+        res.status(500).json({ error: 'Erro ao pegar cpf do cliente' })
+    })
+})
+
 // Requisições para manager
 
 // SAGAS 2 E 3

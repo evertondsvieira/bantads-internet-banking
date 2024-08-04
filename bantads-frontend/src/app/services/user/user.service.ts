@@ -79,8 +79,8 @@ export class UserService {
     this.http.post<any>(`${this.BASE_URL}/logout`, {}, this.httpOptions)
       .pipe(
         map(response => {
-          // Remove o token do localStorage ao fazer logout
           localStorage.removeItem('authToken');
+          localStorage.removeItem('userId');
           console.log('Logout realizado com sucesso:', response);
         }),
       ).subscribe();

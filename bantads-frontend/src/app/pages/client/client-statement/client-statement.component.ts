@@ -39,7 +39,7 @@ export class ClientStatementComponent implements OnInit {
 
   loadAccount(): void {
     if (this.userId) {
-      this.accountService.getAccountById(this.userId).subscribe({
+      this.accountService.getAccountByUserId(this.userId).subscribe({
         next: (account: Account) => {
           this.accountData = account
         },
