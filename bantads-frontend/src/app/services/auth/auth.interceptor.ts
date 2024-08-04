@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
+import { UserServiceId } from './userId.service';
 import { Client } from '../../models/client.model';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private tokenSubject = new BehaviorSubject<string | null>(null)
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserServiceId) {
     const token = localStorage.getItem('authToken')
     this.tokenSubject.next(token)
   }
@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const authToken = this.tokenSubject.value
 
     if (authToken) {
-      console.log('Token encontrado:', authToken);
+      console.log('Token encontrado:', authToken)
 
       const authReq = req.clone({
         setHeaders: {
@@ -39,7 +39,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
             const email = decodedToken.login
             this.getUserByEmail(email).subscribe(user => {
-              localStorage.setItem('userId', user.id)
+              this.userService.setUserId(user.id)
             })
           }
         }),
