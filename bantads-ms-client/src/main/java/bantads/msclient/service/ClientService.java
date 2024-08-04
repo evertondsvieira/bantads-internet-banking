@@ -6,7 +6,8 @@ import bantads.msclient.exception.ClientAlreadyExistsException;
 import bantads.msclient.exception.ClientNotFoundException;
 import bantads.msclient.repository.ClientRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.BeanUtils;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired 
+    private ModelMapper mapper;
 
     public Client createClient(Client newClient) {
         if (clientRepository.findByCpf(newClient.getCpf()).isPresent()) {
@@ -32,30 +36,27 @@ public class ClientService {
     public Client updateClient(Long id, UpdateClientDTO updateClientDTO) {
         Client client = clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException("Client not found"));
 
-        BeanUtils.copyProperties(updateClientDTO, client);
-
-        if (updateClientDTO.getSalary() != null) {
+        if(updateClientDTO.getAddress() != null){
+            client.setAddress(mapper.map(updateClientDTO.getAddress(), bantads.msclient.entity.Address.class));
+        }
+        if(updateClientDTO.getName() != null){
+            client.setName(updateClientDTO.getName());
+        }
+        if(updateClientDTO.getPhone() != null){
+            client.setPhone(updateClientDTO.getPhone());
+        }
+        if(updateClientDTO.getSalary() != null){
             client.setSalary(updateClientDTO.getSalary());
-            double newLimit = calculateLimit(updateClientDTO.getSalary());
-            double currentBalance = getBalance(client);
-            if (newLimit < 0 && newLimit < currentBalance) {
-                newLimit = currentBalance;
-            }
+        }
+        if(updateClientDTO.getSituation() != null){
+            client.setSituation(updateClientDTO.getSituation());
         }
 
         return clientRepository.save(client);
     }
 
-    private double calculateLimit(double salary) {
-        return salary * 0.3;
-    }
-
     public Optional<Client> getClientById(Long id) {
         return clientRepository.findById(id);
-    }
-
-    private double getBalance(Client client) {
-        return 0.0;
     }
 
     public List<Client> getAllClients() {
