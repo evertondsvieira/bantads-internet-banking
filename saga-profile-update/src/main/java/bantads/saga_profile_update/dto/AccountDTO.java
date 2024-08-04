@@ -3,7 +3,6 @@ package bantads.saga_profile_update.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import bantads.saga_profile_update.enums.AccountSituation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

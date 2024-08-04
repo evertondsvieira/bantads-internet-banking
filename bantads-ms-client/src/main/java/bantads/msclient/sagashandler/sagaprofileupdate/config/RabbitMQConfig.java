@@ -68,16 +68,16 @@ public class RabbitMQConfig {
 	}
 
 	@Bean
-	public AmqpTemplate template(ConnectionFactory connectionFactory){
+	public RabbitTemplate jsonRabbitTemplate(ConnectionFactory connectionFactory){
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
 		rabbitTemplate.setMessageConverter(converter());
 		return rabbitTemplate;
 	}
 
 	@Bean
-    public RabbitTemplate simpleRabbitTemplate(ConnectionFactory connectionFactory) {
-        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(new SimpleMessageConverter());
-        return rabbitTemplate;
-    }
+	public RabbitTemplate simpleRabbitTemplate(ConnectionFactory connectionFactory) {
+			RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+			rabbitTemplate.setMessageConverter(new SimpleMessageConverter());
+			return rabbitTemplate;
+	}
 }
