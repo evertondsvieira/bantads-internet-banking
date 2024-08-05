@@ -6,10 +6,10 @@ services:
     env_file:
       - .env
     ports:
-      - "5433:5432"
+      - "5432:5432"
     networks:
       - bantads-network
-
+  
   ms-client:
     build:
       context: .
