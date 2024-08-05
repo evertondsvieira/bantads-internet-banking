@@ -11,8 +11,8 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY --from=build /app/target/account-command-0.0.1-SNAPSHOT.jar account-command.jar
+COPY --from=build /app/target/account-query-0.0.1-SNAPSHOT.jar account-query.jar
 
-EXPOSE 3010
+EXPOSE 3011
 
-ENTRYPOINT ["java", "-jar", "account-command.jar"]
+ENTRYPOINT ["java", "-jar", "account-query.jar"]

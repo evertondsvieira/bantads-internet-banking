@@ -3,7 +3,7 @@ version: '3.8'
 services:
   rabbit-mq:
     image: rabbitmq:3-management
-    container_name: rabbitmq
+    container_name: rabbit-mq
     ports:
       - 5672:5672
       - 15672:15672
@@ -14,43 +14,179 @@ services:
       - bantads-network
     restart: on-failure:3
 
-  ms-account:
-    build:
-      context: ./bantads-ms-account
-      dockerfile: ./Dockerfile
+  postgres-db:
+    container_name: postgres-db
+    build: 
+      context: .
+      dockerfile: ./postgres.Dockerfile
     env_file:
-      - ./bantads-ms-account/.env
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - .postgres-data:/var/lib/postgresql
+    networks:
+      - bantads-network
+      - rabbitmq-net
+    
+    restart: on-failure:3
+
+  mongo-db:
+    image: mongo:latest
+    container_name: mongo-db
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
+    volumes:
+      - .mongo:/data/db
+    networks:
+      - bantads-network
+    restart: on-failure:3
+  
+  ms-account-query:
+    container_name: ms-account-query
+    build:
+      context: ./account-query
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres-db
+      - rabbit-mq
+    networks:
+      - bantads-network
+      - rabbitmq-net
+    ports:
+      - "3011:3011"
+    restart: on-failure:3
+
+  ms-account-command:
+    container_name: ms-account-command
+    build:
+      context: ./account-command
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres-db
+      - rabbit-mq
+    networks:
+      - bantads-network
+      - rabbitmq-net
+    ports:
+      - "3010:3010"
+    restart: on-failure:3
 
   ms-authentication:
+    container_name: ms-authentication
     build:
       context: ./bantads-ms-authentication
       dockerfile: ./Dockerfile
-    env_file:
-      - ./bantads-ms-authentication/.env
     depends_on:
       - rabbit-mq
+      - mongo-db
+    ports:
+      - "3004:3004"
+    networks:
+      - bantads-network
+      - rabbitmq-net
+    restart: on-failure:3
 
   ms-client:
+    container_name: ms-client
     build:
       context: ./bantads-ms-client
       dockerfile: ./Dockerfile
-    env_file:
-      - ./bantads-ms-client/.env
     depends_on:
       - rabbit-mq
-
+      - postgres-db
+    ports:
+      - "3002:3002"
+    networks:
+      - bantads-network
+      - rabbitmq-net
+    restart: on-failure:3
+  
   ms-manager:
+    container_name: ms-manager
     build:
       context: ./bantads-ms-manager
       dockerfile: ./Dockerfile
-    env_file:
-      - ./bantads-ms-manager/.env
+    depends_on:
+      - rabbit-mq
+      - postgres-db
+    ports:
+      - "3003:3003"
+    networks:
+      - bantads-network
+      - rabbitmq-net
+    restart: on-failure:3
+  
+
+  saga-manager:
+    container_name: saga-manager
+    build:
+      context: ./saga-manager
+      dockerfile: ./Dockerfile
+    depends_on:
+      - rabbit-mq
+    ports:
+      - "3006:3006"
+    networks:
+      - bantads-network
+      - rabbitmq-net
+    restart: on-failure:3
 
   saga-register:
+    container_name: saga-register
     build:
       context: ./saga-register
       dockerfile: ./Dockerfile
-    env_file:
-      - ./saga-register/.env
     depends_on:
       - rabbit-mq
+    ports:
+      - "3005:3005"
+    networks:
+      - bantads-network
+      - rabbitmq-net
+    restart: on-failure:3
+
+  saga-profile-update:
+    container_name: saga-profile-update
+    build:
+      context: ./saga-profile-update
+      dockerfile: ./Dockerfile
+    depends_on:
+      - rabbit-mq
+
+    ports:
+      - "3007:3007"
+    networks:
+      - bantads-network
+      - rabbitmq-net
+    restart: on-failure:3
+
+  bantads-angular:
+    build:
+      context: ./bantads-frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - "4200:4200"
+    networks:
+      - bantads-network
+    restart: on-failure:3
+  
+  # bantads-gateway:
+  #   container_name: bantads-gateway
+  #   build:
+  #     context: ./bantads-gateway
+  #     dockerfile: ./Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   networks:
+  #     - rabbitmq-net
+  #     - bantads-network
+  #   restart: on-failure:3
+
+networks:
+  rabbitmq-net:
+    driver: bridge
+  bantads-network:
+    driver: bridge

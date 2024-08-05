@@ -6,3 +6,7 @@
 
 # Diretórios gerados automaticamente
 node_modules/
+
+# dist
+
+dist
