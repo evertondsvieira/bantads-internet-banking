@@ -73,9 +73,14 @@ export class ClientStatementComponent implements OnInit {
   }
 
   getBalance(): number {
-    return this.statements.reduce(
-      (acc, current) => acc + current.ammount,
-      0
-    );
+    return this.statements.reduce((acc, current) => {
+      if (current.type === 'DEPOSIT') {
+        return acc + current.ammount
+      } else if (current.type === 'WITHDRAWL' || current.type === 'TRANSFER') {
+        return acc - current.ammount;
+      }
+      return acc
+    }, 0)
   }
+  
 }
