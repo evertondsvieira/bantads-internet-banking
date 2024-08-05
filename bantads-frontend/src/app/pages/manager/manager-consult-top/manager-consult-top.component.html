@@ -15,7 +15,7 @@
     <tbody>
       <tr *ngFor="let account of sortedAccounts">
         <td>{{ account.client.name }}</td>
-        <td>{{ account.client.cpf }}</td>
+        <td>{{ account.client.cpf | cpf}}</td>
         <td>{{ account.balance | number:'1.2-2' }}</td>
         <td>{{ account.client.address.city }}</td>
         <td>{{ account.client.address.state| uppercase }}</td>
