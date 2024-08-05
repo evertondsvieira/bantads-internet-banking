@@ -22,7 +22,7 @@ data:{"role": "CLIENT,MANAGER"}
 ```
 ## To run the application
 
-Just execute the `start.sh` script found in the route foulder.
+Just execute the `start.sh` script found in the route foulder. (You must add and `.env` on bantads-gateway root folder, following the `.env.example`
 
 Or...
 
