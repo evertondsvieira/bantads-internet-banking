@@ -20,3 +20,16 @@ data:{"role": "CLIENT"}
 ## Autoriza role de cliente e gerente a acessar rota
 data:{"role": "CLIENT,MANAGER"}
 ```
+## To run the application
+
+Just execute the `start.sh` script found in the route foulder.
+
+Or...
+
+you can execute the command (the first time)
+```
+docker compose up --build
+```
+after that you can remove the `--build` unless you change something.
+
+and then run the gateway separetely with `npm i` and `node src/server.js` 
