@@ -8,6 +8,8 @@
         <th scope="col">Nome</th>
         <th scope="col">CPF</th>
         <th scope="col">Saldo</th>
+        <th scope="col">Cidade</th>
+        <th scope="col">Estado</th>
       </tr>
     </thead>
     <tbody>
@@ -15,6 +17,8 @@
         <td>{{ account.client.name }}</td>
         <td>{{ account.client.cpf }}</td>
         <td>{{ account.balance | number:'1.2-2' }}</td>
+        <td>{{ account.client.address.city }}</td>
+        <td>{{ account.client.address.state| uppercase }}</td>
       </tr>
     </tbody>
   </table>
