@@ -46,7 +46,7 @@ export class ClientTransferComponent implements OnInit {
       this.accountService.getAccountByUserId(this.userId).subscribe({
         next: (account: Account) => {
           this.accountData = account
-          this.transaction = new Transaction("TRANSFER", undefined, this.transaction.originAccountId, this.transaction.destinationAccountId)
+          this.transaction = new Transaction("TRANSFER", undefined, this.accountData.id, this.transaction.destinationAccountId)
         },
         error: (error) => {
           console.error('Erro ao carregar cliente', error)
